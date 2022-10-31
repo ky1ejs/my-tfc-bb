@@ -1,0 +1,37 @@
+{
+  "name": "my-tfc-bb",
+  "version": "0.0.1",
+  "description": "Get notifications about your packages at TFC",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "lint": "eslint --fix src/",
+    "lint:ci": "eslint --max-warnings=0 src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ky1ejs/my-tfc-bb.git"
+  },
+  "author": "Kyle Satti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ky1ejs/my-tfc-bb/issues"
+  },
+  "homepage": "https://github.com/ky1ejs/my-tfc-bb#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "^1.0.1",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.14",
+    "@typescript-eslint/eslint-plugin": "^5.41.0",
+    "@typescript-eslint/parser": "^5.41.0",
+    "eslint": "^8.26.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1"
+  }
+}
