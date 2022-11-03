@@ -2,7 +2,11 @@
   "extends": "@tsconfig/node18/tsconfig.json",
   "compilerOptions": {
     "preserveConstEnums": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": "./src/",
+    "paths": {
+      "@models": ["models/index.ts"]
+    },
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

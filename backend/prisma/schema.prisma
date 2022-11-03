@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = ""
+}
+
+model User {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  username String @unique
+  latest_access_token String
+  refresh_token String
+  devices Device[]
+}
+
+enum DevicePlatform {
+  IOS
+  ANDROID
+  WEB
+  OTHER
+}
+
+model Device {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  device_provided_id String
+  push_token String?
+  platform DevicePlatform?
+  user User @relation(fields: [user_id], references: [id])
+  user_id String @db.Uuid
+}
