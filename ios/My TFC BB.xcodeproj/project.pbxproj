@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93615634291472E3001B0831 /* UIView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93615633291472E3001B0831 /* UIView+Helpers.swift */; };
 		93EE6A3B291098D70012C716 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A3A291098D70012C716 /* AppDelegate.swift */; };
 		93EE6A3D291098D70012C716 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A3C291098D70012C716 /* SceneDelegate.swift */; };
 		93EE6A3F291098D70012C716 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A3E291098D70012C716 /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		93615633291472E3001B0831 /* UIView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Helpers.swift"; sourceTree = "<group>"; };
 		93EE6A37291098D70012C716 /* My TFC BB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My TFC BB.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93EE6A3A291098D70012C716 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93EE6A3C291098D70012C716 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				93EE6A3E291098D70012C716 /* ViewController.swift */,
 				93EE6A522910B0170012C716 /* TFC API */,
 				93EE6A4E2910AC8E0012C716 /* LogInView.swift */,
+				93615633291472E3001B0831 /* UIView+Helpers.swift */,
 				93EE6A43291098D80012C716 /* Assets.xcassets */,
 				93EE6A45291098D80012C716 /* LaunchScreen.storyboard */,
 				93EE6A48291098D80012C716 /* Info.plist */,
@@ -168,6 +171,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93615634291472E3001B0831 /* UIView+Helpers.swift in Sources */,
 				93EE6A3F291098D70012C716 /* ViewController.swift in Sources */,
 				93EE6A5D2910B0520012C716 /* Endpoint.swift in Sources */,
 				93EE6A542910B02B0012C716 /* LogInEndpoint.swift in Sources */,

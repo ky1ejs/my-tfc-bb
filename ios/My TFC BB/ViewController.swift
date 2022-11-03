@@ -18,13 +18,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        loginView.submitButton.addTarget(self, action: #selector(logIn), for: .touchUpInside)
+        loginView.setSubmitAction { [weak self] in
+            self?.logIn()
+        }
     }
 
-    @objc private func logIn() {
+    private func logIn() {
         let result = LogInResult(
-            username: loginView.usernameTF.text!,
-            password: loginView.passwordTF.text!,
+            username: loginView.username,
+            password: loginView.password,
             deviceId: UIDevice.current.identifierForVendor!.uuidString
         )
 
