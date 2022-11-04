@@ -7,16 +7,10 @@
 
 import Foundation
 
-struct LogInResult: JsonResponseDecodable, Encodable {
-    let username: String
-    let password: String
-    let deviceId: String
-}
-
 struct LogInEndpoint: Endpoint {
-    let input: LogInResult
+    let input: LogInCredentials
 
-    typealias SuccessType = LogInResult
-    let url = URL(string: "http://localhost:3000/my-tfc/v1/login")!
+    typealias SuccessType = BackendAssignedId
+    let url = URL(string: "\(TFC_API_BASE)/login")!
     var method: HTTPMethod { .post(body: input) }
 }

@@ -37,6 +37,12 @@ protocol URLResponseDecodable {
     static func parse(data: Data) throws -> Self
 }
 
+struct EmptyResponse: URLResponseDecodable {
+    static func parse(data: Data) throws -> EmptyResponse {
+        return EmptyResponse()
+    }
+}
+
 protocol JsonResponseDecodable: URLResponseDecodable, Decodable {}
 
 extension JsonResponseDecodable {

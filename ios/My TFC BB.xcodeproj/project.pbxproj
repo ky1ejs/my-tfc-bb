@@ -8,9 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		93615634291472E3001B0831 /* UIView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93615633291472E3001B0831 /* UIView+Helpers.swift */; };
+		9361563629147B05001B0831 /* DeliveriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361563529147B05001B0831 /* DeliveriesViewController.swift */; };
+		9361563929147C20001B0831 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 9361563829147C20001B0831 /* KeychainAccess */; };
+		9361563B29147C30001B0831 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361563A29147C30001B0831 /* KeychainManager.swift */; };
+		9361563D29147DE4001B0831 /* GetDeliveriesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361563C29147DE4001B0831 /* GetDeliveriesEndpoint.swift */; };
+		9361563F29147DEF001B0831 /* UpdatePushTokenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361563E29147DEF001B0831 /* UpdatePushTokenEndpoint.swift */; };
+		9361564129147E10001B0831 /* LogInCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361564029147E10001B0831 /* LogInCredentials.swift */; };
+		9361564329147E50001B0831 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361564229147E50001B0831 /* Constants.swift */; };
+		9361564529147F44001B0831 /* Delivery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361564429147F44001B0831 /* Delivery.swift */; };
+		9361564729147F4A001B0831 /* Deliveries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361564629147F4A001B0831 /* Deliveries.swift */; };
+		9361564A29147FAA001B0831 /* TokenUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361564929147FAA001B0831 /* TokenUpdate.swift */; };
+		9361564D2914825E001B0831 /* HTTPClient+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361564C2914825E001B0831 /* HTTPClient+Helper.swift */; };
+		936156502914892C001B0831 /* BackendAssignedId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361564F2914892C001B0831 /* BackendAssignedId.swift */; };
 		93EE6A3B291098D70012C716 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A3A291098D70012C716 /* AppDelegate.swift */; };
 		93EE6A3D291098D70012C716 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A3C291098D70012C716 /* SceneDelegate.swift */; };
-		93EE6A3F291098D70012C716 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A3E291098D70012C716 /* ViewController.swift */; };
+		93EE6A3F291098D70012C716 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A3E291098D70012C716 /* LogInViewController.swift */; };
 		93EE6A44291098D80012C716 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93EE6A43291098D80012C716 /* Assets.xcassets */; };
 		93EE6A47291098D80012C716 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93EE6A45291098D80012C716 /* LaunchScreen.storyboard */; };
 		93EE6A4F2910AC8E0012C716 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A4E2910AC8E0012C716 /* LogInView.swift */; };
@@ -23,10 +35,21 @@
 
 /* Begin PBXFileReference section */
 		93615633291472E3001B0831 /* UIView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Helpers.swift"; sourceTree = "<group>"; };
+		9361563529147B05001B0831 /* DeliveriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveriesViewController.swift; sourceTree = "<group>"; };
+		9361563A29147C30001B0831 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		9361563C29147DE4001B0831 /* GetDeliveriesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDeliveriesEndpoint.swift; sourceTree = "<group>"; };
+		9361563E29147DEF001B0831 /* UpdatePushTokenEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePushTokenEndpoint.swift; sourceTree = "<group>"; };
+		9361564029147E10001B0831 /* LogInCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInCredentials.swift; sourceTree = "<group>"; };
+		9361564229147E50001B0831 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9361564429147F44001B0831 /* Delivery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delivery.swift; sourceTree = "<group>"; };
+		9361564629147F4A001B0831 /* Deliveries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deliveries.swift; sourceTree = "<group>"; };
+		9361564929147FAA001B0831 /* TokenUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenUpdate.swift; sourceTree = "<group>"; };
+		9361564C2914825E001B0831 /* HTTPClient+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPClient+Helper.swift"; sourceTree = "<group>"; };
+		9361564F2914892C001B0831 /* BackendAssignedId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAssignedId.swift; sourceTree = "<group>"; };
 		93EE6A37291098D70012C716 /* My TFC BB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My TFC BB.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93EE6A3A291098D70012C716 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93EE6A3C291098D70012C716 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		93EE6A3E291098D70012C716 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		93EE6A3E291098D70012C716 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		93EE6A43291098D80012C716 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93EE6A46291098D80012C716 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		93EE6A48291098D80012C716 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -43,12 +66,44 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9361563929147C20001B0831 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9361564829147F53001B0831 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9361564029147E10001B0831 /* LogInCredentials.swift */,
+				9361564F2914892C001B0831 /* BackendAssignedId.swift */,
+				9361564429147F44001B0831 /* Delivery.swift */,
+				9361564929147FAA001B0831 /* TokenUpdate.swift */,
+				9361564629147F4A001B0831 /* Deliveries.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9361564B2914807F001B0831 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				9361563529147B05001B0831 /* DeliveriesViewController.swift */,
+				93EE6A3E291098D70012C716 /* LogInViewController.swift */,
+				93EE6A4E2910AC8E0012C716 /* LogInView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		9361564E29148264001B0831 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9361564C2914825E001B0831 /* HTTPClient+Helper.swift */,
+				93615633291472E3001B0831 /* UIView+Helpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		93EE6A2E291098D70012C716 = {
 			isa = PBXGroup;
 			children = (
@@ -70,11 +125,11 @@
 			children = (
 				93EE6A3A291098D70012C716 /* AppDelegate.swift */,
 				93EE6A3C291098D70012C716 /* SceneDelegate.swift */,
+				9361564B2914807F001B0831 /* UI */,
+				9361563A29147C30001B0831 /* KeychainManager.swift */,
+				9361564E29148264001B0831 /* Helpers */,
 				93EE6A552910B0520012C716 /* Networking */,
-				93EE6A3E291098D70012C716 /* ViewController.swift */,
 				93EE6A522910B0170012C716 /* TFC API */,
-				93EE6A4E2910AC8E0012C716 /* LogInView.swift */,
-				93615633291472E3001B0831 /* UIView+Helpers.swift */,
 				93EE6A43291098D80012C716 /* Assets.xcassets */,
 				93EE6A45291098D80012C716 /* LaunchScreen.storyboard */,
 				93EE6A48291098D80012C716 /* Info.plist */,
@@ -85,7 +140,11 @@
 		93EE6A522910B0170012C716 /* TFC API */ = {
 			isa = PBXGroup;
 			children = (
+				9361564229147E50001B0831 /* Constants.swift */,
 				93EE6A532910B02B0012C716 /* LogInEndpoint.swift */,
+				9361563C29147DE4001B0831 /* GetDeliveriesEndpoint.swift */,
+				9361563E29147DEF001B0831 /* UpdatePushTokenEndpoint.swift */,
+				9361564829147F53001B0831 /* Models */,
 			);
 			path = "TFC API";
 			sourceTree = "<group>";
@@ -117,6 +176,9 @@
 			dependencies = (
 			);
 			name = "My TFC BB";
+			packageProductDependencies = (
+				9361563829147C20001B0831 /* KeychainAccess */,
+			);
 			productName = "My TFC BB";
 			productReference = 93EE6A37291098D70012C716 /* My TFC BB.app */;
 			productType = "com.apple.product-type.application";
@@ -145,6 +207,9 @@
 				Base,
 			);
 			mainGroup = 93EE6A2E291098D70012C716;
+			packageReferences = (
+				9361563729147C20001B0831 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+			);
 			productRefGroup = 93EE6A38291098D70012C716 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -172,15 +237,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				93615634291472E3001B0831 /* UIView+Helpers.swift in Sources */,
-				93EE6A3F291098D70012C716 /* ViewController.swift in Sources */,
+				93EE6A3F291098D70012C716 /* LogInViewController.swift in Sources */,
+				9361564529147F44001B0831 /* Delivery.swift in Sources */,
+				9361564729147F4A001B0831 /* Deliveries.swift in Sources */,
 				93EE6A5D2910B0520012C716 /* Endpoint.swift in Sources */,
 				93EE6A542910B02B0012C716 /* LogInEndpoint.swift in Sources */,
+				9361563D29147DE4001B0831 /* GetDeliveriesEndpoint.swift in Sources */,
+				9361563629147B05001B0831 /* DeliveriesViewController.swift in Sources */,
 				93EE6A5A2910B0520012C716 /* HTTPMethod.swift in Sources */,
+				9361564329147E50001B0831 /* Constants.swift in Sources */,
+				9361563F29147DEF001B0831 /* UpdatePushTokenEndpoint.swift in Sources */,
+				9361564A29147FAA001B0831 /* TokenUpdate.swift in Sources */,
 				93EE6A5B2910B0520012C716 /* HTTPClient.swift in Sources */,
+				9361563B29147C30001B0831 /* KeychainManager.swift in Sources */,
 				93EE6A3B291098D70012C716 /* AppDelegate.swift in Sources */,
 				93EE6A4F2910AC8E0012C716 /* LogInView.swift in Sources */,
+				9361564D2914825E001B0831 /* HTTPClient+Helper.swift in Sources */,
+				9361564129147E10001B0831 /* LogInCredentials.swift in Sources */,
 				93EE6A5C2910B0520012C716 /* HTTPStatusCode.swift in Sources */,
 				93EE6A3D291098D70012C716 /* SceneDelegate.swift in Sources */,
+				936156502914892C001B0831 /* BackendAssignedId.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +395,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X2TBSUCASC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "My TFC BB/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -345,6 +422,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X2TBSUCASC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "My TFC BB/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -386,6 +464,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9361563729147C20001B0831 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9361563829147C20001B0831 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9361563729147C20001B0831 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 93EE6A2F291098D70012C716 /* Project object */;
 }

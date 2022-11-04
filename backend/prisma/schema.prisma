@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = ""
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -16,6 +16,7 @@ model User {
   latest_access_token String
   refresh_token String
   devices Device[]
+  deliveries Delivery[]
 }
 
 enum DevicePlatform {
@@ -27,9 +28,16 @@ enum DevicePlatform {
 
 model Device {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  device_provided_id String
+  device_provided_id String @unique
   push_token String?
   platform DevicePlatform?
+  user User @relation(fields: [user_id], references: [id])
+  user_id String @db.Uuid
+}
+
+model Delivery {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name String
   user User @relation(fields: [user_id], references: [id])
   user_id String @db.Uuid
 }

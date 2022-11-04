@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import Auth from "./services/auth";
+import { PrismaClient } from "@prisma/client";
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -19,7 +20,45 @@ app.use(function (req, res, next) {
 app.post("/my-tfc/v1/login", async (req, res) => {
   return new Auth()
     .auth(req.body.username, req.body.password, req.body.device_id)
-    .then((device) => res.send({ new_device: { id: device.id } }));
+    .then((device) => res.send({ device_id: device.id }));
+});
+
+app.get("/my-tfc/v1/deliveries", async (req, res) => {
+  const prisma = new PrismaClient();
+  const devideId = req.headers["device_id"]?.toString();
+
+  if (!devideId) {
+    res.sendStatus(422);
+  }
+
+  return prisma.device
+    .findUniqueOrThrow({
+      include: { user: { include: { deliveries: true } } },
+      where: { id: devideId },
+    })
+    .then(({user: {deliveries}}) => {
+      res.send({deliveries: deliveries, total: deliveries.length});
+    });
+});
+
+app.post("/my-tfc/v1/push", async (req, res) => {
+  const prisma = new PrismaClient();
+  const devideId = req.headers["device_id"]?.toString();
+
+  if (!devideId) {
+    res.sendStatus(422);
+  }
+
+  return prisma.device
+    .findUniqueOrThrow({ where: { id: devideId } })
+    .then((device) => {
+      return prisma.device.update({
+        where: { id: device.id },
+        data: {
+          push_token: req.body.push_token,
+        },
+      });
+    });
 });
 
 app.listen(port, () => console.log(`🛰️  Listening on port ${port}`));

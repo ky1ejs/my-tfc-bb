@@ -31,6 +31,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            guard settings.authorizationStatus == .authorized else { return }
+            DispatchQueue.main.async {
+              UIApplication.shared.registerForRemoteNotifications()
+            }
+          }
+    }
 
+    func application(
+      _ application: UIApplication,
+      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+    ) {
+      let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+      let token = tokenParts.joined()
+        Task {
+           let _ = await HTTPClient.authorizedClient.call(endpoint: UpdatePushTokenEndpoint(tokenUpdate: TokenUpdate(pushToken: token)))
+        }
+    }
 }
 

@@ -13,7 +13,6 @@ export default class Auth {
 
   private logUserInAndUpsert(username: string, password: string) {
     return this.tfc.login({ username, password }).then((creds) => {
-      console.log(creds);
       return this.prisma.user.upsert({
         where: {
           username: username,
@@ -32,9 +31,18 @@ export default class Auth {
   }
 
   private registerNewDevice(user: User, deviceId: string) {
-    console.log(deviceId);
-    return this.prisma.device.create({
-      data: {
+    return this.prisma.device.upsert({
+      where: {
+        id: deviceId
+      },
+      update: {
+        user: {
+          connect: {
+            id: user.id,
+          },
+        },
+      },
+      create: {
         device_provided_id: deviceId,
         platform: DevicePlatform.IOS,
         user: {

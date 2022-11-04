@@ -13,6 +13,10 @@ class LogInView: UIView {
     private let usernameTF: UITextField = {
         let tf = UITextField()
         tf.textContentType = .username
+        tf.keyboardType = .emailAddress
+        tf.autocorrectionType = .no
+        tf.autocapitalizationType = .none
+        tf.isSecureTextEntry = true
         tf.placeholder = "username"
         tf.returnKeyType = .next
         return tf
