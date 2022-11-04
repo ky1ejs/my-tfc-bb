@@ -33,7 +33,7 @@ export default class Auth {
   private registerNewDevice(user: User, deviceId: string) {
     return this.prisma.device.upsert({
       where: {
-        id: deviceId
+        id: deviceId,
       },
       update: {
         user: {

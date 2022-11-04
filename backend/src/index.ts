@@ -36,8 +36,8 @@ app.get("/my-tfc/v1/deliveries", async (req, res) => {
       include: { user: { include: { deliveries: true } } },
       where: { id: devideId },
     })
-    .then(({user: {deliveries}}) => {
-      res.send({deliveries: deliveries, total: deliveries.length});
+    .then(({ user: { deliveries } }) => {
+      res.send({ deliveries: deliveries, total: deliveries.length });
     });
 });
 
