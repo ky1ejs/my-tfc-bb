@@ -4,7 +4,8 @@
   "description": "Get notifications about your packages at TFC",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node -r dotenv/config src/index.ts",
+    "dev": "ts-node -r dotenv/config src/index.ts",
+    "start": "prisma migrate deploy && ts-node -r dotenv/config src/index.ts",
     "lint": "eslint --fix src/",
     "lint:ci": "eslint --max-warnings=0 src/"
   },
