@@ -37,7 +37,10 @@ model Device {
 
 model Delivery {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tfc_id String @unique
   name String
+  comment String
+  date_received DateTime @db.Timestamptz
   user User @relation(fields: [user_id], references: [id])
   user_id String @db.Uuid
 }

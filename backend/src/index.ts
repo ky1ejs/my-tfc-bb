@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import Auth from "./services/auth";
 import { PrismaClient } from "@prisma/client";
+import { Worker } from "worker_threads";
+import { fetchAndUpdateDeliveries } from "./my-tfc/get_deliveries";
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -36,8 +38,12 @@ app.get("/my-tfc/v1/deliveries", async (req, res) => {
       include: { user: { include: { deliveries: true } } },
       where: { id: devideId },
     })
-    .then(({ user: { deliveries } }) => {
-      res.send({ deliveries: deliveries, total: deliveries.length });
+    .then(({ user }) => fetchAndUpdateDeliveries(user))
+    .then(({ latestDeliveries }) => {
+      res.send({
+        deliveries: latestDeliveries,
+        total: latestDeliveries.length,
+      });
     });
 });
 
@@ -59,6 +65,10 @@ app.post("/my-tfc/v1/push", async (req, res) => {
         },
       });
     });
+});
+
+new Worker(require.resolve(`./worker/DeliveryChecker`), {
+  execArgv: ["-r", "ts-node/register"],
 });
 
 app.listen(port, () => console.log(`🛰️  Listening on port ${port}`));

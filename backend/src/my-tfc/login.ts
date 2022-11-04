@@ -84,11 +84,3 @@ export function exchangeCodeForToken(code: string): Promise<Tokens> {
     )
     .then((res) => res.data);
 }
-
-// .then(response => {
-//   return axios.get(
-//     "https://connect.tfc.com/api/v1/packages/my-packages/",
-//     {headers: {
-//       Authorization: `Token ${response.data.access_token}`
-//     }})
-// })
