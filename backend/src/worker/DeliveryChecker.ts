@@ -23,11 +23,11 @@ import { pushToUsersDevices } from "./NotificationSender";
     })
     .then((promises) => Promise.all(promises))
     .then(function () {
-      console.log("Process finished, waiting 1 minute");
+      console.log("Process finished, waiting 2 minutes");
       setTimeout(function () {
         console.log("Going to restart");
         schedule();
-      }, 1000 * 60);
+      }, 1000 * 60 * 2);
     })
     .catch((err) => {
       console.error("error in scheduler", err);
