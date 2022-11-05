@@ -17,6 +17,8 @@ export function getDeliveries(
       return response;
     },
     function (error) {
+      // TODO: catch 502 received in logs that shut the instance down
+      //        probably should report all non erros somehow
       const originalRequest = error.config;
       if (
         originalRequest &&

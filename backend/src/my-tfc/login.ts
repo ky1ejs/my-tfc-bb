@@ -48,6 +48,8 @@ export function authenticate(
 }
 
 export function getCode(response: AxiosResponse): string {
+  // TODO: catch 502 received in logs that shut the instance down
+  //        probably should report all non erros somehow
   const url = new URL(response.request.res.responseUrl);
   const code = url.hash
     .replace("#", "")
