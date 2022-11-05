@@ -16,7 +16,6 @@ class LogInView: UIView {
         tf.keyboardType = .emailAddress
         tf.autocorrectionType = .no
         tf.autocapitalizationType = .none
-        tf.isSecureTextEntry = true
         tf.placeholder = "username"
         tf.returnKeyType = .next
         return tf
@@ -26,6 +25,7 @@ class LogInView: UIView {
         tf.textContentType = .password
         tf.placeholder = "password"
         tf.returnKeyType = .go
+        tf.isSecureTextEntry = true
         return tf
     }()
     private let submitButton = UIButton(type: .system)
