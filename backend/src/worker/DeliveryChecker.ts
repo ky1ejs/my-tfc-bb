@@ -1,9 +1,8 @@
 import prisma from "../db";
 import { fetchAndUpdateDeliveries } from "../my-tfc/get_deliveries";
-import { NotificationSender } from "./NotificationSender";
+import { pushToUsersDevices } from "./NotificationSender";
 
 (function schedule() {
-  const notif = new NotificationSender();
   prisma.user
     .findMany()
     .then((users) => Promise.all(users.map(fetchAndUpdateDeliveries)))
@@ -11,7 +10,7 @@ import { NotificationSender } from "./NotificationSender";
       return updates.map((u) => {
         const collectedPackages = u.collectedDeliveries.length;
         if (collectedPackages > 0) {
-          return notif.sendNotification(
+          return pushToUsersDevices(
             u.user,
             `${collectedPackages} package${
               collectedPackages > 1 ? "s" : ""

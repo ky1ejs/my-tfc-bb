@@ -1,7 +1,13 @@
 import { Device, User } from "@prisma/client";
+import prisma from "db";
 
-export class NotificationSender {
-  async sendNotification(device: Device | User, message: string) {
-    return "";
-  }
+export async function pushToUsersDevices(user: User, message: string) {
+  return prisma.device
+    .findMany({ where: { user_id: user.id } })
+    .then((devices) => devices.map((d) => pushToDevice(d, message)))
+    .then((promises) => Promise.all(promises));
+}
+
+export async function pushToDevice(device: Device, message: string) {
+  return "";
 }
