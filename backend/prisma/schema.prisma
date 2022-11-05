@@ -44,4 +44,5 @@ model Delivery {
   date_received DateTime @db.Timestamptz
   user User @relation(fields: [user_id], references: [id])
   user_id String @db.Uuid
+  collected_at DateTime? @db.Timestamptz
 }

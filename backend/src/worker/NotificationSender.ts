@@ -9,6 +9,6 @@ export async function pushToUsersDevices(user: User, message: string) {
 }
 
 export async function pushToDevice(device: Device, message: string) {
-  console.log(message)
+  console.log(message);
   return "";
 }

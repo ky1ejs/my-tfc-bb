@@ -46,24 +46,29 @@ export function getDeliveries(
 
 export async function fetchAndUpdateDeliveries(user: User) {
   const data = await Promise.all([
-    prisma.delivery.findMany({ where: { user_id: user.id } }),
+    prisma.delivery.findMany({
+      where: { user_id: user.id, collected_at: null },
+    }),
     getDeliveries(user),
   ]);
 
-  const [deliveriesInDatabase, latestDeliveries] = data;
+  const [uncollectedDeliveries, latestDeliveries] = data;
   const latestDeliveryIds = latestDeliveries.map((d) => d.tfc_id);
-  const collectedDeliveries = deliveriesInDatabase.filter((d) =>
-    latestDeliveryIds.includes(d.tfc_id)
+  const collectedDeliveries = uncollectedDeliveries.filter(
+    (d) => !latestDeliveryIds.includes(d.tfc_id)
   );
 
-  const deleteDeliveries = prisma.delivery.deleteMany({
+  const setCollected = prisma.delivery.updateMany({
     where: { id: { in: collectedDeliveries.map((d) => d.id) } },
+    data: {
+      collected_at: new Date(),
+    },
   });
   const createDeliveries = prisma.delivery.createMany({
     data: latestDeliveries,
     skipDuplicates: true,
   });
-  await Promise.all([deleteDeliveries, createDeliveries]);
+  await Promise.all([setCollected, createDeliveries]);
   return {
     collectedDeliveries,
     latestDeliveries,
@@ -83,6 +88,7 @@ function mapTfcDelivery(
       comment: d.opening_comment,
       date_received: new Date(d.date_opened),
       user_id: user.id,
+      collected_at: null,
     };
   });
 }
