@@ -1,20 +1,48 @@
-import { User, Prisma, PrismaClient } from "@prisma/client";
+import { User, Prisma } from "@prisma/client";
 import axios from "axios";
+import prisma from "../db";
+import Auth from "../services/auth";
+import { decrypt } from "../services/cipher";
 
 export function getDeliveries(
   user: User
 ): Promise<Prisma.DeliveryCreateManyInput[]> {
-  return axios
-    .get("https://connect.tfc.com/api/v1/packages/my-packages/", {
-      headers: {
-        Authorization: `Token ${user.latest_access_token}`,
-      },
-    })
+  const a = axios.create();
+  a.defaults.headers.common = {
+    Authorization: `Token ${user.latest_access_token}`,
+  };
+
+  a.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    function (error) {
+      const originalRequest = error.config;
+      if (
+        originalRequest &&
+        !originalRequest._retry &&
+        error.response.status === 403
+      ) {
+        originalRequest._retry = true;
+        return new Auth()
+          .authUser(user.username, decrypt(user.hashed_password))
+          .then((user) => {
+            originalRequest.headers = {
+              Authorization: `Token ${user.latest_access_token}`,
+            };
+            return a(originalRequest);
+          });
+      }
+      return Promise.reject(error);
+    }
+  );
+
+  return a
+    .get("https://connect.tfc.com/api/v1/packages/my-packages/")
     .then((res) => mapTfcDelivery(res.data, user));
 }
 
 export async function fetchAndUpdateDeliveries(user: User) {
-  const prisma = new PrismaClient();
   const data = await Promise.all([
     prisma.delivery.findMany({ where: { user_id: user.id } }),
     getDeliveries(user),
@@ -31,6 +59,7 @@ export async function fetchAndUpdateDeliveries(user: User) {
   });
   const createDeliveries = prisma.delivery.createMany({
     data: latestDeliveries,
+    skipDuplicates: true,
   });
   await Promise.all([deleteDeliveries, createDeliveries]);
   return {

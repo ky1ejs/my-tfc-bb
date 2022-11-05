@@ -15,6 +15,7 @@ model User {
   username String @unique
   latest_access_token String
   refresh_token String
+  hashed_password String
   devices Device[]
   deliveries Delivery[]
 }
@@ -37,7 +38,7 @@ model Device {
 
 model Delivery {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  tfc_id String @unique
+  tfc_id Int @unique
   name String
   comment String
   date_received DateTime @db.Timestamptz

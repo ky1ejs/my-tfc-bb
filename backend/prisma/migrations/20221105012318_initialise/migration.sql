@@ -7,6 +7,7 @@ CREATE TABLE "User" (
     "username" STRING NOT NULL,
     "latest_access_token" STRING NOT NULL,
     "refresh_token" STRING NOT NULL,
+    "hashed_password" STRING NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -25,7 +26,10 @@ CREATE TABLE "Device" (
 -- CreateTable
 CREATE TABLE "Delivery" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "tfc_id" INT4 NOT NULL,
     "name" STRING NOT NULL,
+    "comment" STRING NOT NULL,
+    "date_received" TIMESTAMPTZ NOT NULL,
     "user_id" UUID NOT NULL,
 
     CONSTRAINT "Delivery_pkey" PRIMARY KEY ("id")
@@ -36,6 +40,9 @@ CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Device_device_provided_id_key" ON "Device"("device_provided_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Delivery_tfc_id_key" ON "Delivery"("tfc_id");
 
 -- AddForeignKey
 ALTER TABLE "Device" ADD CONSTRAINT "Device_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../db";
 import { fetchAndUpdateDeliveries } from "../my-tfc/get_deliveries";
 import { NotificationSender } from "./NotificationSender";
-
-const prisma = new PrismaClient();
 
 (function schedule() {
   const notif = new NotificationSender();
@@ -26,11 +24,14 @@ const prisma = new PrismaClient();
     })
     .then((promises) => Promise.all(promises))
     .then(function () {
-      console.log("Process finished, waiting 5 minutes");
+      console.log("Process finished, waiting 1 minute");
       setTimeout(function () {
         console.log("Going to restart");
         schedule();
-      }, 1000 * 60 * 5);
+      }, 1000 * 60);
     })
-    .catch((err) => console.error("error in scheduler", err));
+    .catch((err) => {
+      console.error("error in scheduler", err);
+      throw err;
+    });
 })();

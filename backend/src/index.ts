@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
 import Auth from "./services/auth";
-import { PrismaClient } from "@prisma/client";
 import { Worker } from "worker_threads";
 import { fetchAndUpdateDeliveries } from "./my-tfc/get_deliveries";
+import prisma from "./db";
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -21,12 +21,11 @@ app.use(function (req, res, next) {
 
 app.post("/my-tfc/v1/login", async (req, res) => {
   return new Auth()
-    .auth(req.body.username, req.body.password, req.body.device_id)
+    .authDevice(req.body.username, req.body.password, req.body.device_id)
     .then((device) => res.send({ device_id: device.id }));
 });
 
 app.get("/my-tfc/v1/deliveries", async (req, res) => {
-  const prisma = new PrismaClient();
   const devideId = req.headers["device_id"]?.toString();
 
   if (!devideId) {
@@ -48,7 +47,6 @@ app.get("/my-tfc/v1/deliveries", async (req, res) => {
 });
 
 app.post("/my-tfc/v1/push", async (req, res) => {
-  const prisma = new PrismaClient();
   const devideId = req.headers["device_id"]?.toString();
 
   if (!devideId) {
