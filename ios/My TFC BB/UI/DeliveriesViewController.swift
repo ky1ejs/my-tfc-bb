@@ -23,6 +23,13 @@ class DeliveresViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchData()
+
+        let refreshControl = UIRefreshControl()
+        refreshControl.addAction(UIAction(handler: { _ in
+            self.fetchData()
+        }), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -52,6 +59,7 @@ class DeliveresViewController: UITableViewController {
     }
 
     private func fetchData() {
+        tableView.refreshControl?.beginRefreshing()
         Task {
             switch await client.call(endpoint: GetDeliveriesEndpoint()) {
             case .success(let result):
@@ -59,6 +67,7 @@ class DeliveresViewController: UITableViewController {
                 self.tableView.reloadData()
                 let deliverCount = result.deliveries.count
                 self.title = deliverCount > 0 ? "Packages (\(deliverCount))" : "Packages"
+                self.tableView.refreshControl?.endRefreshing()
             case .failure(let error):
                 let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Damn man...", style: .cancel))
