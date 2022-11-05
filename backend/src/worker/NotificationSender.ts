@@ -1,5 +1,5 @@
 import { Device, User } from "@prisma/client";
-import prisma from "db";
+import prisma from "../db";
 
 export async function pushToUsersDevices(user: User, message: string) {
   return prisma.device
