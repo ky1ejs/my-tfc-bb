@@ -33,7 +33,6 @@ class DeliveresViewController: UITableViewController {
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
-                
             }
     }
 
@@ -58,6 +57,8 @@ class DeliveresViewController: UITableViewController {
             case .success(let result):
                 self.deliveries = result.deliveries
                 self.tableView.reloadData()
+                let deliverCount = result.deliveries.count
+                self.title = deliverCount > 0 ? "Packages (\(deliverCount))" : "Packages"
             case .failure(let error):
                 let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Damn man...", style: .cancel))
