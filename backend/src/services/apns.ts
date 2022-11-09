@@ -23,6 +23,10 @@ const headers = {
     'authorization': `bearer ${bearerToken}`
 }
 
+  console.log(getHostForEnv(deviceToken.env))
+  console.log(deviceToken.token)
+  console.log(deviceToken.env)
+
   return new Promise((resolve, reject) => {
     const client = http2.connect(getHostForEnv(deviceToken.env));
     client.on('error', (err) => reject(err));
