@@ -95,6 +95,7 @@ app.get("/my-tfc/v1/push/test", async (req, res) => {
         return Promise.resolve()
       }
       return pushToDevice(device.push_token, "Testing 123.")
+        .then(v => res.sendStatus(200))
     });
 });
 
