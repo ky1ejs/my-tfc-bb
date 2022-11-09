@@ -20,20 +20,32 @@ model User {
   deliveries Delivery[]
 }
 
-enum DevicePlatform {
-  IOS
-  ANDROID
-  WEB
-  OTHER
-}
-
 model Device {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   device_provided_id String @unique
-  push_token String?
-  platform DevicePlatform?
   user User @relation(fields: [user_id], references: [id])
   user_id String @db.Uuid
+  push_token PushToken?
+}
+
+enum TokenEnv {
+  STAGING
+  PRODUCTION
+}
+
+enum PushPlatform {
+  IOS
+  ANDROID
+  WEB
+}
+
+model PushToken {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  token String
+  env TokenEnv
+  platform PushPlatform
+  device Device @relation(fields: [device_id], references: [id])
+  device_id String @unique @db.Uuid
 }
 
 model Delivery {

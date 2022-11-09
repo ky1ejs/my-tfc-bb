@@ -1,4 +1,4 @@
-import { DevicePlatform, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import prisma from "../db";
 import TFC from "../my-tfc";
 import { encrypt } from "./cipher";
@@ -51,7 +51,6 @@ export default class Auth {
       },
       create: {
         device_provided_id: deviceId,
-        platform: DevicePlatform.IOS,
         user: {
           connect: {
             id: user.id,

@@ -4,6 +4,7 @@ import Auth from "./services/auth";
 import { Worker } from "worker_threads";
 import { fetchAndUpdateDeliveries } from "./my-tfc/get_deliveries";
 import prisma from "./db";
+import { PushPlatform, TokenEnv } from "@prisma/client";
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -48,6 +49,9 @@ app.get("/my-tfc/v1/deliveries", async (req, res) => {
 
 app.post("/my-tfc/v1/push", async (req, res) => {
   const devideId = req.headers["device_id"]?.toString();
+  const platform: PushPlatform = req.body.platform
+  const token: string = req.body.push_token
+  const env: TokenEnv = req.body.env
 
   if (!devideId) {
     res.sendStatus(422);
@@ -56,10 +60,20 @@ app.post("/my-tfc/v1/push", async (req, res) => {
   return prisma.device
     .findUniqueOrThrow({ where: { id: devideId } })
     .then((device) => {
-      return prisma.device.update({
-        where: { id: device.id },
-        data: {
-          push_token: req.body.push_token,
+      return prisma.pushToken.upsert({
+        where: { device_id: device.id },
+        create: {
+          token: token,
+          platform: platform,
+          env: env,
+          device: {
+            connect: {
+              id: device.id
+            }
+          }
+        },
+        update: {
+          token: token
         },
       });
     });
