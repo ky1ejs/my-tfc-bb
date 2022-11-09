@@ -30,6 +30,9 @@ class DeliveresViewController: UITableViewController {
         }), for: .valueChanged)
         tableView.refreshControl = refreshControl
 
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", primaryAction: UIAction(handler: { _ in
+            self.navigationController?.pushViewController(SettingsViewController(), animated: true)
+        }))
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -67,12 +70,12 @@ class DeliveresViewController: UITableViewController {
                 self.tableView.reloadData()
                 let deliverCount = result.deliveries.count
                 self.title = deliverCount > 0 ? "Packages (\(deliverCount))" : "Packages"
-                self.tableView.refreshControl?.endRefreshing()
             case .failure(let error):
                 let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Damn man...", style: .cancel))
                 self.present(alert, animated: true)
             }
+            self.tableView.refreshControl?.endRefreshing()
         }
     }
 }

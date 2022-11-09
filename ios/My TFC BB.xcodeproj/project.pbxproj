@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		935DC5DC291B2F5400DB3F39 /* TestPushEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935DC5DB291B2F5400DB3F39 /* TestPushEndpoint.swift */; };
+		935DC5E2291B301100DB3F39 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935DC5E1291B301100DB3F39 /* SettingsViewController.swift */; };
 		93615634291472E3001B0831 /* UIView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93615633291472E3001B0831 /* UIView+Helpers.swift */; };
 		9361563629147B05001B0831 /* DeliveriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361563529147B05001B0831 /* DeliveriesViewController.swift */; };
 		9361563929147C20001B0831 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 9361563829147C20001B0831 /* KeychainAccess */; };
@@ -34,6 +36,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		93074046291A859C0027B6B1 /* My TFC BB.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "My TFC BB.entitlements"; sourceTree = "<group>"; };
+		935DC5DB291B2F5400DB3F39 /* TestPushEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPushEndpoint.swift; sourceTree = "<group>"; };
+		935DC5E1291B301100DB3F39 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		93615633291472E3001B0831 /* UIView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Helpers.swift"; sourceTree = "<group>"; };
 		9361563529147B05001B0831 /* DeliveriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveriesViewController.swift; sourceTree = "<group>"; };
 		9361563A29147C30001B0831 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
@@ -73,6 +78,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		935DC5DD291B2FCC00DB3F39 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				93074046291A859C0027B6B1 /* My TFC BB.entitlements */,
+				93EE6A48291098D80012C716 /* Info.plist */,
+				93EE6A43291098D80012C716 /* Assets.xcassets */,
+				93EE6A45291098D80012C716 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		935DC5DE291B2FF800DB3F39 /* Log In */ = {
+			isa = PBXGroup;
+			children = (
+				93EE6A3E291098D70012C716 /* LogInViewController.swift */,
+				93EE6A4E2910AC8E0012C716 /* LogInView.swift */,
+			);
+			path = "Log In";
+			sourceTree = "<group>";
+		};
+		935DC5DF291B300100DB3F39 /* Deliveries */ = {
+			isa = PBXGroup;
+			children = (
+				9361563529147B05001B0831 /* DeliveriesViewController.swift */,
+			);
+			path = Deliveries;
+			sourceTree = "<group>";
+		};
+		935DC5E0291B300800DB3F39 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				935DC5E1291B301100DB3F39 /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		9361564829147F53001B0831 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,9 +129,9 @@
 		9361564B2914807F001B0831 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				9361563529147B05001B0831 /* DeliveriesViewController.swift */,
-				93EE6A3E291098D70012C716 /* LogInViewController.swift */,
-				93EE6A4E2910AC8E0012C716 /* LogInView.swift */,
+				935DC5E0291B300800DB3F39 /* Settings */,
+				935DC5DF291B300100DB3F39 /* Deliveries */,
+				935DC5DE291B2FF800DB3F39 /* Log In */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -124,15 +165,13 @@
 			isa = PBXGroup;
 			children = (
 				93EE6A3A291098D70012C716 /* AppDelegate.swift */,
-				93EE6A3C291098D70012C716 /* SceneDelegate.swift */,
-				9361564B2914807F001B0831 /* UI */,
 				9361563A29147C30001B0831 /* KeychainManager.swift */,
+				93EE6A3C291098D70012C716 /* SceneDelegate.swift */,
 				9361564E29148264001B0831 /* Helpers */,
 				93EE6A552910B0520012C716 /* Networking */,
+				935DC5DD291B2FCC00DB3F39 /* Resources */,
 				93EE6A522910B0170012C716 /* TFC API */,
-				93EE6A43291098D80012C716 /* Assets.xcassets */,
-				93EE6A45291098D80012C716 /* LaunchScreen.storyboard */,
-				93EE6A48291098D80012C716 /* Info.plist */,
+				9361564B2914807F001B0831 /* UI */,
 			);
 			path = "My TFC BB";
 			sourceTree = "<group>";
@@ -144,6 +183,7 @@
 				93EE6A532910B02B0012C716 /* LogInEndpoint.swift */,
 				9361563C29147DE4001B0831 /* GetDeliveriesEndpoint.swift */,
 				9361563E29147DEF001B0831 /* UpdatePushTokenEndpoint.swift */,
+				935DC5DB291B2F5400DB3F39 /* TestPushEndpoint.swift */,
 				9361564829147F53001B0831 /* Models */,
 			);
 			path = "TFC API";
@@ -238,6 +278,7 @@
 			files = (
 				93615634291472E3001B0831 /* UIView+Helpers.swift in Sources */,
 				93EE6A3F291098D70012C716 /* LogInViewController.swift in Sources */,
+				935DC5DC291B2F5400DB3F39 /* TestPushEndpoint.swift in Sources */,
 				9361564529147F44001B0831 /* Delivery.swift in Sources */,
 				9361564729147F4A001B0831 /* Deliveries.swift in Sources */,
 				93EE6A5D2910B0520012C716 /* Endpoint.swift in Sources */,
@@ -250,6 +291,7 @@
 				9361564A29147FAA001B0831 /* TokenUpdate.swift in Sources */,
 				93EE6A5B2910B0520012C716 /* HTTPClient.swift in Sources */,
 				9361563B29147C30001B0831 /* KeychainManager.swift in Sources */,
+				935DC5E2291B301100DB3F39 /* SettingsViewController.swift in Sources */,
 				93EE6A3B291098D70012C716 /* AppDelegate.swift in Sources */,
 				93EE6A4F2910AC8E0012C716 /* LogInView.swift in Sources */,
 				9361564D2914825E001B0831 /* HTTPClient+Helper.swift in Sources */,
@@ -393,11 +435,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "My TFC BB/Resources/My TFC BB.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X2TBSUCASC;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "My TFC BB/Info.plist";
+				INFOPLIST_FILE = "My TFC BB/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -409,6 +453,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.kylejs.My-TFC-BB";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -420,11 +465,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "My TFC BB/Resources/My TFC BB.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X2TBSUCASC;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "My TFC BB/Info.plist";
+				INFOPLIST_FILE = "My TFC BB/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -436,6 +483,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.kylejs.My-TFC-BB";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

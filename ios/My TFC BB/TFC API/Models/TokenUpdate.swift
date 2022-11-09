@@ -9,4 +9,11 @@ import Foundation
 
 struct TokenUpdate: Encodable {
     let pushToken: String
+    let tokenEnv: TokenEnv
+    let platform = "IOS"
+}
+
+enum TokenEnv: String, Encodable {
+    case staging = "STAGING"
+    case production = "PRODUCTION"
 }

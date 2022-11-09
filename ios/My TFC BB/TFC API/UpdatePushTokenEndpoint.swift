@@ -10,7 +10,7 @@ import Foundation
 struct UpdatePushTokenEndpoint: Endpoint {
     let tokenUpdate: TokenUpdate
     typealias SuccessType = EmptyResponse
-    let url = URL(string: "\(TFC_API_BASE)/deliveries")!
+    let url = URL(string: "\(TFC_API_BASE)/push")!
     var method: HTTPMethod { .post(body: tokenUpdate) }
 }
 

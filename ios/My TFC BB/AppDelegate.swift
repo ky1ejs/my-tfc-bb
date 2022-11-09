@@ -11,9 +11,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UNUserNotificationCenter.current().delegate = self
         return true
     }
 
@@ -40,15 +40,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           }
     }
 
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
+        print(userInfo)
+        return .noData
+    }
+
     func application(
       _ application: UIApplication,
       didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
-      let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
-      let token = tokenParts.joined()
+        let token = deviceToken.hexString
+        #if DEBUG
+        let env = TokenEnv.staging
+        print(token)
+        #else
+        let env = TokenEnv.production
+        #endif
         Task {
-           let _ = await HTTPClient.authorizedClient.call(endpoint: UpdatePushTokenEndpoint(tokenUpdate: TokenUpdate(pushToken: token)))
+            let update = TokenUpdate(pushToken: token, tokenEnv: env)
+            let _ = await HTTPClient.authorizedClient.call(endpoint: UpdatePushTokenEndpoint(tokenUpdate: update))
         }
+    }
+
+
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.badge, .sound, .banner])
     }
 }
 
+extension Data {
+    var hexString: String {
+        let hexString = map { String(format: "%02.2hhx", $0) }.joined()
+        return hexString
+    }
+}
