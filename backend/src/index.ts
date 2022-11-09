@@ -80,7 +80,7 @@ app.post("/my-tfc/v1/push", async (req, res) => {
     });
 });
 
-app.post("/my-tfc/v1/push/test", async (req, res) => {
+app.get("/my-tfc/v1/push/test", async (req, res) => {
   const devideId = req.headers["device_id"]?.toString();
 
   if (!devideId) {
