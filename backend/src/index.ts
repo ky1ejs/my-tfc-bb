@@ -5,6 +5,7 @@ import { Worker } from "worker_threads";
 import { fetchAndUpdateDeliveries } from "./my-tfc/get_deliveries";
 import prisma from "./db";
 import { PushPlatform, TokenEnv } from "@prisma/client";
+import { pushToDevice } from "./worker/NotificationSender";
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -51,7 +52,7 @@ app.post("/my-tfc/v1/push", async (req, res) => {
   const devideId = req.headers["device_id"]?.toString();
   const platform: PushPlatform = req.body.platform
   const token: string = req.body.push_token
-  const env: TokenEnv = req.body.env
+  const env: TokenEnv = req.body.token_env
 
   if (!devideId) {
     res.sendStatus(422);
@@ -76,6 +77,24 @@ app.post("/my-tfc/v1/push", async (req, res) => {
           token: token
         },
       });
+    });
+});
+
+app.post("/my-tfc/v1/push/test", async (req, res) => {
+  const devideId = req.headers["device_id"]?.toString();
+
+  if (!devideId) {
+    res.sendStatus(422);
+  }
+
+  return prisma.device
+    .findUniqueOrThrow({ where: { id: devideId }, include: {push_token: true} })
+    .then((device) => {
+      if (!device.push_token!) {
+        res.sendStatus(422)
+        return Promise.resolve()
+      }
+      return pushToDevice(device.push_token, "Testing 123.")
     });
 });
 
