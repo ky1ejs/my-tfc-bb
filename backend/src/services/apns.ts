@@ -17,18 +17,19 @@ export function sendPush(message: string, deviceToken: PushToken): Promise<void>
   }
 const headers = {
     ':method': 'POST',
+    'apns-push-type': 'alert',
     'apns-topic': 'dev.kylejs.My-TFC-BB', //your application bundle ID
     ':scheme': 'https',
     ':path': path,
     'authorization': `bearer ${bearerToken}`
 }
 
-  console.log(getHostForEnv(deviceToken.env))
+  console.log(getHostForEnv(TokenEnv.PRODUCTION))
   console.log(deviceToken.token)
   console.log(deviceToken.env)
 
   return new Promise((resolve, reject) => {
-    const client = http2.connect(getHostForEnv(deviceToken.env));
+    const client = http2.connect(getHostForEnv(TokenEnv.PRODUCTION));
     client.on('error', (err) => reject(err));
     const request = client.request(headers);
     request.on('response', (headers, flags) => {
