@@ -75,6 +75,7 @@ app.post("/my-tfc/v1/push", async (req, res) => {
         },
         update: {
           token: token,
+          env: env,
         },
       });
     });
