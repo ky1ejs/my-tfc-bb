@@ -7,12 +7,15 @@ Read p8 file. Assumes p8 file to be in same directory
 */
 const KEY = process.env.PUSH_P3
 
-export function sendPush(message: string, deviceToken: PushToken): Promise<void> {
+export function sendPush(deviceToken: PushToken, title: string, body: string): Promise<void> {
   const path = `/3/device/${deviceToken.token}`
   const bearerToken = createBearerToken()
-  const body = {
+  const payload = {
     aps: {
-        alert: message
+        alert: {
+          title: title,
+          body: body
+        }
     }
   }
 const headers = {
@@ -41,7 +44,7 @@ const headers = {
   request.setEncoding('utf8');
   let data = ''
   request.on('data', (chunk) => { data += chunk; });
-  request.write(JSON.stringify(body))
+  request.write(JSON.stringify(payload))
   request.on('end', () => {
       console.log(`\n${data}`);
       resolve()

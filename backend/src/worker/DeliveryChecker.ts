@@ -14,7 +14,8 @@ import { pushToUsersDevices } from "./NotificationSender";
             u.user,
             `${collectedPackages} package${
               collectedPackages > 1 ? "s" : ""
-            } collected`
+            } collected`,
+            `${u.latestDeliveries.length > 1 ? "No packages are waiting to be collected." : `${u.latestDeliveries.length} remain to be collected.`}`
           );
         } else {
           return Promise.resolve("undefined");
