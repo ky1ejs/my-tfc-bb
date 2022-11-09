@@ -8,8 +8,7 @@ Read p8 file. Assumes p8 file to be in same directory
 const KEY = process.env.PUSH_P3
 
 export function sendPush(message: string, deviceToken: PushToken): Promise<void> {
-  const base64Token = Buffer.from(deviceToken.token, 'base64').toString('hex');
-  const path = `/3/device/${base64Token}`
+  const path = `/3/device/${deviceToken.token}`
   const bearerToken = createBearerToken()
   const body = {
     aps: {
