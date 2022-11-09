@@ -7,5 +7,5 @@
 
 import Foundation
 
-//let TFC_API_BASE = "https://my-tfc.up.railway.app/my-tfc/v1"
-let TFC_API_BASE = "http://localhost:3000/my-tfc/v1"
+let TFC_API_BASE = "https://my-tfc.up.railway.app/my-tfc/v1"
+//let TFC_API_BASE = "http://localhost:3000/my-tfc/v1"
