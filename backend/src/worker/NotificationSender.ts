@@ -15,7 +15,7 @@ export async function pushToDevice(token: PushToken, message: string): Promise<v
   console.log(message);
   switch (token.platform) {
     case PushPlatform.IOS:
-      sendPush(message, token)
+      return sendPush(message, token)
     default:
       return Promise.resolve()
   }
