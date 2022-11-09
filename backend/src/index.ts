@@ -50,9 +50,9 @@ app.get("/my-tfc/v1/deliveries", async (req, res) => {
 
 app.post("/my-tfc/v1/push", async (req, res) => {
   const devideId = req.headers["device_id"]?.toString();
-  const platform: PushPlatform = req.body.platform
-  const token: string = req.body.push_token
-  const env: TokenEnv = req.body.token_env
+  const platform: PushPlatform = req.body.platform;
+  const token: string = req.body.push_token;
+  const env: TokenEnv = req.body.token_env;
 
   if (!devideId) {
     res.sendStatus(422);
@@ -69,12 +69,12 @@ app.post("/my-tfc/v1/push", async (req, res) => {
           env: env,
           device: {
             connect: {
-              id: device.id
-            }
-          }
+              id: device.id,
+            },
+          },
         },
         update: {
-          token: token
+          token: token,
         },
       });
     });
@@ -88,14 +88,20 @@ app.get("/my-tfc/v1/push/test", async (req, res) => {
   }
 
   return prisma.device
-    .findUniqueOrThrow({ where: { id: devideId }, include: {push_token: true} })
+    .findUniqueOrThrow({
+      where: { id: devideId },
+      include: { push_token: true },
+    })
     .then((device) => {
-      if (!device.push_token!) {
-        res.sendStatus(422)
-        return Promise.resolve()
+      if (!device.push_token) {
+        res.sendStatus(422);
+        return Promise.resolve();
       }
-      return pushToDevice(device.push_token, "Testing 123", "Can you hear me?")
-        .then(v => res.sendStatus(200))
+      return pushToDevice(
+        device.push_token,
+        "Testing 123",
+        "Can you hear me?"
+      ).then(() => res.sendStatus(200));
     });
 });
 

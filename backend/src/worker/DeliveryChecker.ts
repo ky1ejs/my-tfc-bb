@@ -15,7 +15,11 @@ import { pushToUsersDevices } from "./NotificationSender";
             `${collectedPackages} package${
               collectedPackages > 1 ? "s" : ""
             } collected`,
-            `${u.latestDeliveries.length > 1 ? "No packages are waiting to be collected." : `${u.latestDeliveries.length} remain to be collected.`}`
+            `${
+              u.latestDeliveries.length > 1
+                ? "No packages are waiting to be collected."
+                : `${u.latestDeliveries.length} remain to be collected.`
+            }`
           );
         } else {
           return Promise.resolve("undefined");
