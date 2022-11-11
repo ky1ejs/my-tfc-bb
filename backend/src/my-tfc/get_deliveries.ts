@@ -65,7 +65,7 @@ export async function fetchAndUpdateDeliveries(user: User) {
 
   const uncollectedDeliveryIds = uncollectedDeliveries.map((d) => d.tfc_id);
   const newDeliveries = latestDeliveries.filter((d) =>
-    uncollectedDeliveryIds.includes(d.tfc_id)
+    !uncollectedDeliveryIds.includes(d.tfc_id)
   );
 
   const setCollected = prisma.delivery.updateMany({
