@@ -1,5 +1,6 @@
 import { User, Prisma } from "@prisma/client";
 import axios from "axios";
+import { TfcError, TfcErrorType } from "../models/TfcError";
 import prisma from "../db";
 import Auth from "../services/auth";
 import { decrypt } from "../services/cipher";
@@ -17,8 +18,6 @@ export function getDeliveries(
       return response;
     },
     function (error) {
-      // TODO: catch 502 received in logs that shut the instance down
-      //        probably should report all non erros somehow
       const originalRequest = error.config;
       if (
         originalRequest &&
@@ -35,6 +34,11 @@ export function getDeliveries(
             return a(originalRequest);
           });
       }
+
+      if (error.response.status === 502) {
+        return Promise.reject(new TfcError(TfcErrorType.BAD_GATEWAY));
+      }
+
       return Promise.reject(error);
     }
   );

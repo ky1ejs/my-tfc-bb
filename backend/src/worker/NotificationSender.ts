@@ -12,7 +12,7 @@ export async function pushToUsersDevices(
     .then((tokens) => tokens.filter((t): t is PushToken => t !== null))
     .then((tokens) => tokens.map((t) => pushToDevice(t, message)))
     .then((promises) => Promise.all(promises))
-    .then((promise) => undefined); // map to void
+    .then(() => undefined); // map to void
 }
 
 export async function pushToDevice(

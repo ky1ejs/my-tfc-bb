@@ -1,6 +1,7 @@
 import { Tokens, LoginConfig, LoginCredentials } from "@models";
 import axios, { AxiosResponse } from "axios";
 import { JSDOM } from "jsdom";
+import { TfcError, TfcErrorType } from "../models/TfcError";
 import { stringify } from "querystring";
 
 export function getConfig(): Promise<LoginConfig> {
@@ -48,8 +49,10 @@ export function authenticate(
 }
 
 export function getCode(response: AxiosResponse): string {
-  // TODO: catch 502 received in logs that shut the instance down
-  //        probably should report all non erros somehow
+  if (response.status === 502) {
+    throw new TfcError(TfcErrorType.BAD_GATEWAY);
+  }
+
   const url = new URL(response.request.res.responseUrl);
   const code = url.hash
     .replace("#", "")
@@ -60,6 +63,7 @@ export function getCode(response: AxiosResponse): string {
       return map;
     }, new Map<string, string>())
     .get("code");
+
   if (!code) {
     throw new Error("did not get a code");
   }

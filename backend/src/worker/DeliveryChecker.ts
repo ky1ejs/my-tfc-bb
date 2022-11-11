@@ -1,3 +1,4 @@
+import { TfcError } from "../models/TfcError";
 import prisma from "../db";
 import { fetchAndUpdateDeliveries } from "../my-tfc/get_deliveries";
 import { pushToUsersDevices } from "./NotificationSender";
@@ -56,6 +57,8 @@ import { pushToUsersDevices } from "./NotificationSender";
     })
     .catch((err) => {
       console.error("error in scheduler", err);
-      throw err;
+      if (!(err instanceof TfcError)) {
+        throw err;
+      }
     });
 })();
