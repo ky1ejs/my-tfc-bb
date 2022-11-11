@@ -2,9 +2,52 @@ import { TfcError } from "../models/TfcError";
 import prisma from "../db";
 import { fetchAndUpdateDeliveries } from "../my-tfc/get_deliveries";
 import { pushToUsersDevices } from "./NotificationSender";
+import { DateTime } from "luxon";
 
-(function schedule() {
-  prisma.user
+const COLLECTION_CLOSE = 22; // 10pm
+const COLLECTION_OPEN = 7; // 7am
+const WHILE_CLOSED_CHECK_INTERVAL = 15; // minutes
+const WHILE_OPEN_CHECK_INTERVAL = 2; // minutes
+
+let intervalMinutes = WHILE_OPEN_CHECK_INTERVAL;
+
+const start = () => {
+  process()
+    .then(schedule)
+    .catch((err) => {
+      console.error("error in scheduler", err);
+      if (err instanceof TfcError) {
+        schedule();
+        return;
+      }
+      throw err;
+    });
+};
+
+function schedule() {
+  console.log(
+    `Delivery check finished, waiting ${intervalMinutes} minute${
+      intervalMinutes > 1 ? "s" : ""
+    }`
+  );
+  setTimeout(function () {
+    console.log("Going to restart");
+    start();
+  }, 1000 * 60 * intervalMinutes);
+}
+
+function process(): Promise<void> {
+  console.log("Delivery check started.");
+
+  const nowHour = DateTime.now().setZone("America/New_York").hour;
+  if (nowHour >= COLLECTION_CLOSE || nowHour < COLLECTION_OPEN) {
+    console.log(`Parcel room is closed, skipping.`);
+    intervalMinutes = WHILE_CLOSED_CHECK_INTERVAL;
+    return Promise.resolve();
+  }
+
+  intervalMinutes = WHILE_OPEN_CHECK_INTERVAL;
+  return prisma.user
     .findMany()
     .then((users) => Promise.all(users.map(fetchAndUpdateDeliveries)))
     .then((updates) => {
@@ -44,21 +87,11 @@ import { pushToUsersDevices } from "./NotificationSender";
           );
         }
 
-        return Promise.all(promises);
+        return Promise.all(promises).then(undefined);
       });
     })
     .then((promises) => Promise.all(promises))
-    .then(function () {
-      console.log("Process finished, waiting 2 minutes");
-      setTimeout(function () {
-        console.log("Going to restart");
-        schedule();
-      }, 1000 * 60 * 2);
-    })
-    .catch((err) => {
-      console.error("error in scheduler", err);
-      if (!(err instanceof TfcError)) {
-        throw err;
-      }
-    });
-})();
+    .then(undefined);
+}
+
+start();
