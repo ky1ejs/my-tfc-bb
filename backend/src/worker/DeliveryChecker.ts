@@ -8,22 +8,42 @@ import { pushToUsersDevices } from "./NotificationSender";
     .then((users) => Promise.all(users.map(fetchAndUpdateDeliveries)))
     .then((updates) => {
       return updates.map((u) => {
+        const promises: Promise<void>[] = [];
+
         const collectedPackages = u.collectedDeliveries.length;
+        const currentPackageCount = u.latestDeliveries.length;
         if (collectedPackages > 0) {
-          return pushToUsersDevices(
-            u.user,
-            `${collectedPackages} package${
-              collectedPackages > 1 ? "s" : ""
-            } collected`,
-            `${
-              u.latestDeliveries.length > 1
-                ? "No packages are waiting to be collected."
-                : `${u.latestDeliveries.length} remain to be collected.`
-            }`
+          const title = `${collectedPackages} package${
+            collectedPackages > 1 ? "s" : ""
+          } collected`;
+          const body = `${currentPackageCount} remain to be collected`;
+          promises.push(
+            pushToUsersDevices(u.user, {
+              title,
+              body,
+              badge: currentPackageCount,
+            })
           );
-        } else {
-          return Promise.resolve("undefined");
         }
+
+        const newDeliveries = u.newDeliveries.length;
+        if (newDeliveries > 0) {
+          const title = `${newDeliveries} new ${
+            newDeliveries > 1 ? "packages are" : "package is"
+          } ready for collection`;
+          const body = `${currentPackageCount} ${
+            currentPackageCount > 1 ? "packages are" : "package is"
+          } for collection in total`;
+          promises.push(
+            pushToUsersDevices(u.user, {
+              title,
+              body,
+              badge: currentPackageCount,
+            })
+          );
+        }
+
+        return Promise.all(promises);
       });
     })
     .then((promises) => Promise.all(promises))

@@ -7,10 +7,15 @@ Read p8 file. Assumes p8 file to be in same directory
 */
 const KEY = process.env.PUSH_P3;
 
+export type PushMessage = {
+  title: string;
+  body: string;
+  badge?: number;
+};
+
 export function sendPush(
   deviceToken: PushToken,
-  title: string,
-  body: string
+  { title, body, badge }: PushMessage
 ): Promise<void> {
   const path = `/3/device/${deviceToken.token}`;
   const bearerToken = createBearerToken();
@@ -20,6 +25,7 @@ export function sendPush(
         title: title,
         body: body,
       },
+      badge: badge,
     },
   };
   const headers = {
