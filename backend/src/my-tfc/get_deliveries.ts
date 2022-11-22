@@ -64,8 +64,8 @@ export async function fetchAndUpdateDeliveries(user: User) {
   );
 
   const uncollectedDeliveryIds = uncollectedDeliveries.map((d) => d.tfc_id);
-  const newDeliveries = latestDeliveries.filter((d) =>
-    !uncollectedDeliveryIds.includes(d.tfc_id)
+  const newDeliveries = latestDeliveries.filter(
+    (d) => !uncollectedDeliveryIds.includes(d.tfc_id)
   );
 
   const setCollected = prisma.delivery.updateMany({
@@ -74,11 +74,22 @@ export async function fetchAndUpdateDeliveries(user: User) {
       collected_at: new Date(),
     },
   });
+
+  const updateRedelivered = prisma.delivery
+    .findMany({
+      where: { tfc_id: { in: latestDeliveries.map((d) => d.tfc_id) } },
+    })
+    .then((redelivered) =>
+      prisma.delivery.updateMany({
+        where: { id: { in: redelivered.map((d) => d.id) } },
+        data: { collected_at: null },
+      })
+    );
   const createDeliveries = prisma.delivery.createMany({
     data: latestDeliveries,
     skipDuplicates: true,
   });
-  await Promise.all([setCollected, createDeliveries]);
+  await Promise.all([updateRedelivered, setCollected, createDeliveries]);
   return {
     collectedDeliveries,
     latestDeliveries,
