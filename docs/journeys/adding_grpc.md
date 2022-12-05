@@ -1,6 +1,48 @@
 
-## Protobuf / gRPC
+## Protobuf / gRPC / buf
+### Why use buf?
+[`buf generate`](https://docs.buf.build/generate/usage)
 
+I'm not sure exactly how much Buf helps... I could have just used `protoc` directly, however tutorials I found used Buf and I didn't want to spend too much time trying to integrate gRPC rather than building my feature.
+
+This is what happened when I tried to run `protoc` (I tried for all of 2 mins but quit bc `buf` was working fine for me):
+```bash
+❯ protoc --swift_out=. ../shared/proto/v1/my-tfc-bb.proto
+../shared/proto/v1/my-tfc-bb.proto: File does not reside within any path specified using --proto_path (or -I).  You must specify a --proto_path which encompasses this file.  Note that the proto_path must be an exact prefix of the .proto file names -- protoc is too dumb to figure out when two paths (e.g. absolute and relative) are equivalent (it's harder than you think)
+```
+
+* [More generation docs](https://github.com/grpc-ecosystem/grpc-gateway/issues/2039)
+* [Trying to figure out how to define the buf.gen.yaml file](https://github.com/mrjbond/blogging/blob/master/grpc-node-buf-typescript/proto/buf.gen.yaml)
+  * In the end I don't think either `js` (note that this will map to the standard `js-protobuf` plugin) or `grpc_tools_node_protoc_plugin`
+
+### Directory Structure
+I wanted to have the dir structure be:
+```
+ios
+backend
+shared---|
+         |-proto
+```
+
+I felt this gave a nicer feel to the shared definition of the protos and RPCs.
+
+However `nixpacks` (Railways own layer on top of `docker build/compose`) doesn't play well with this, since it bundles the whole of `/backend` into a container. Docker deliberately does not allow you to copy files from outside the context:
+
+From https://stackoverflow.com/a/31885214/3053366:
+> If you read the discussion in the issue 2745 not only docker may never support symlinks they may never support adding files outside your context. Seems to be a design philosophy that files that go into docker build should explicitly be part of its context or be from a URL where it is presumably deployed too with a fixed version so that the build is repeatable with well known URLs or files shipped with the docker container.
+
+> I prefer to build from a version controlled source - ie docker build -t stuff http://my.git.org/repo - otherwise I'm building from some random place with random files.
+
+> fundamentally, no.... -- SvenDowideit, Docker Inc
+
+> Just my opinion but I think you should restructure to separate out the code and docker repositories. That way the containers can be generic and pull in any version of the code at run time rather than build time.
+
+> Alternatively, use docker as your fundamental code deployment artifact and then you put the dockerfile in the root of the code repository. if you go this route probably makes sense to have a parent docker container for more general system level details and a child container for setup specific to your code.
+
+From https://stackoverflow.com/questions/31881904/docker-follow-symlink-outside-context:
+> That is not possible and will not be implemented. Please have a look at the discussion on github issue #1676:
+
+> We do not allow this because it's not repeatable. A symlink on your machine is the not the same as my machine and the same Dockerfile would produce two different results. Also having symlinks to /etc/paasswd would cause issues because it would link the host files and not your local files.
 
 ## Node / TypeScript
 
@@ -85,21 +127,3 @@ You need two `protoc` plugins: swift-protobuf and grpc-swift
 ```bash
 brew install swift-protobuf grpc-swift
 ```
-
-**Buf for defining generation**
-`[Buf generage](https://docs.buf.build/generate/usage)`
-
-I'm not sure exactly how much Buf helps... I could have just used `protoc` directly, however tutorials I found used Buf and I didn't want to spend too much time trying to integrate gRPC rather than building my feature.
-
-This is what happened when I tried to run `protoc` (I tried for all of 2 mins but quit bc `buf` was working fine for me):
-```bash
-❯ protoc --swift_out=. ../shared/proto/v1/my-tfc-bb.proto
-../shared/proto/v1/my-tfc-bb.proto: File does not reside within any path specified using --proto_path (or -I).  You must specify a --proto_path which encompasses this file.  Note that the proto_path must be an exact prefix of the .proto file names -- protoc is too dumb to figure out when two paths (e.g. absolute and relative) are equivalent (it's harder than you think)
-```
-
-* [More generation docs](https://github.com/grpc-ecosystem/grpc-gateway/issues/2039)
-* [Trying to figure out how to define the buf.gen.yaml file](https://github.com/mrjbond/blogging/blob/master/grpc-node-buf-typescript/proto/buf.gen.yaml)
-  * In the end I don't think either `js` (note that this will map to the standard `js-protobuf` plugin) or `grpc_tools_node_protoc_plugin`
-
-
-
