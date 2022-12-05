@@ -60,7 +60,7 @@ message UpdatePushTokenRequest {
   string token = 3;
 }
 
-service MyTfcService {
+service MyTfc {
   rpc LogIn(LogInRequest) returns (LogInResponse);
   rpc GetDeliveries(GetDeliveriesRequest) returns (GetDeliveriesResponse);
   rpc UpdatePushToken(UpdatePushTokenRequest) returns (google.protobuf.Empty);

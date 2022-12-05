@@ -1,11 +1,11 @@
 import { handleUnaryCall } from "@grpc/grpc-js";
 import { Delivery } from "@prisma/client";
-import { Delivery as DeliveryProto } from "./../generated/proto/my-tfc-bb";
+import { Delivery as DeliveryProto } from "../generated/proto/my_tfc_bb/v1/my_tfc_bb";
 import { handleError } from "../errors/HandleGrpcError";
 import {
   GetDeliveriesRequest,
   GetDeliveriesResponse,
-} from "../generated/proto/my-tfc-bb";
+} from "../generated/proto/my_tfc_bb/v1/my_tfc_bb";
 import { authenticate } from "../helpers/authenticate";
 import { fetchAndUpdateDeliveries } from "../my-tfc/get_deliveries";
 import { logRequest } from "../helpers/logRequest";

@@ -2,7 +2,7 @@
 import { Worker } from "worker_threads";
 import { Server, ServerCredentials } from "@grpc/grpc-js";
 import { MyTfcServiceImpl } from "./MyTfcServer";
-import { MyTfcService } from "./generated/proto/my-tfc-bb";
+import { MyTfcService } from "./generated/proto/my_tfc_bb/v1/my_tfc_bb";
 
 const PORT = process.env.PORT || 3000;
 const RUN_DELIVERY_CHECK = (process.env.RUN_DELIVERY_CHECK ?? "true") === "true"

@@ -1,6 +1,6 @@
 import { handleUnaryCall } from "@grpc/grpc-js";
 import { handleError } from "../errors/HandleGrpcError";
-import { LogInRequest, LogInResponse } from "../generated/proto/my-tfc-bb";
+import { LogInRequest, LogInResponse } from "../generated/proto/my_tfc_bb/v1/my_tfc_bb";
 import { logRequest } from "../helpers/logRequest";
 import Auth from "../services/auth";
 

@@ -5,7 +5,7 @@ import { handleError } from "../errors/HandleGrpcError";
 import { Empty } from "../generated/proto/google/protobuf/empty";
 import {
   UpdatePushTokenRequest,
-} from "../generated/proto/my-tfc-bb";
+} from "../generated/proto/my_tfc_bb/v1/my_tfc_bb";
 import { authenticate } from "../helpers/authenticate";
 import { tokenEnvFromProto } from "../helpers/tokenEnvFromProto";
 import { pushPlatformFromProto } from "../helpers/pushPlatformFromProto";

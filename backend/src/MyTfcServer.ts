@@ -1,5 +1,5 @@
 import { UntypedHandleCall } from "@grpc/grpc-js";
-import { MyTfcServer } from "./generated/proto/my-tfc-bb";
+import { MyTfcServer } from "./generated/proto/my_tfc_bb/v1/my_tfc_bb";
 import { getDeliveriesHandler } from "./handlers/getDeliveries";
 import { logInHandler } from "./handlers/logIn";
 import { logOutHandler } from "./handlers/logOut";
