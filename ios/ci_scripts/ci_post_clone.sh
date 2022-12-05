@@ -8,6 +8,6 @@
 brew install protoc
 brew install swift-protobuf
 brew install grpc-swift
-brew install buf
+brew install bufbuild/buf/buf
 
 buf generate ../backend/proto
