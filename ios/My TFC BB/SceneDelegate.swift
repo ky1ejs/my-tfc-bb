@@ -11,6 +11,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    static var shared: SceneDelegate {
+        let windowScene = UIApplication.shared.connectedScenes.first as! UIWindowScene
+        return windowScene.delegate as! SceneDelegate
+    }
+
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -33,10 +38,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func authenticated() {
-        let vc = DeliveresViewController()
-        window!.rootViewController = UINavigationController(rootViewController: vc)
-        UIView.transition(with: window!, duration: 0.3, options: .transitionCrossDissolve, animations: {})
+        animate(to: DeliveresViewController())
     }
 
+    func logedOut() {
+        animate(to: LogInViewController())
+    }
+
+    private func animate(to newRootViewController: UIViewController) {
+        window!.rootViewController = UINavigationController(rootViewController: newRootViewController)
+        UIView.transition(with: window!, duration: 0.3, options: .transitionCrossDissolve, animations: {})
+    }
 }
 

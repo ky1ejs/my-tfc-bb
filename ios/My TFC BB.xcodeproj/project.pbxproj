@@ -7,50 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		935DC5DC291B2F5400DB3F39 /* TestPushEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935DC5DB291B2F5400DB3F39 /* TestPushEndpoint.swift */; };
 		935DC5E2291B301100DB3F39 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935DC5E1291B301100DB3F39 /* SettingsViewController.swift */; };
 		93615634291472E3001B0831 /* UIView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93615633291472E3001B0831 /* UIView+Helpers.swift */; };
 		9361563629147B05001B0831 /* DeliveriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361563529147B05001B0831 /* DeliveriesViewController.swift */; };
 		9361563929147C20001B0831 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 9361563829147C20001B0831 /* KeychainAccess */; };
 		9361563B29147C30001B0831 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361563A29147C30001B0831 /* KeychainManager.swift */; };
-		9361563D29147DE4001B0831 /* GetDeliveriesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361563C29147DE4001B0831 /* GetDeliveriesEndpoint.swift */; };
-		9361563F29147DEF001B0831 /* UpdatePushTokenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361563E29147DEF001B0831 /* UpdatePushTokenEndpoint.swift */; };
-		9361564129147E10001B0831 /* LogInCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361564029147E10001B0831 /* LogInCredentials.swift */; };
 		9361564329147E50001B0831 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361564229147E50001B0831 /* Constants.swift */; };
-		9361564529147F44001B0831 /* Delivery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361564429147F44001B0831 /* Delivery.swift */; };
-		9361564729147F4A001B0831 /* Deliveries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361564629147F4A001B0831 /* Deliveries.swift */; };
-		9361564A29147FAA001B0831 /* TokenUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361564929147FAA001B0831 /* TokenUpdate.swift */; };
-		9361564D2914825E001B0831 /* HTTPClient+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361564C2914825E001B0831 /* HTTPClient+Helper.swift */; };
-		936156502914892C001B0831 /* BackendAssignedId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361564F2914892C001B0831 /* BackendAssignedId.swift */; };
+		937AFC5729370D36004833FF /* my-tfc-bb.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937AFC5629370D36004833FF /* my-tfc-bb.pb.swift */; };
+		937AFC5A29370DA0004833FF /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 937AFC5929370DA0004833FF /* SwiftProtobuf */; };
+		937AFC5C293826D2004833FF /* my-tfc-bb.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937AFC5B293826D2004833FF /* my-tfc-bb.grpc.swift */; };
+		937AFC5F2938273A004833FF /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 937AFC5E2938273A004833FF /* GRPC */; };
+		937AFC612938299D004833FF /* TfcApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937AFC602938299D004833FF /* TfcApiClient.swift */; };
+		937AFC632938664F004833FF /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937AFC622938664F004833FF /* Types.swift */; };
 		93EE6A3B291098D70012C716 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A3A291098D70012C716 /* AppDelegate.swift */; };
 		93EE6A3D291098D70012C716 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A3C291098D70012C716 /* SceneDelegate.swift */; };
 		93EE6A3F291098D70012C716 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A3E291098D70012C716 /* LogInViewController.swift */; };
 		93EE6A44291098D80012C716 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93EE6A43291098D80012C716 /* Assets.xcassets */; };
 		93EE6A47291098D80012C716 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93EE6A45291098D80012C716 /* LaunchScreen.storyboard */; };
 		93EE6A4F2910AC8E0012C716 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A4E2910AC8E0012C716 /* LogInView.swift */; };
-		93EE6A542910B02B0012C716 /* LogInEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A532910B02B0012C716 /* LogInEndpoint.swift */; };
-		93EE6A5A2910B0520012C716 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A562910B0520012C716 /* HTTPMethod.swift */; };
-		93EE6A5B2910B0520012C716 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A572910B0520012C716 /* HTTPClient.swift */; };
-		93EE6A5C2910B0520012C716 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A582910B0520012C716 /* HTTPStatusCode.swift */; };
-		93EE6A5D2910B0520012C716 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A592910B0520012C716 /* Endpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		93074046291A859C0027B6B1 /* My TFC BB.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "My TFC BB.entitlements"; sourceTree = "<group>"; };
-		935DC5DB291B2F5400DB3F39 /* TestPushEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPushEndpoint.swift; sourceTree = "<group>"; };
 		935DC5E1291B301100DB3F39 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		93615633291472E3001B0831 /* UIView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Helpers.swift"; sourceTree = "<group>"; };
 		9361563529147B05001B0831 /* DeliveriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveriesViewController.swift; sourceTree = "<group>"; };
 		9361563A29147C30001B0831 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
-		9361563C29147DE4001B0831 /* GetDeliveriesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDeliveriesEndpoint.swift; sourceTree = "<group>"; };
-		9361563E29147DEF001B0831 /* UpdatePushTokenEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePushTokenEndpoint.swift; sourceTree = "<group>"; };
-		9361564029147E10001B0831 /* LogInCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInCredentials.swift; sourceTree = "<group>"; };
 		9361564229147E50001B0831 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		9361564429147F44001B0831 /* Delivery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delivery.swift; sourceTree = "<group>"; };
-		9361564629147F4A001B0831 /* Deliveries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deliveries.swift; sourceTree = "<group>"; };
-		9361564929147FAA001B0831 /* TokenUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenUpdate.swift; sourceTree = "<group>"; };
-		9361564C2914825E001B0831 /* HTTPClient+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPClient+Helper.swift"; sourceTree = "<group>"; };
-		9361564F2914892C001B0831 /* BackendAssignedId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAssignedId.swift; sourceTree = "<group>"; };
+		937AFC5629370D36004833FF /* my-tfc-bb.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "my-tfc-bb.pb.swift"; sourceTree = "<group>"; };
+		937AFC5B293826D2004833FF /* my-tfc-bb.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "my-tfc-bb.grpc.swift"; sourceTree = "<group>"; };
+		937AFC602938299D004833FF /* TfcApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TfcApiClient.swift; sourceTree = "<group>"; };
+		937AFC622938664F004833FF /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		937AFC65293D9760004833FF /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		93EE6A37291098D70012C716 /* My TFC BB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My TFC BB.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93EE6A3A291098D70012C716 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93EE6A3C291098D70012C716 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,11 +47,6 @@
 		93EE6A46291098D80012C716 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		93EE6A48291098D80012C716 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93EE6A4E2910AC8E0012C716 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
-		93EE6A532910B02B0012C716 /* LogInEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInEndpoint.swift; sourceTree = "<group>"; };
-		93EE6A562910B0520012C716 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		93EE6A572910B0520012C716 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
-		93EE6A582910B0520012C716 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
-		93EE6A592910B0520012C716 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +55,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9361563929147C20001B0831 /* KeychainAccess in Frameworks */,
+				937AFC5A29370DA0004833FF /* SwiftProtobuf in Frameworks */,
+				937AFC5F2938273A004833FF /* GRPC in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,18 +99,6 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		9361564829147F53001B0831 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				9361564029147E10001B0831 /* LogInCredentials.swift */,
-				9361564F2914892C001B0831 /* BackendAssignedId.swift */,
-				9361564429147F44001B0831 /* Delivery.swift */,
-				9361564929147FAA001B0831 /* TokenUpdate.swift */,
-				9361564629147F4A001B0831 /* Deliveries.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		9361564B2914807F001B0831 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,15 +112,40 @@
 		9361564E29148264001B0831 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				9361564C2914825E001B0831 /* HTTPClient+Helper.swift */,
 				93615633291472E3001B0831 /* UIView+Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		937AFC5429370D36004833FF /* generated */ = {
+			isa = PBXGroup;
+			children = (
+				937AFC5529370D36004833FF /* proto */,
+			);
+			path = generated;
+			sourceTree = "<group>";
+		};
+		937AFC5529370D36004833FF /* proto */ = {
+			isa = PBXGroup;
+			children = (
+				937AFC5B293826D2004833FF /* my-tfc-bb.grpc.swift */,
+				937AFC5629370D36004833FF /* my-tfc-bb.pb.swift */,
+			);
+			path = proto;
+			sourceTree = "<group>";
+		};
+		937AFC64293D973D004833FF /* ci_scripts */ = {
+			isa = PBXGroup;
+			children = (
+				937AFC65293D9760004833FF /* ci_post_clone.sh */,
+			);
+			path = ci_scripts;
+			sourceTree = "<group>";
+		};
 		93EE6A2E291098D70012C716 = {
 			isa = PBXGroup;
 			children = (
+				937AFC64293D973D004833FF /* ci_scripts */,
 				93EE6A39291098D70012C716 /* My TFC BB */,
 				93EE6A38291098D70012C716 /* Products */,
 			);
@@ -167,6 +165,7 @@
 				93EE6A3A291098D70012C716 /* AppDelegate.swift */,
 				9361563A29147C30001B0831 /* KeychainManager.swift */,
 				93EE6A3C291098D70012C716 /* SceneDelegate.swift */,
+				937AFC5429370D36004833FF /* generated */,
 				9361564E29148264001B0831 /* Helpers */,
 				93EE6A552910B0520012C716 /* Networking */,
 				935DC5DD291B2FCC00DB3F39 /* Resources */,
@@ -179,12 +178,9 @@
 		93EE6A522910B0170012C716 /* TFC API */ = {
 			isa = PBXGroup;
 			children = (
+				937AFC602938299D004833FF /* TfcApiClient.swift */,
 				9361564229147E50001B0831 /* Constants.swift */,
-				93EE6A532910B02B0012C716 /* LogInEndpoint.swift */,
-				9361563C29147DE4001B0831 /* GetDeliveriesEndpoint.swift */,
-				9361563E29147DEF001B0831 /* UpdatePushTokenEndpoint.swift */,
-				935DC5DB291B2F5400DB3F39 /* TestPushEndpoint.swift */,
-				9361564829147F53001B0831 /* Models */,
+				937AFC622938664F004833FF /* Types.swift */,
 			);
 			path = "TFC API";
 			sourceTree = "<group>";
@@ -192,10 +188,6 @@
 		93EE6A552910B0520012C716 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				93EE6A562910B0520012C716 /* HTTPMethod.swift */,
-				93EE6A572910B0520012C716 /* HTTPClient.swift */,
-				93EE6A582910B0520012C716 /* HTTPStatusCode.swift */,
-				93EE6A592910B0520012C716 /* Endpoint.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -218,6 +210,8 @@
 			name = "My TFC BB";
 			packageProductDependencies = (
 				9361563829147C20001B0831 /* KeychainAccess */,
+				937AFC5929370DA0004833FF /* SwiftProtobuf */,
+				937AFC5E2938273A004833FF /* GRPC */,
 			);
 			productName = "My TFC BB";
 			productReference = 93EE6A37291098D70012C716 /* My TFC BB.app */;
@@ -249,6 +243,8 @@
 			mainGroup = 93EE6A2E291098D70012C716;
 			packageReferences = (
 				9361563729147C20001B0831 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				937AFC5829370DA0004833FF /* XCRemoteSwiftPackageReference "swift-protobuf" */,
+				937AFC5D2938273A004833FF /* XCRemoteSwiftPackageReference "grpc-swift" */,
 			);
 			productRefGroup = 93EE6A38291098D70012C716 /* Products */;
 			projectDirPath = "";
@@ -278,27 +274,17 @@
 			files = (
 				93615634291472E3001B0831 /* UIView+Helpers.swift in Sources */,
 				93EE6A3F291098D70012C716 /* LogInViewController.swift in Sources */,
-				935DC5DC291B2F5400DB3F39 /* TestPushEndpoint.swift in Sources */,
-				9361564529147F44001B0831 /* Delivery.swift in Sources */,
-				9361564729147F4A001B0831 /* Deliveries.swift in Sources */,
-				93EE6A5D2910B0520012C716 /* Endpoint.swift in Sources */,
-				93EE6A542910B02B0012C716 /* LogInEndpoint.swift in Sources */,
-				9361563D29147DE4001B0831 /* GetDeliveriesEndpoint.swift in Sources */,
+				937AFC5729370D36004833FF /* my-tfc-bb.pb.swift in Sources */,
+				937AFC612938299D004833FF /* TfcApiClient.swift in Sources */,
+				937AFC5C293826D2004833FF /* my-tfc-bb.grpc.swift in Sources */,
 				9361563629147B05001B0831 /* DeliveriesViewController.swift in Sources */,
-				93EE6A5A2910B0520012C716 /* HTTPMethod.swift in Sources */,
 				9361564329147E50001B0831 /* Constants.swift in Sources */,
-				9361563F29147DEF001B0831 /* UpdatePushTokenEndpoint.swift in Sources */,
-				9361564A29147FAA001B0831 /* TokenUpdate.swift in Sources */,
-				93EE6A5B2910B0520012C716 /* HTTPClient.swift in Sources */,
 				9361563B29147C30001B0831 /* KeychainManager.swift in Sources */,
+				937AFC632938664F004833FF /* Types.swift in Sources */,
 				935DC5E2291B301100DB3F39 /* SettingsViewController.swift in Sources */,
 				93EE6A3B291098D70012C716 /* AppDelegate.swift in Sources */,
 				93EE6A4F2910AC8E0012C716 /* LogInView.swift in Sources */,
-				9361564D2914825E001B0831 /* HTTPClient+Helper.swift in Sources */,
-				9361564129147E10001B0831 /* LogInCredentials.swift in Sources */,
-				93EE6A5C2910B0520012C716 /* HTTPStatusCode.swift in Sources */,
 				93EE6A3D291098D70012C716 /* SceneDelegate.swift in Sources */,
-				936156502914892C001B0831 /* BackendAssignedId.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,7 +302,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		93EE6A49291098D80012C716 /* Debug */ = {
+		937AFC66293D9942004833FF /* Debug - production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -371,10 +357,100 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG PRODUCTION_API";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = "Debug - production";
+		};
+		937AFC67293D9942004833FF /* Debug - production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "My TFC BB/Resources/My TFC BB.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X2TBSUCASC;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "My TFC BB/Resources/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.kylejs.My-TFC-BB";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug - production";
+		};
+		93EE6A49291098D80012C716 /* Debug - localhost */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG LOCALHOST_API";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = "Debug - localhost";
 		};
 		93EE6A4A291098D80012C716 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -414,6 +490,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -424,13 +501,14 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PRODUCTION_API;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		93EE6A4C291098D80012C716 /* Debug */ = {
+		93EE6A4C291098D80012C716 /* Debug - localhost */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -458,7 +536,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = "Debug - localhost";
 		};
 		93EE6A4D291098D80012C716 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -496,7 +574,8 @@
 		93EE6A32291098D70012C716 /* Build configuration list for PBXProject "My TFC BB" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				93EE6A49291098D80012C716 /* Debug */,
+				93EE6A49291098D80012C716 /* Debug - localhost */,
+				937AFC66293D9942004833FF /* Debug - production */,
 				93EE6A4A291098D80012C716 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -505,7 +584,8 @@
 		93EE6A4B291098D80012C716 /* Build configuration list for PBXNativeTarget "My TFC BB" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				93EE6A4C291098D80012C716 /* Debug */,
+				93EE6A4C291098D80012C716 /* Debug - localhost */,
+				937AFC67293D9942004833FF /* Debug - production */,
 				93EE6A4D291098D80012C716 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -522,6 +602,22 @@
 				minimumVersion = 4.2.2;
 			};
 		};
+		937AFC5829370DA0004833FF /* XCRemoteSwiftPackageReference "swift-protobuf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-protobuf.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		937AFC5D2938273A004833FF /* XCRemoteSwiftPackageReference "grpc-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/grpc/grpc-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -529,6 +625,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9361563729147C20001B0831 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
+		};
+		937AFC5929370DA0004833FF /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 937AFC5829370DA0004833FF /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
+		};
+		937AFC5E2938273A004833FF /* GRPC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 937AFC5D2938273A004833FF /* XCRemoteSwiftPackageReference "grpc-swift" */;
+			productName = GRPC;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

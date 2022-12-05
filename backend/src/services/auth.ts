@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { Device, User } from "@prisma/client";
 import prisma from "../db";
 import TFC from "../my-tfc";
 import { encrypt } from "./cipher";
@@ -6,7 +6,11 @@ import { encrypt } from "./cipher";
 export default class Auth {
   private tfc = new TFC();
 
-  authDevice(username: string, password: string, deviceId: string) {
+  authDevice(
+    username: string,
+    password: string,
+    deviceId: string
+  ): Promise<Device> {
     return this.logUserInAndUpsert(username, password).then((user) =>
       this.registerNewDevice(user, deviceId)
     );
@@ -40,7 +44,7 @@ export default class Auth {
   private registerNewDevice(user: User, deviceId: string) {
     return prisma.device.upsert({
       where: {
-        id: deviceId,
+        device_provided_id: deviceId,
       },
       update: {
         user: {

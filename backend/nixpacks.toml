@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ['...', 'buf']
+
+[phases.install]
+cmds = ['npm install']
+
+[phases.build]
+cmds = ['npm run proto:gen']
+
+[start]
+cmd = 'npm run start'

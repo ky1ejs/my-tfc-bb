@@ -4,10 +4,11 @@ import { TfcError, TfcErrorType } from "../models/TfcError";
 import prisma from "../db";
 import Auth from "../services/auth";
 import { decrypt } from "../services/cipher";
+import { parseTfcDeliveries, TfcDelivery } from "./TfcDelivery";
 
 export function getDeliveries(
   user: User
-): Promise<Prisma.DeliveryCreateManyInput[]> {
+): Promise<TfcDelivery[]> {
   const a = axios.create();
   a.defaults.headers.common = {
     Authorization: `Token ${user.latest_access_token}`,
@@ -45,7 +46,7 @@ export function getDeliveries(
 
   return a
     .get("https://connect.tfc.com/api/v1/packages/my-packages/")
-    .then((res) => mapTfcDelivery(res.data, user));
+    .then((res) => parseTfcDeliveries(res.data));
 }
 
 export async function fetchAndUpdateDeliveries(user: User) {
@@ -56,16 +57,16 @@ export async function fetchAndUpdateDeliveries(user: User) {
     getDeliveries(user),
   ]);
 
-  const [uncollectedDeliveries, latestDeliveries] = data;
+  const [uncollectedDeliveries, latestTfcDeliveries] = data;
 
-  const latestDeliveryIds = latestDeliveries.map((d) => d.tfc_id);
+  const latestDeliveryIds = latestTfcDeliveries.map((d) => d.id);
   const collectedDeliveries = uncollectedDeliveries.filter(
-    (cd) => !latestDeliveryIds.includes(cd.tfc_id)
+    (d) => !latestDeliveryIds.includes(d.tfc_id)
   );
 
   const uncollectedDeliveryIds = uncollectedDeliveries.map((d) => d.tfc_id);
-  const newDeliveries = latestDeliveries.filter(
-    (d) => !uncollectedDeliveryIds.includes(d.tfc_id)
+  const newDeliveries = latestTfcDeliveries.filter(
+    (d) => !uncollectedDeliveryIds.includes(d.id)
   );
 
   const setCollected = prisma.delivery.updateMany({
@@ -74,22 +75,23 @@ export async function fetchAndUpdateDeliveries(user: User) {
       collected_at: new Date(),
     },
   });
-
-  const updateRedelivered = prisma.delivery
-    .findMany({
-      where: { tfc_id: { in: latestDeliveries.map((d) => d.tfc_id) } },
-    })
-    .then((redelivered) =>
-      prisma.delivery.updateMany({
-        where: { id: { in: redelivered.map((d) => d.id) } },
-        data: { collected_at: null },
-      })
-    );
-  const createDeliveries = prisma.delivery.createMany({
-    data: latestDeliveries,
-    skipDuplicates: true,
-  });
-  await Promise.all([updateRedelivered, setCollected, createDeliveries]);
+  const createDeliveries = prisma.$transaction(
+    latestTfcDeliveries.map(d => prisma.delivery.upsert({
+      where: {tfc_id_user_id: {user_id: user.id, tfc_id: d.id}}, 
+      create: {
+        name: d.name,
+        comment: d.comment,
+        date_received: d.date_received,
+        tfc_id: d.id,
+        user_id: user.id
+      },
+      update: {
+        collected_at: null,
+        name: d.name,
+        comment: d.comment
+      }}))  
+  )
+  const [latestDeliveries] = await Promise.all([createDeliveries, setCollected]);
   return {
     collectedDeliveries,
     latestDeliveries,
@@ -98,19 +100,3 @@ export async function fetchAndUpdateDeliveries(user: User) {
   };
 }
 
-function mapTfcDelivery(
-  data: any,
-  user: User
-): Prisma.DeliveryCreateManyInput[] {
-  const deliveries: any[] = data.results;
-  return deliveries.map((d) => {
-    return {
-      tfc_id: d.id,
-      name: d.package_type.name,
-      comment: d.opening_comment,
-      date_received: new Date(d.date_opened),
-      user_id: user.id,
-      collected_at: null,
-    };
-  });
-}

@@ -16,6 +16,13 @@ class SettingsViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(primaryAction: UIAction(title: "Log Out", handler: { [unowned self] _ in
+            self.logOut()
+        }))
+    }
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -36,10 +43,28 @@ class SettingsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        sendTestPush()
+    }
+
+    private func sendTestPush() {
         Task {
-            switch (await HTTPClient.authorizedClient.call(endpoint: TestPushEndpoint())) {
-            case .success: return
-            case .failure(let error):
+            do {
+                let _ = try await TfcApi.client.sendTestPushNotication(Empty())
+            } catch let error {
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Damn man...", style: .cancel))
+                self.present(alert, animated: true)
+            }
+        }
+    }
+
+    private func logOut() {
+        Task {
+            do {
+                let _ = try await TfcApi.client.logOut(Empty())
+                KeychainManager.clearKeyain()
+                SceneDelegate.shared.logedOut()
+            } catch let error {
                 let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Damn man...", style: .cancel))
                 self.present(alert, animated: true)

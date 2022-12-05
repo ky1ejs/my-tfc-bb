@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node -r dotenv/config src/index.ts",
+    "dev:no-delivery-check": "RUN_DELIVERY_CHECK=false ts-node -r dotenv/config src/index.ts",
     "start": "prisma migrate deploy && ts-node -r dotenv/config src/index.ts",
     "lint": "eslint --fix src/",
-    "lint:ci": "eslint --max-warnings=0 src/"
+    "lint:ci": "eslint --max-warnings=0 src/",
+    "proto:lint": "buf lint proto",
+    "proto:gen": "buf generate proto"
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,7 @@
   },
   "homepage": "https://github.com/ky1ejs/my-tfc-bb#readme",
   "dependencies": {
+    "@grpc/grpc-js": "^1.7.3",
     "@prisma/client": "^4.5.0",
     "axios": "^1.1.3",
     "cors": "^2.8.5",
@@ -44,6 +48,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "ts-proto": "^1.131.0"
   }
 }

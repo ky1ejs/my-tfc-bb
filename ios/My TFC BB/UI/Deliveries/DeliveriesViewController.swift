@@ -8,7 +8,6 @@
 import UIKit
 
 class DeliveresViewController: UITableViewController {
-    private let client = HTTPClient.authorizedClient
     private var deliveries = [Delivery]()
 
     init() {
@@ -64,17 +63,18 @@ class DeliveresViewController: UITableViewController {
     private func fetchData() {
         tableView.refreshControl?.beginRefreshing()
         Task {
-            switch await client.call(endpoint: GetDeliveriesEndpoint()) {
-            case .success(let result):
-                self.deliveries = result.deliveries
+            do {
+                let response = try await TfcApi.client.getDeliveries(Services_Mytfcbb_V1_GetDeliveriesRequest())
+                self.deliveries = response.deliveries
                 self.tableView.reloadData()
-                let deliverCount = result.deliveries.count
+                let deliverCount = response.deliveries.count
                 self.title = deliverCount > 0 ? "Packages (\(deliverCount))" : "Packages"
-            case .failure(let error):
+            } catch let error {
                 let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Damn man...", style: .cancel))
                 self.present(alert, animated: true)
             }
+
             self.tableView.refreshControl?.endRefreshing()
         }
     }
