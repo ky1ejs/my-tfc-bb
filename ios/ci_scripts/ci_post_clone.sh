@@ -10,4 +10,4 @@ brew install swift-protobuf
 brew install grpc-swift
 brew install buf
 
-buf generate ../shared/proto
+buf generate ../backend/proto

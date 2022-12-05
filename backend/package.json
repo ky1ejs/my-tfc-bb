@@ -9,8 +9,8 @@
     "start": "prisma migrate deploy && ts-node -r dotenv/config src/index.ts",
     "lint": "eslint --fix src/",
     "lint:ci": "eslint --max-warnings=0 src/",
-    "proto:lint": "buf lint ../shared/proto",
-    "proto:gen": "buf generate ../shared/proto"
+    "proto:lint": "buf lint proto",
+    "proto:gen": "buf generate proto"
   },
   "repository": {
     "type": "git",
