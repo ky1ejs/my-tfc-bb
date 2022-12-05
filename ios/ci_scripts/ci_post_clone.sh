@@ -10,4 +10,5 @@ brew install swift-protobuf
 brew install grpc-swift
 brew install bufbuild/buf/buf
 
+cd ios
 buf generate ../backend/proto
