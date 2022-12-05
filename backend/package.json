@@ -47,7 +47,6 @@
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "grpc-tools": "^1.11.3",
     "prettier": "^2.7.1",
     "ts-node": "^10.9.1",
     "ts-proto": "^1.131.0"
