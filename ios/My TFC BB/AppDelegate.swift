@@ -50,15 +50,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
         let token = deviceToken.hexString
-        #if DEBUG
-        let env = TokenEnv.staging
-        print(token)
-        #else
-        let env = TokenEnv.production
-        #endif
         Task {
-            let update = TokenUpdate(pushToken: token, tokenEnv: env)
-            let _ = await HTTPClient.authorizedClient.call(endpoint: UpdatePushTokenEndpoint(tokenUpdate: update))
+            let update = Services_Mytfcbb_V1_UpdatePushTokenRequest.with {
+                $0.token = token
+                #if DEBUG
+                $0.env = .staging
+                #else
+                $0.env = .production
+                #endif
+            }
+            let _ = try? await TfcApi.client.updatePushToken(update)
         }
     }
 

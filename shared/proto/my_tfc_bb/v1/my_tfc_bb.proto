@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+package my_tfc_bb.v1;
+
+message Delivery {
+  string id = 1;
+  string name = 2;
+  string comment = 3;
+  google.protobuf.Timestamp date_received = 4;
+  google.protobuf.Timestamp collected_at = 5;
+}
+
+message LogInRequest {
+  string username = 1;
+  string password = 2;
+  string device_id = 3;
+}
+
+message LogInResponse {
+  string device_id = 1;
+}
+
+enum GetDeliveriesFilterType {
+  UNCOLLECTED = 0;
+  ACTIVE = 1;
+  COLLECTED = 2;
+  SEARCH = 3;
+}
+
+message GetDeliveriesRequest {
+  GetDeliveriesFilterType filter = 1;
+  string search_term = 2;
+}
+
+message GetDeliveriesResponse {
+  repeated Delivery deliveries = 1;
+  int32 collected_count = 2;
+  int32 uncollected_count = 3;
+}
+
+enum PushPlatform {
+  PUSH_PLATFORM_UNSPECIFIED = 0;
+  IOS = 1; 
+  ANDROID = 2;
+  WEB = 3;
+}
+
+enum TokenEnv {
+  TOKEN_ENV_UNSPECIFIED = 0;
+  PRODUCTION = 1;
+  STAGING = 2;
+}
+
+message UpdatePushTokenRequest {
+  PushPlatform platform = 1;
+  TokenEnv env = 2;
+  string token = 3;
+}
+
+service MyTfcService {
+  rpc LogIn(LogInRequest) returns (LogInResponse);
+  rpc GetDeliveries(GetDeliveriesRequest) returns (GetDeliveriesResponse);
+  rpc UpdatePushToken(UpdatePushTokenRequest) returns (google.protobuf.Empty);
+  rpc SendTestPushNotication(google.protobuf.Empty) returns (google.protobuf.Empty);
+  rpc LogOut(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
+

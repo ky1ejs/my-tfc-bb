@@ -1,0 +1,14 @@
+# Configuring (including linting): https://docs.buf.build/lint/configuration
+# Linter rules: https://docs.buf.build/lint/rules
+version: v1
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT
+  except:
+    - ENUM_VALUE_PREFIX
+    - ENUM_ZERO_VALUE_SUFFIX
+  rpc_allow_google_protobuf_empty_requests: true
+  rpc_allow_google_protobuf_empty_responses: true

@@ -18,4 +18,8 @@ struct KeychainManager {
     static func setBackendAssignedId(_ id: String) {
         try? Keychain().set(id, key: BACKEND_DEVICE_ID_KEY)
     }
+
+    static func clearKeyain() {
+        try? Keychain().removeAll()
+    }
 }
