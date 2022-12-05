@@ -1,5 +1,6 @@
 # Configuring (including linting): https://docs.buf.build/lint/configuration
 # Linter rules: https://docs.buf.build/lint/rules
+# Google's Protobuf Styleguide: https://developers.google.com/protocol-buffers/docs/style
 version: v1
 breaking:
   use:
