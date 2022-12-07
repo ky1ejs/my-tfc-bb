@@ -41,16 +41,16 @@ class TfcApi {
     }
 }
 
-struct InteceptorFactory: Services_Mytfcbb_V1_MyTfcClientInterceptorFactoryProtocol {
-    func makeLogInInterceptors() -> [GRPC.ClientInterceptor<Services_Mytfcbb_V1_LogInRequest, Services_Mytfcbb_V1_LogInResponse>] {
+struct InteceptorFactory: MyTfcBb_V1_MyTfcClientInterceptorFactoryProtocol {
+    func makeLogInInterceptors() -> [GRPC.ClientInterceptor<MyTfcBb_V1_LogInRequest, MyTfcBb_V1_LogInResponse>] {
         return []
     }
 
-    func makeGetDeliveriesInterceptors() -> [GRPC.ClientInterceptor<Services_Mytfcbb_V1_GetDeliveriesRequest, Services_Mytfcbb_V1_GetDeliveriesResponse>] {
+    func makeGetDeliveriesInterceptors() -> [GRPC.ClientInterceptor<MyTfcBb_V1_GetDeliveriesRequest, MyTfcBb_V1_GetDeliveriesResponse>] {
         return [AuthInterceptor()]
     }
 
-    func makeUpdatePushTokenInterceptors() -> [GRPC.ClientInterceptor<Services_Mytfcbb_V1_UpdatePushTokenRequest, SwiftProtobuf.Google_Protobuf_Empty>] {
+    func makeUpdatePushTokenInterceptors() -> [GRPC.ClientInterceptor<MyTfcBb_V1_UpdatePushTokenRequest, SwiftProtobuf.Google_Protobuf_Empty>] {
         return [AuthInterceptor()]
     }
 

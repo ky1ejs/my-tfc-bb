@@ -7,6 +7,6 @@
 
 import SwiftProtobuf
 
-typealias TfcApiClient = Services_Mytfcbb_V1_MyTfcAsyncClient
+typealias TfcApiClient = MyTfcBb_V1_MyTfcAsyncClient
 typealias Empty = Google_Protobuf_Empty
-typealias Delivery = Services_Mytfcbb_V1_Delivery
+typealias Delivery = MyTfcBb_V1_Delivery

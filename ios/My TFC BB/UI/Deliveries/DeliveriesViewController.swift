@@ -64,7 +64,7 @@ class DeliveresViewController: UITableViewController {
         tableView.refreshControl?.beginRefreshing()
         Task {
             do {
-                let response = try await TfcApi.client.getDeliveries(Services_Mytfcbb_V1_GetDeliveriesRequest())
+                let response = try await TfcApi.client.getDeliveries(MyTfcBb_V1_GetDeliveriesRequest())
                 self.deliveries = response.deliveries
                 self.tableView.reloadData()
                 let deliverCount = response.deliveries.count

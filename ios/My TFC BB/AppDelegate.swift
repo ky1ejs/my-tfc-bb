@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) {
         let token = deviceToken.hexString
         Task {
-            let update = Services_Mytfcbb_V1_UpdatePushTokenRequest.with {
+            let update = MyTfcBb_V1_UpdatePushTokenRequest.with {
                 $0.token = token
                 #if DEBUG
                 $0.env = .staging
