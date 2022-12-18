@@ -18,6 +18,12 @@ model User {
   hashed_password String
   devices Device[]
   deliveries Delivery[]
+  password_status PasswordStatus @default(VALID)
+}
+
+enum PasswordStatus {
+  VALID
+  INVALID
 }
 
 model Device {

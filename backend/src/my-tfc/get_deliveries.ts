@@ -1,9 +1,9 @@
-import { User, Prisma } from "@prisma/client";
+import { User } from "@prisma/client";
 import axios from "axios";
-import { TfcError, TfcErrorType } from "../models/TfcError";
 import prisma from "../db";
 import Auth from "../services/auth";
 import { decrypt } from "../services/cipher";
+import { TfcApiError } from "./TfcApiError";
 import { parseTfcDeliveries, TfcDelivery } from "./TfcDelivery";
 
 export function getDeliveries(
@@ -37,7 +37,7 @@ export function getDeliveries(
       }
 
       if (error.response.status === 502) {
-        return Promise.reject(new TfcError(TfcErrorType.BAD_GATEWAY));
+        return Promise.reject(TfcApiError.badGateway());
       }
 
       return Promise.reject(error);

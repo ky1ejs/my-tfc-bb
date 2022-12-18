@@ -1,8 +1,8 @@
 import { Tokens, LoginConfig, LoginCredentials } from "@models";
 import axios, { AxiosResponse } from "axios";
 import { JSDOM } from "jsdom";
-import { TfcError, TfcErrorType } from "../models/TfcError";
 import { stringify } from "querystring";
+import { TfcApiError } from "./TfcApiError";
 
 export function getConfig(): Promise<LoginConfig> {
   return axios
@@ -29,6 +29,13 @@ export function parseConfig(response: AxiosResponse): LoginConfig {
   const loginUrl = loginForm?.getAttribute("action");
   const cookies = response.headers["set-cookie"];
   if (!loginForm || !loginUrl || !cookies) {
+    const errorContainer = dom.window.document.getElementById("kc-error-message");
+    const errorTextElement = errorContainer?.getElementsByClassName("instruction")
+    const errorText = errorTextElement?.[0].textContent
+    if (errorText === "Invalid username or password.") {
+      throw TfcApiError.invalidPassword();
+    }
+    
     throw new Error("couldn't find the form and/or url");
   }
   return { loginUrl, cookies };
@@ -50,7 +57,7 @@ export function authenticate(
 
 export function getCode(response: AxiosResponse): string {
   if (response.status === 502) {
-    throw new TfcError(TfcErrorType.BAD_GATEWAY);
+    throw TfcApiError.badGateway();
   }
 
   const url = new URL(response.request.res.responseUrl);

@@ -14,4 +14,3 @@ export function tokenEnvFromProto(env: grpc.TokenEnv): TokenEnv {
   }
 }
 
-

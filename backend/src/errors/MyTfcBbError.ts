@@ -36,6 +36,6 @@ export class MyTfcBbError extends Error {
   }
 
   static badRequest(): MyTfcBbError {
-    return new MyTfcBbError(MyTfcBbErrorType.UNAUTHENTICATED);
+    return new MyTfcBbError(MyTfcBbErrorType.BAD_REQUEST);
   }
 }
