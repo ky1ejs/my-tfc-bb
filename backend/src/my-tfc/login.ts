@@ -57,12 +57,10 @@ export function authenticate(
           const dom = new JSDOM(error.response.data);
           const errorContainer =
             dom.window.document.getElementById("kc-error-message");
-          console.log(errorContainer);
           const errorTextElement =
             errorContainer?.getElementsByClassName("instruction");
           const errorText = errorTextElement?.[0].textContent;
           if (errorText === "Invalid username or password.") {
-            console.log("invalid password");
             return Promise.reject(TfcApiError.invalidPassword());
           }
         }
