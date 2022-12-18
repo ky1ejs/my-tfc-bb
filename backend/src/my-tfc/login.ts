@@ -29,13 +29,15 @@ export function parseConfig(response: AxiosResponse): LoginConfig {
   const loginUrl = loginForm?.getAttribute("action");
   const cookies = response.headers["set-cookie"];
   if (!loginForm || !loginUrl || !cookies) {
-    const errorContainer = dom.window.document.getElementById("kc-error-message");
-    const errorTextElement = errorContainer?.getElementsByClassName("instruction")
-    const errorText = errorTextElement?.[0].textContent
+    const errorContainer =
+      dom.window.document.getElementById("kc-error-message");
+    const errorTextElement =
+      errorContainer?.getElementsByClassName("instruction");
+    const errorText = errorTextElement?.[0].textContent;
     if (errorText === "Invalid username or password.") {
       throw TfcApiError.invalidPassword();
     }
-    
+
     throw new Error("couldn't find the form and/or url");
   }
   return { loginUrl, cookies };

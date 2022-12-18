@@ -33,7 +33,6 @@ function deliveryToProto(d: Delivery): DeliveryProto {
     name: d.name,
     comment: d.comment,
     dateReceived: d.date_received,
-    collectedAt: d.collected_at ?? undefined
-  }
+    collectedAt: d.collected_at ?? undefined,
+  };
 }
-

@@ -6,9 +6,7 @@ import { decrypt } from "../services/cipher";
 import { TfcApiError } from "./TfcApiError";
 import { parseTfcDeliveries, TfcDelivery } from "./TfcDelivery";
 
-export function getDeliveries(
-  user: User
-): Promise<TfcDelivery[]> {
+export function getDeliveries(user: User): Promise<TfcDelivery[]> {
   const a = axios.create();
   a.defaults.headers.common = {
     Authorization: `Token ${user.latest_access_token}`,
@@ -76,22 +74,28 @@ export async function fetchAndUpdateDeliveries(user: User) {
     },
   });
   const createDeliveries = prisma.$transaction(
-    latestTfcDeliveries.map(d => prisma.delivery.upsert({
-      where: {tfc_id_user_id: {user_id: user.id, tfc_id: d.id}}, 
-      create: {
-        name: d.name,
-        comment: d.comment,
-        date_received: d.date_received,
-        tfc_id: d.id,
-        user_id: user.id
-      },
-      update: {
-        collected_at: null,
-        name: d.name,
-        comment: d.comment
-      }}))  
-  )
-  const [latestDeliveries] = await Promise.all([createDeliveries, setCollected]);
+    latestTfcDeliveries.map((d) =>
+      prisma.delivery.upsert({
+        where: { tfc_id_user_id: { user_id: user.id, tfc_id: d.id } },
+        create: {
+          name: d.name,
+          comment: d.comment,
+          date_received: d.date_received,
+          tfc_id: d.id,
+          user_id: user.id,
+        },
+        update: {
+          collected_at: null,
+          name: d.name,
+          comment: d.comment,
+        },
+      })
+    )
+  );
+  const [latestDeliveries] = await Promise.all([
+    createDeliveries,
+    setCollected,
+  ]);
   return {
     collectedDeliveries,
     latestDeliveries,
@@ -99,4 +103,3 @@ export async function fetchAndUpdateDeliveries(user: User) {
     user,
   };
 }
-

@@ -1,7 +1,6 @@
-
 export enum TfcApiErrorType {
   BAD_GATEWAY,
-  INVALID_PASSWORD
+  INVALID_PASSWORD,
 }
 
 export class TfcApiError extends Error {

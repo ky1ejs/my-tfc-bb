@@ -10,6 +10,6 @@ export const logOutHandler: handleUnaryCall<Empty, Empty> = (
 ) => {
   return logRequest(call)
     .then(authenticate)
-    .then(({id}) => prisma.device.delete({where: {id: id}}))
-    .then(() => callback(null))
+    .then(({ id }) => prisma.device.delete({ where: { id: id } }))
+    .then(() => callback(null));
 };

@@ -50,25 +50,32 @@ function process(): Promise<void> {
 
   intervalMinutes = WHILE_OPEN_CHECK_INTERVAL;
   return prisma.user
-    .findMany({where: {password_status: PasswordStatus.VALID}})
-    .then(users => users.map(processUpdatesForUser))
+    .findMany({ where: { password_status: PasswordStatus.VALID } })
+    .then((users) => users.map(processUpdatesForUser))
     .then((promises) => Promise.all(promises))
-    .then(undefined) // map to void;
+    .then(undefined); // map to void;
 }
 
 async function processUpdatesForUser(user: User): Promise<void> {
   try {
-    const updates = await fetchAndUpdateDeliveries(user)
-    await sendNotificationsForUpdates(updates)
+    const updates = await fetchAndUpdateDeliveries(user);
+    await sendNotificationsForUpdates(updates);
   } catch (error) {
     if (error instanceof TfcApiError) {
       if (error.type === TfcApiErrorType.INVALID_PASSWORD) {
         await prisma.user
-          .update({where: {id: user.id}, data: {password_status: PasswordStatus.INVALID}})
-          .then(() => pushToUsersDevices(user, {title: "Can't update you packages", body: "It seems your authentications details are no longer valid."}))
+          .update({
+            where: { id: user.id },
+            data: { password_status: PasswordStatus.INVALID },
+          })
+          .then(() =>
+            pushToUsersDevices(user, {
+              title: "Can't update you packages",
+              body: "It seems your authentications details are no longer valid.",
+            })
+          );
       }
     }
-
   }
 }
 
@@ -78,42 +85,42 @@ async function sendNotificationsForUpdates(update: {
   newDeliveries: TfcDelivery[];
   user: User;
 }): Promise<void> {
-    const promises: Promise<void>[] = [];
+  const promises: Promise<void>[] = [];
 
-    const collectedPackages = update.collectedDeliveries.length;
-    const currentPackageCount = update.latestDeliveries.length;
-    if (collectedPackages > 0) {
-      const title = `${collectedPackages} package${
-        collectedPackages > 1 ? "s" : ""
-      } collected`;
-      const body = `${currentPackageCount} remain to be collected`;
-      promises.push(
-        pushToUsersDevices(update.user, {
-          title,
-          body,
-          badge: currentPackageCount,
-        })
-      );
-    }
+  const collectedPackages = update.collectedDeliveries.length;
+  const currentPackageCount = update.latestDeliveries.length;
+  if (collectedPackages > 0) {
+    const title = `${collectedPackages} package${
+      collectedPackages > 1 ? "s" : ""
+    } collected`;
+    const body = `${currentPackageCount} remain to be collected`;
+    promises.push(
+      pushToUsersDevices(update.user, {
+        title,
+        body,
+        badge: currentPackageCount,
+      })
+    );
+  }
 
-    const newDeliveries = update.newDeliveries.length;
-    if (newDeliveries > 0) {
-      const title = `${newDeliveries} new ${
-        newDeliveries > 1 ? "packages are" : "package is"
-      } ready for collection`;
-      const body = `${currentPackageCount} ${
-        currentPackageCount > 1 ? "packages are" : "package is"
-      } for collection in total`;
-      promises.push(
-        pushToUsersDevices(update.user, {
-          title,
-          body,
-          badge: currentPackageCount,
-        })
-      );
-    }
-    
-    await Promise.all(promises)
+  const newDeliveries = update.newDeliveries.length;
+  if (newDeliveries > 0) {
+    const title = `${newDeliveries} new ${
+      newDeliveries > 1 ? "packages are" : "package is"
+    } ready for collection`;
+    const body = `${currentPackageCount} ${
+      currentPackageCount > 1 ? "packages are" : "package is"
+    } for collection in total`;
+    promises.push(
+      pushToUsersDevices(update.user, {
+        title,
+        body,
+        badge: currentPackageCount,
+      })
+    );
+  }
+
+  await Promise.all(promises);
 }
 
 start();

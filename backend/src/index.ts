@@ -5,7 +5,8 @@ import { MyTfcServiceImpl } from "./MyTfcServer";
 import { MyTfcService } from "./generated/proto/my_tfc_bb/v1/my_tfc_bb";
 
 const PORT = process.env.PORT || 3000;
-const RUN_DELIVERY_CHECK = (process.env.RUN_DELIVERY_CHECK ?? "true") === "true"
+const RUN_DELIVERY_CHECK =
+  (process.env.RUN_DELIVERY_CHECK ?? "true") === "true";
 
 if (RUN_DELIVERY_CHECK) {
   new Worker(require.resolve(`./worker/DeliveryChecker`), {
@@ -22,7 +23,7 @@ server.addService(MyTfcService, new MyTfcServiceImpl());
 server.bindAsync(
   `0.0.0.0:${PORT}`,
   ServerCredentials.createInsecure(),
-  (err: Error | null, bindPort: number) => {
+  (err: Error | null) => {
     if (err) {
       throw err;
     }

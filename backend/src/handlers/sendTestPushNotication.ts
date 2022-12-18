@@ -12,7 +12,7 @@ export const sendTestPushNoticationHandler: handleUnaryCall<Empty, Empty> = (
 ) => {
   return logRequest(call)
     .then(authenticate)
-    .then(({id}) =>
+    .then(({ id }) =>
       prisma.pushToken.findUniqueOrThrow({ where: { device_id: id } })
     )
     .then((token) =>
