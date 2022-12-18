@@ -1,18 +1,21 @@
+import { Status } from "@grpc/grpc-js/build/src/constants";
+import { GrpcError } from "../errors/GrpcError";
+
 export enum TfcApiErrorType {
   BAD_GATEWAY,
   INVALID_PASSWORD,
 }
 
-export class TfcApiError extends Error {
+export class TfcApiError extends GrpcError {
   type: TfcApiErrorType;
 
   constructor(type: TfcApiErrorType) {
     switch (type) {
       case TfcApiErrorType.BAD_GATEWAY:
-        super("502 from TFC API.");
+        super(Status.INTERNAL, "502 from TFC API.");
         break;
       case TfcApiErrorType.INVALID_PASSWORD:
-        super("User's password is invalid");
+        super(Status.UNAUTHENTICATED, "User's password is invalid");
         break;
       default:
         throw new Error("Unknown TfcApiErrorType passed in at construction");
