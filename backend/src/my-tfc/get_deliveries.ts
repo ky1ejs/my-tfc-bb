@@ -3,6 +3,7 @@ import axios from "axios";
 import prisma from "../db";
 import Auth from "../services/auth";
 import { decrypt } from "../services/cipher";
+import myTfcEndpoints from "./endpoints";
 import { TfcApiError } from "./TfcApiError";
 import { parseTfcDeliveries, TfcDelivery } from "./TfcDelivery";
 
@@ -43,7 +44,7 @@ export function getDeliveries(user: User): Promise<TfcDelivery[]> {
   );
 
   return a
-    .get("https://connect.tfc.com/api/v1/packages/my-packages/")
+    .get(myTfcEndpoints.delivereies)
     .then((res) => parseTfcDeliveries(res.data));
 }
 

@@ -2,12 +2,13 @@ import { Tokens, LoginConfig, LoginCredentials } from "@models";
 import axios, { AxiosResponse } from "axios";
 import { JSDOM } from "jsdom";
 import { stringify } from "querystring";
+import myTfcEndpoints from "./endpoints";
 import { TfcApiError } from "./TfcApiError";
 
 export function getConfig(): Promise<LoginConfig> {
   return axios
     .get(
-      "https://auth.tfc.io/auth/realms/my-tfc/protocol/openid-connect/auth",
+      myTfcEndpoints.authConfig,
       {
         params: {
           client_id: "my-tfc",
@@ -97,7 +98,7 @@ export function exchangeCodeForToken(code: string): Promise<Tokens> {
   };
   return axios
     .post(
-      "https://auth.tfc.io/auth/realms/my-tfc/protocol/openid-connect/token",
+      myTfcEndpoints.token,
       stringify(form),
       {
         withCredentials: true,
