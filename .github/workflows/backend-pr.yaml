@@ -1,0 +1,12 @@
+name: Backend PR
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths: 
+      - 'backend/**'
+      - '.github/workflows/**'
+
+jobs: 
+  test:
+    uses: ./.github/workflows/backend-test.yaml
