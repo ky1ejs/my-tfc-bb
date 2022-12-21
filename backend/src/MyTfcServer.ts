@@ -23,7 +23,7 @@ export function bootService(port: string | number): Server {
     "grpc.max_receive_message_length": -1,
     "grpc.max_send_message_length": -1,
   });
-  
+
   server.addService(MyTfcService, new MyTfcServiceImpl());
   server.bindAsync(
     `0.0.0.0:${port}`,
@@ -36,6 +36,6 @@ export function bootService(port: string | number): Server {
       server.start();
     }
   );
-  console.log("booted")
+  console.log("booted");
   return server;
 }
