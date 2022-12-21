@@ -44,6 +44,8 @@ jobs:
         run: npm ci
       - name: Install buf
         uses: bufbuild/buf-setup-action@v1.10.0
+        with:
+          github_token: ${{ github.token }}
       - name: Generate protos
         run: npm run proto:gen
       - name: Test
