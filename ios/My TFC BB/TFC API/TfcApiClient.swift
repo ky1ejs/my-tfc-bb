@@ -9,6 +9,7 @@ import Foundation
 import GRPC
 import NIO
 import SwiftProtobuf
+import UIKit
 
 class TfcApi {
 
@@ -47,19 +48,23 @@ struct InteceptorFactory: MyTfcBb_V1_MyTfcClientInterceptorFactoryProtocol {
     }
 
     func makeGetDeliveriesInterceptors() -> [GRPC.ClientInterceptor<MyTfcBb_V1_GetDeliveriesRequest, MyTfcBb_V1_GetDeliveriesResponse>] {
-        return [AuthInterceptor()]
+        return defaultInteceptors()
     }
 
     func makeUpdatePushTokenInterceptors() -> [GRPC.ClientInterceptor<MyTfcBb_V1_UpdatePushTokenRequest, SwiftProtobuf.Google_Protobuf_Empty>] {
-        return [AuthInterceptor()]
+        return defaultInteceptors()
     }
 
     func makeSendTestPushNoticationInterceptors() -> [GRPC.ClientInterceptor<SwiftProtobuf.Google_Protobuf_Empty, SwiftProtobuf.Google_Protobuf_Empty>] {
-        return [AuthInterceptor()]
+        return defaultInteceptors()
     }
 
     func makeLogOutInterceptors() -> [GRPC.ClientInterceptor<SwiftProtobuf.Google_Protobuf_Empty, SwiftProtobuf.Google_Protobuf_Empty>] {
-        return [AuthInterceptor()]
+        return defaultInteceptors()
+    }
+
+    private func defaultInteceptors<Request, Response>() -> [ClientInterceptor<Request, Response>] {
+        return [AuthInterceptor(), UnauthenticatedInteceptor()]
     }
 }
 
@@ -72,5 +77,34 @@ class AuthInterceptor<Request, Response>: ClientInterceptor<Request, Response> {
 
         hPACKHeaders.add(name: "device_id", value: token)
         context.send(.metadata(hPACKHeaders), promise: promise)
+    }
+}
+
+class UnauthenticatedInteceptor<Request, Response>: ClientInterceptor<Request, Response> {
+    override func receive(_ part: GRPCClientResponsePart<Response>, context: ClientInterceptorContext<Request, Response>) {
+        guard case let .end(status, _) = part else {
+            context.receive(part)
+            return
+        }
+
+        if status.code == GRPCStatus.Code.unauthenticated {
+            let topViewController: UIViewController = {
+                let root = SceneDelegate.shared.window!.rootViewController!
+                var topViewController = root
+
+                while let presentedVC = topViewController.presentedViewController {
+                    topViewController = presentedVC
+                }
+
+                return topViewController
+            }()
+
+
+            let alert = UIAlertController(title: "Authentication problem 😕", message: "There's a problem with your log in details (perhaps you changed your password?).\n\nPlease log in again.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: { _ in
+                SceneDelegate.shared.logedOut()
+            }))
+            topViewController.present(alert, animated: true)
+        }
     }
 }

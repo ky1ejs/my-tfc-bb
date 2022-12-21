@@ -1,4 +1,4 @@
-import { Device, User } from "@prisma/client";
+import { Device, PasswordStatus, User } from "@prisma/client";
 import prisma from "../db";
 import TFC from "../my-tfc";
 import { encrypt } from "./cipher";
@@ -30,6 +30,7 @@ export default class Auth {
           latest_access_token: creds.access_token,
           refresh_token: creds.refresh_token,
           hashed_password: encrypt(password),
+          password_status: PasswordStatus.VALID,
         },
         create: {
           username: username,
