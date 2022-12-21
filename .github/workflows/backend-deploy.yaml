@@ -13,9 +13,6 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./backend
     steps:
       - name: Clone repo
         uses: actions/checkout@v2
