@@ -97,7 +97,7 @@ describe("getDeliveries handler", () => {
       client.getDeliveries(
         { filter: GetDeliveriesFilterType.ACTIVE, searchTerm: "" },
         metadata,
-        (error, response) => {
+        (error) => {
           try {
             expect(error).not.toBeNull();
             expect(error?.code).toBe(Status.UNAUTHENTICATED);
