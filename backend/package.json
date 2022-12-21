@@ -11,7 +11,7 @@
     "lint:ci": "eslint --max-warnings=0 src/",
     "docker:up": "docker-compose up -d --no-recreate",
     "docker:wipe": "docker rm -f -v postgres_container_name",
-    "test": "npm run docker:up && sleep 7 && dotenv -e .env.test -- prisma migrate deploy && dotenv -e .env.test -- jest -i --coverage",
+    "test": "npm run docker:up && npm run proto:gen && sleep 5 && dotenv -e .env.test -- prisma migrate deploy && dotenv -e .env.test -- jest -i --coverage",
     "proto:lint": "buf lint proto",
     "proto:gen": "buf generate proto"
   },
