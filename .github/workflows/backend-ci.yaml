@@ -35,6 +35,8 @@ jobs:
       run:
         working-directory: ./backend
     steps:
+      - name: Boot CockroachDB # getting this done early so it's ready in time
+        run: npm run docker:up
       - uses: actions/checkout@v2
       - name: Use Node.js
         uses: actions/setup-node@v2
@@ -42,8 +44,8 @@ jobs:
           node-version: '18'
           cache: 'npm'
           cache-dependency-path: ./backend/package-lock.json
-      - name: Boot CockroachDB
-        run: npm run docker:up 
+      - name: Install dependencies
+        run: npm ci
       - name: Install buf
         uses: bufbuild/buf-setup-action@v1.10.0
       - name: Generate protos
