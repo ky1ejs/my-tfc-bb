@@ -1,5 +1,5 @@
 // import "source-map-support/register"; // TODO: what does this do? It was introducted by this grpc example:
-import { bootService } from "MyTfcServer";
+import { bootService } from "./MyTfcServer";
 import { Worker } from "worker_threads";
 
 const PORT = process.env.PORT || 3000;
