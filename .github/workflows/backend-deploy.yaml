@@ -17,9 +17,10 @@ jobs:
       run:
         working-directory: ./backend
     steps:
+      - name: Clone repo
+        uses: actions/checkout@v2
       - name: Install Railway
         run: npm i -g @railway/cli
-
       - name: Deploy
         run: railway up
         env:
