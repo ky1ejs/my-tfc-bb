@@ -2,24 +2,22 @@ import { Tokens, LoginConfig, LoginCredentials } from "@models";
 import axios, { AxiosResponse } from "axios";
 import { JSDOM } from "jsdom";
 import { stringify } from "querystring";
+import myTfcEndpoints from "./endpoints";
 import { TfcApiError } from "./TfcApiError";
 
 export function getConfig(): Promise<LoginConfig> {
   return axios
-    .get(
-      "https://auth.tfc.io/auth/realms/my-tfc/protocol/openid-connect/auth",
-      {
-        params: {
-          client_id: "my-tfc",
-          redirect_uri: "https://my.tfc.com/",
-          response_mode: "fragment",
-          response_type: "code",
-          scope: "openid",
-          nonce: "f9c25d08-9bf1-4006-bf44-2b7e56a98275",
-        },
-        withCredentials: true,
-      }
-    )
+    .get(myTfcEndpoints.authConfig, {
+      params: {
+        client_id: "my-tfc",
+        redirect_uri: "https://my.tfc.com/",
+        response_mode: "fragment",
+        response_type: "code",
+        scope: "openid",
+        nonce: "f9c25d08-9bf1-4006-bf44-2b7e56a98275",
+      },
+      withCredentials: true,
+    })
     .then(parseConfig);
 }
 
@@ -28,10 +26,10 @@ export function parseConfig(response: AxiosResponse): LoginConfig {
   const loginForm = dom.window.document.getElementById("kc-form-login");
   const loginUrl = loginForm?.getAttribute("action");
   const cookies = response.headers["set-cookie"];
-  if (!loginForm || !loginUrl || !cookies) {
+  if (!loginForm || !loginUrl) {
     throw new Error("couldn't find the form and/or url");
   }
-  return { loginUrl, cookies };
+  return { loginUrl, cookies: cookies ?? [] };
 }
 
 export function authenticate(
@@ -96,15 +94,11 @@ export function exchangeCodeForToken(code: string): Promise<Tokens> {
     redirect_uri: "https://my.tfc.com/",
   };
   return axios
-    .post(
-      "https://auth.tfc.io/auth/realms/my-tfc/protocol/openid-connect/token",
-      stringify(form),
-      {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      }
-    )
+    .post(myTfcEndpoints.token, stringify(form), {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    })
     .then((res) => res.data);
 }

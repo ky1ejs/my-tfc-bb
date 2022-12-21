@@ -5,9 +5,10 @@ export interface TfcDelivery {
   date_received: Date;
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function parseTfcDeliveries(data: any): TfcDelivery[] {
-  const deliveries: any[] = data.results;
-  return deliveries.map((d) => {
+  return data.results.map((d: any) => {
+    /* eslint-enable @typescript-eslint/no-explicit-any */
     return {
       id: d.id,
       name: d.package_type.name,

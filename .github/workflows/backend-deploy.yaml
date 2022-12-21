@@ -1,0 +1,22 @@
+name: Backend Deploy
+
+on:
+  push:
+    branches: [ main ]
+    paths: 
+      - 'backend/**'
+
+jobs: 
+  test:
+    uses: ./.github/workflows/backend-test.yaml
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Railway
+        run: npm i -g @railway/cli
+
+      - name: Deploy
+        run: railway up
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}

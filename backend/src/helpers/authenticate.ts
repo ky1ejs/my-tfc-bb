@@ -19,5 +19,5 @@ export function authenticate<T, V>(
 export function getDeviceIdFromRequest<T, V>(
   call: ServerUnaryCall<T, V>
 ): string {
-  return call.metadata.getMap()["device_id"].toString() ?? "";
+  return call.metadata.getMap()["device_id"]?.toString() ?? "";
 }
