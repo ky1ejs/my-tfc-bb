@@ -12,6 +12,9 @@ env:
 jobs: 
   test:
     uses: ./.github/workflows/backend-test.yaml
+    defaults:
+      run:
+        working-directory: ./backend
   deploy:
     needs: test
     runs-on: ubuntu-latest
