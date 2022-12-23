@@ -11,7 +11,7 @@
     "lint:ci": "eslint --max-warnings=0 src/",
     "docker:build": "docker build . -t kylejs/my-tfc-bb",
     "docker:up": "docker-compose up -d --no-recreate",
-    "docker:wipe": "docker rm -f -v postgres_container_name",
+    "docker:clean": "docker-compose down && rm -rf test_output",
     "test": "dotenv -e .env.test -- prisma migrate deploy && dotenv -e .env.test -- jest -i --coverage",
     "proto:lint": "buf lint proto",
     "proto:gen": "buf generate proto"
