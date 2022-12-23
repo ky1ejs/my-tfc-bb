@@ -11,9 +11,9 @@ export const logInHandler: handleUnaryCall<LogInRequest, LogInResponse> = (
   call,
   callback
 ) => {
-  const { username, password, deviceId } = call.request;
+  const { username, password, deviceId, deviceName } = call.request;
   return logRequest(call)
-    .then(() => new Auth().authDevice(username, password, deviceId))
+    .then(() => new Auth().authDevice(username, password, deviceId, deviceName))
     .then(({ id }) => callback(null, { deviceId: id }))
     .catch((error) => handleError(error, callback));
 };

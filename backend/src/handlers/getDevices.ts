@@ -9,10 +9,10 @@ import {
 import { authenticate } from "../helpers/authenticate";
 import { logRequest } from "../helpers/logRequest";
 
-export const getDeliveriesHandler: handleUnaryCall<
-  Empty,
-  GetDevicesResponse
-> = (call, callback) => {
+export const getDevicesHandler: handleUnaryCall<Empty, GetDevicesResponse> = (
+  call,
+  callback
+) => {
   return logRequest(call)
     .then(authenticate)
     .then(({ user: { id: uid } }) =>

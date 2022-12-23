@@ -9,10 +9,11 @@ export default class Auth {
   authDevice(
     username: string,
     password: string,
-    deviceId: string
+    deviceId: string,
+    deviceName: string
   ): Promise<Device> {
     return this.logUserInAndUpsert(username, password).then((user) =>
-      this.registerNewDevice(user, deviceId)
+      this.registerNewDevice(user, deviceId, deviceName)
     );
   }
 
@@ -42,7 +43,7 @@ export default class Auth {
     });
   }
 
-  private registerNewDevice(user: User, deviceId: string) {
+  private registerNewDevice(user: User, deviceId: string, deviceName: string) {
     return prisma.device.upsert({
       where: {
         device_provided_id: deviceId,
@@ -56,6 +57,7 @@ export default class Auth {
       },
       create: {
         device_provided_id: deviceId,
+        name: deviceName,
         user: {
           connect: {
             id: user.id,
