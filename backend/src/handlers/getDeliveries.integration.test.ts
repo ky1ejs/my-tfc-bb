@@ -76,8 +76,8 @@ describe("getDeliveries handler", () => {
   });
 
   afterEach(async () => {
-    if (device) await prisma.device.deleteMany({ where: { id: device.id } })
-    if (user) await prisma.user.deleteMany({ where: { id: user.id } })
+    if (device) await prisma.device.deleteMany({ where: { id: device.id } });
+    if (user) await prisma.user.deleteMany({ where: { id: user.id } });
     await prisma.$disconnect();
     client.close();
     mockTfcApi.close();
