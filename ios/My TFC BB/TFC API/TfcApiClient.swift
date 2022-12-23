@@ -67,9 +67,16 @@ struct InteceptorFactory: MyTfcBb_V1_MyTfcClientInterceptorFactoryProtocol {
         return defaultInteceptors()
     }
 
+    func makeGetDevicesInterceptors() -> [ClientInterceptor<Google_Protobuf_Empty, MyTfcBb_V1_GetDevicesResponse>] {
+        return defaultInteceptors()
+    }
+
+    func makeRemoveDeviceInterceptors() -> [ClientInterceptor<MyTfcBb_V1_RemoveDeviceRequest, Google_Protobuf_Empty>] {
+        return defaultInteceptors()
+    }
+
     private func defaultInteceptors<Request, Response>() -> [ClientInterceptor<Request, Response>] {
-//        return [AuthInterceptor(), UnauthenticatedInteceptor()]
-                return [AuthInterceptor()]
+        return [AuthInterceptor(), UnauthenticatedInteceptor()]
     }
 }
 
@@ -93,6 +100,7 @@ class UnauthenticatedInteceptor<Request, Response>: ClientInterceptor<Request, R
             return
         }
 
+        DispatchQueue.main.async {
             let topViewController: UIViewController = {
                 let root = SceneDelegate.shared.window!.rootViewController!
                 var topViewController = root
@@ -110,5 +118,6 @@ class UnauthenticatedInteceptor<Request, Response>: ClientInterceptor<Request, R
                 SceneDelegate.shared.logedOut()
             }))
             topViewController.present(alert, animated: true)
+        }
     }
 }

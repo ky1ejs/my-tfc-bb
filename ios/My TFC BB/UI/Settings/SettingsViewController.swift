@@ -28,7 +28,7 @@ class SettingsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -37,13 +37,30 @@ class SettingsViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = "Send test push notification"
-        cell.selectionStyle = .none
+        switch indexPath.row {
+        case 0:
+            cell.textLabel?.text = "Send test push notification"
+            cell.selectionStyle = .none
+        case 1:
+            cell.textLabel?.text = "Devices"
+            cell.selectionStyle = .none
+        default:
+            assertionFailure("Invalid index path")
+        }
+
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        sendTestPush()
+        switch indexPath.row {
+        case 0:
+            sendTestPush()
+        case 1:
+            self.navigationController?.pushViewController(DevicesViewController(), animated: true)
+        default:
+            assertionFailure("Invalid index path")
+        }
+
     }
 
     private func sendTestPush() {
@@ -73,15 +90,3 @@ class SettingsViewController: UITableViewController {
     }
 }
 
-//class NotificationCell: UITableViewCell {
-//    init(identifier: String) {
-//        super.init(style: .default, reuseIdentifier: identifier)
-//
-//        UNUserNotificationCenter.current().getNotificationSettings { settings in
-//            guard settings.authorizationStatus == .authorized else { return }
-//            DispatchQueue.main.async {
-//                UIApplication.shared.registerForRemoteNotifications()
-//            }
-//        }
-//    }
-//}

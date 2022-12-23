@@ -58,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 #else
                 $0.env = .production
                 #endif
+                $0.platform = .ios
             }
             let _ = try? await TfcApi.client.updatePushToken(update)
         }

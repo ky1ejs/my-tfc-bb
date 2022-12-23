@@ -26,9 +26,12 @@ class LogInViewController: UIViewController {
 
     private func logIn() {
         let request = MyTfcBb_V1_LogInRequest.with {
+            let currentDevice = UIDevice.current
+
             $0.username = loginView.username
             $0.password = loginView.password
-            $0.deviceID = UIDevice.current.identifierForVendor!.uuidString
+            $0.deviceID = currentDevice.identifierForVendor!.uuidString
+            $0.deviceName = currentDevice.name
         }
 
         Task {
