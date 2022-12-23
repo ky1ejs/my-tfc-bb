@@ -18,5 +18,7 @@ jobs:
     steps:
       - name: Clone repo
         uses: actions/checkout@v2
-      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Install flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Deploy
         run: flyctl deploy
