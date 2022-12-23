@@ -12,7 +12,6 @@
 		9361563629147B05001B0831 /* DeliveriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361563529147B05001B0831 /* DeliveriesViewController.swift */; };
 		9361563929147C20001B0831 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 9361563829147C20001B0831 /* KeychainAccess */; };
 		9361563B29147C30001B0831 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361563A29147C30001B0831 /* KeychainManager.swift */; };
-		9361564329147E50001B0831 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361564229147E50001B0831 /* Constants.swift */; };
 		937AFC5A29370DA0004833FF /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 937AFC5929370DA0004833FF /* SwiftProtobuf */; };
 		937AFC5F2938273A004833FF /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 937AFC5E2938273A004833FF /* GRPC */; };
 		937AFC612938299D004833FF /* TfcApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937AFC602938299D004833FF /* TfcApiClient.swift */; };
@@ -33,7 +32,6 @@
 		93615633291472E3001B0831 /* UIView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Helpers.swift"; sourceTree = "<group>"; };
 		9361563529147B05001B0831 /* DeliveriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveriesViewController.swift; sourceTree = "<group>"; };
 		9361563A29147C30001B0831 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
-		9361564229147E50001B0831 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		937AFC602938299D004833FF /* TfcApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TfcApiClient.swift; sourceTree = "<group>"; };
 		937AFC622938664F004833FF /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		937AFC65293D9760004833FF /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
@@ -195,7 +193,6 @@
 			isa = PBXGroup;
 			children = (
 				937AFC602938299D004833FF /* TfcApiClient.swift */,
-				9361564229147E50001B0831 /* Constants.swift */,
 				937AFC622938664F004833FF /* Types.swift */,
 			);
 			path = "TFC API";
@@ -292,7 +289,6 @@
 				93EE6A3F291098D70012C716 /* LogInViewController.swift in Sources */,
 				937AFC612938299D004833FF /* TfcApiClient.swift in Sources */,
 				9361563629147B05001B0831 /* DeliveriesViewController.swift in Sources */,
-				9361564329147E50001B0831 /* Constants.swift in Sources */,
 				9361563B29147C30001B0831 /* KeychainManager.swift in Sources */,
 				937AFC632938664F004833FF /* Types.swift in Sources */,
 				935DC5E2291B301100DB3F39 /* SettingsViewController.swift in Sources */,

@@ -21,11 +21,15 @@ class TfcApi {
 
         fileprivate init() throws {
             group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
+            #if LOCALHOST_API
+            connection = ClientConnection
+                .insecure(group: group)
+                .connect(host: "0.0.0.0", port: 3000)
+            #elseif PRODUCTION_API
             connection = ClientConnection
                 .usingPlatformAppropriateTLS(for: group)
-                .connect(host: TFC_API_HOST, port: TFC_API_PORT)
-
-//            GRPCChannelPool.Configuration.with(target: .host(TFC_API_HOST), transportSecurity: .tls(), eventLoopGroup: )
+                .connect(host: "my-tfc-bb.fly.dev", port: 443)
+            #endif
         }
 
         deinit {
