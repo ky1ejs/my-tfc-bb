@@ -64,7 +64,7 @@ describe("getDeliveries handler", () => {
       },
     });
     device = await prisma.device.create({
-      data: { user_id: user.id, device_provided_id: "123" },
+      data: { user_id: user.id, device_provided_id: "123", name: "Burt's iPhone" },
     });
     console.log("✨ created data");
 
