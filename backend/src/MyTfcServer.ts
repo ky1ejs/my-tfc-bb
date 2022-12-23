@@ -18,15 +18,16 @@ export class MyTfcServiceImpl implements MyTfcServer {
   logOut = logOutHandler;
 }
 
-export function bootService(port: string | number): Server {
+export function bootService(): Server {
   const server = new Server({
     "grpc.max_receive_message_length": -1,
     "grpc.max_send_message_length": -1,
   });
+  const port = 3000;
 
   server.addService(MyTfcService, new MyTfcServiceImpl());
   server.bindAsync(
-    `0.0.0.0:${port}`,
+    `[::]:${port}`,
     ServerCredentials.createInsecure(),
     (err: Error | null) => {
       if (err) {

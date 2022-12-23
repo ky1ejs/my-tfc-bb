@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node -r dotenv src/index.ts",
-    "dev:no-delivery-check": "RUN_DELIVERY_CHECK=false ts-node -r dotenv/config src/index.ts",
-    "start": "prisma migrate deploy && ts-node -r dotenv/config src/index.ts",
+    "dev:no-delivery-check": "RUN_DELIVERY_CHECK=false ts-node -r dotenv src/index.ts",
+    "start": "prisma migrate deploy && ts-node -r dotenv src/index.ts",
     "lint": "eslint --fix src/",
     "lint:ci": "eslint --max-warnings=0 src/",
+    "docker:build": "docker build . -t kylejs/my-tfc-bb",
     "docker:up": "docker-compose up -d --no-recreate",
     "docker:wipe": "docker rm -f -v postgres_container_name",
     "test": "dotenv -e .env.test -- prisma migrate deploy && dotenv -e .env.test -- jest -i --coverage",

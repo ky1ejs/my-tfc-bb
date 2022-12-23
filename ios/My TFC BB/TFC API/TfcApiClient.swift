@@ -17,15 +17,15 @@ class TfcApi {
 
     private class ChannelProvider {
         private let group: EventLoopGroup
-        let channel: GRPCChannel
+        let connection: ClientConnection
 
         fileprivate init() throws {
             group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-            channel = try GRPCChannelPool.with(
-              target: .host(TFC_API_HOST, port: TFC_API_PORT),
-              transportSecurity: .plaintext,
-              eventLoopGroup: group
-            )
+            connection = ClientConnection
+                .usingPlatformAppropriateTLS(for: group)
+                .connect(host: TFC_API_HOST, port: TFC_API_PORT)
+
+//            GRPCChannelPool.Configuration.with(target: .host(TFC_API_HOST), transportSecurity: .tls(), eventLoopGroup: )
         }
 
         deinit {
@@ -36,7 +36,7 @@ class TfcApi {
     static var client: TfcApiClient {
         if let c = clientAndChannel { return c.0 }
         let channelProvider = try! ChannelProvider()
-        let client = TfcApiClient(channel: channelProvider.channel, interceptors: InteceptorFactory())
+        let client = TfcApiClient(channel: channelProvider.connection, interceptors: InteceptorFactory())
         clientAndChannel = (client, channelProvider)
         return client
     }
@@ -64,7 +64,8 @@ struct InteceptorFactory: MyTfcBb_V1_MyTfcClientInterceptorFactoryProtocol {
     }
 
     private func defaultInteceptors<Request, Response>() -> [ClientInterceptor<Request, Response>] {
-        return [AuthInterceptor(), UnauthenticatedInteceptor()]
+//        return [AuthInterceptor(), UnauthenticatedInteceptor()]
+                return [AuthInterceptor()]
     }
 }
 
@@ -82,12 +83,12 @@ class AuthInterceptor<Request, Response>: ClientInterceptor<Request, Response> {
 
 class UnauthenticatedInteceptor<Request, Response>: ClientInterceptor<Request, Response> {
     override func receive(_ part: GRPCClientResponsePart<Response>, context: ClientInterceptorContext<Request, Response>) {
-        guard case let .end(status, _) = part else {
-            context.receive(part)
+        defer { context.receive(part) }
+
+        guard case let .end(status, _) = part, status.code == GRPCStatus.Code.unauthenticated else {
             return
         }
 
-        if status.code == GRPCStatus.Code.unauthenticated {
             let topViewController: UIViewController = {
                 let root = SceneDelegate.shared.window!.rootViewController!
                 var topViewController = root
@@ -105,6 +106,5 @@ class UnauthenticatedInteceptor<Request, Response>: ClientInterceptor<Request, R
                 SceneDelegate.shared.logedOut()
             }))
             topViewController.present(alert, animated: true)
-        }
     }
 }

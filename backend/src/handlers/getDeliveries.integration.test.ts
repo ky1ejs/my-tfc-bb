@@ -46,7 +46,6 @@ export const handlers = [
 ];
 
 describe("getDeliveries handler", () => {
-  const port = 5990;
   let server: Server;
   let client: MyTfcClient;
   let user: User;
@@ -69,8 +68,8 @@ describe("getDeliveries handler", () => {
     });
     console.log("✨ created data");
 
-    server = bootService(port);
-    client = new MyTfcClient(`0.0.0.0:${port}`, credentials.createInsecure());
+    server = bootService();
+    client = new MyTfcClient(`0.0.0.0:3000}`, credentials.createInsecure());
 
     mockTfcApi = setupServer(...handlers);
     mockTfcApi.listen();

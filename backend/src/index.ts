@@ -2,7 +2,6 @@
 import { bootService } from "./MyTfcServer";
 import { Worker } from "worker_threads";
 
-const PORT = process.env.PORT || 3000;
 const RUN_DELIVERY_CHECK =
   (process.env.RUN_DELIVERY_CHECK ?? "true") === "true";
 
@@ -12,4 +11,4 @@ if (RUN_DELIVERY_CHECK) {
   });
 }
 
-bootService(PORT);
+bootService();
