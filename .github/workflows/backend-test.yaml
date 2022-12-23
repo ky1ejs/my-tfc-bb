@@ -22,6 +22,20 @@ jobs:
       - name: Lint
         run: npm run lint:ci
 
+  buf-lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install buf
+        uses: bufbuild/buf-setup-action@v1.10.0
+        with:
+          github_token: ${{ github.token }}
+      - name: Lint protos
+        run: buf lint proto
+
   run-tests:
     runs-on: ubuntu-latest
     defaults:
