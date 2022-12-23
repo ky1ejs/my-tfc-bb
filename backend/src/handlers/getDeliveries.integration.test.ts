@@ -69,17 +69,15 @@ describe("getDeliveries handler", () => {
     console.log("✨ created data");
 
     server = bootService();
-    client = new MyTfcClient(`0.0.0.0:3000}`, credentials.createInsecure());
+    client = new MyTfcClient(`0.0.0.0:3000`, credentials.createInsecure());
 
     mockTfcApi = setupServer(...handlers);
     mockTfcApi.listen();
   });
 
   afterEach(async () => {
-    await prisma.$transaction([
-      prisma.device.deleteMany({ where: { id: device.id } }),
-      prisma.user.deleteMany({ where: { id: user.id } }),
-    ]);
+    if (device) await prisma.device.deleteMany({ where: { id: device.id } })
+    if (user) await prisma.user.deleteMany({ where: { id: user.id } })
     await prisma.$disconnect();
     client.close();
     mockTfcApi.close();
