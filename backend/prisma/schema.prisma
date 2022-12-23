@@ -28,8 +28,9 @@ enum PasswordStatus {
 
 model Device {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name String
   device_provided_id String @unique
-  user User @relation(fields: [user_id], references: [id])
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id String @db.Uuid
   push_token PushToken?
 }
@@ -50,7 +51,7 @@ model PushToken {
   token String
   env TokenEnv
   platform PushPlatform
-  device Device @relation(fields: [device_id], references: [id])
+  device Device @relation(fields: [device_id], references: [id], onDelete: Cascade)
   device_id String @unique @db.Uuid
 }
 
@@ -60,7 +61,7 @@ model Delivery {
   name String
   comment String
   date_received DateTime @db.Timestamptz
-  user User @relation(fields: [user_id], references: [id])
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id String @db.Uuid
   collected_at DateTime? @db.Timestamptz
   @@unique([tfc_id, user_id])

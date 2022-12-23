@@ -60,11 +60,26 @@ message UpdatePushTokenRequest {
   string token = 3;
 }
 
+message Device {
+  string id = 1;
+  string name = 2;
+}
+
+message GetDevicesResponse {
+  repeated Device devices = 1;
+}
+
+message RemoveDeviceRequest {
+  string device_id = 1;
+}
+
 service MyTfc {
   rpc LogIn(LogInRequest) returns (LogInResponse);
   rpc GetDeliveries(GetDeliveriesRequest) returns (GetDeliveriesResponse);
   rpc UpdatePushToken(UpdatePushTokenRequest) returns (google.protobuf.Empty);
   rpc SendTestPushNotication(google.protobuf.Empty) returns (google.protobuf.Empty);
   rpc LogOut(google.protobuf.Empty) returns (google.protobuf.Empty);
+  rpc GetDevices(google.protobuf.Empty) returns (GetDevicesResponse);
+  rpc RemoveDevice(RemoveDeviceRequest) returns (google.protobuf.Empty);
 }
 
