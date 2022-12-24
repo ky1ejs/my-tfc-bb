@@ -1,6 +1,9 @@
 import { handleUnaryCall } from "@grpc/grpc-js";
 import { Delivery } from "@prisma/client";
-import { Courier, Delivery as DeliveryProto } from "../generated/proto/my_tfc_bb/v1/my_tfc_bb";
+import {
+  Courier,
+  Delivery as DeliveryProto,
+} from "../generated/proto/my_tfc_bb/v1/my_tfc_bb";
 import { handleError } from "../errors/HandleGrpcError";
 import {
   GetDeliveriesRequest,
@@ -36,21 +39,24 @@ function deliveryToProto(d: Delivery): DeliveryProto {
     collectedAt: d.collected_at ?? undefined,
     bookedInByFirstName: d.booked_in_by_first_name,
     bookedInByLastName: d.booked_in_by_last_name,
-    identifiedCourier: identifyCourier(d.name)
+    identifiedCourier: identifyCourier(d.name),
   };
 }
 
 function identifyCourier(deliveryName: string): Courier {
-  const text = deliveryName.toLowerCase()
-  console.log(text)
+  const text = deliveryName.toLowerCase();
   const searchTerms = new Map<Courier, string[]>([
     [Courier.AMAZON, ["amazon", "laser ship"]],
     [Courier.FEDEX, ["fedex"]],
     [Courier.UPS, ["ups"]],
     [Courier.USPS, ["usps"]],
-  ])
+  ]);
 
-  const identifiedCourier = Array.from(searchTerms.keys()).find(c => searchTerms.get(c)!.find(t => { if (text.includes(t)) return c }))
+  const identifiedCourier = Array.from(searchTerms.keys()).find((c) =>
+    searchTerms.get(c)!.find((t) => {
+      if (text.includes(t)) return c;
+    })
+  );
 
-  return identifiedCourier ?? Courier.UNIDENTIFIED
+  return identifiedCourier ?? Courier.UNIDENTIFIED;
 }

@@ -69,12 +69,16 @@ export function authenticate(
 }
 
 export function getCode(response: AxiosResponse): string {
-  const dom = new JSDOM(response.data)
-  const errorElement = dom.window.document.getElementById("input-error")
-  if (errorElement?.textContent?.toLowerCase().includes("invalid username or password")) {
-    throw TfcApiError.invalidPassword()
+  const dom = new JSDOM(response.data);
+  const errorElement = dom.window.document.getElementById("input-error");
+  if (
+    errorElement?.textContent
+      ?.toLowerCase()
+      .includes("invalid username or password")
+  ) {
+    throw TfcApiError.invalidPassword();
   }
-  
+
   const url = new URL(response.request.res.responseUrl);
   const code = url.hash
     .replace("#", "")
