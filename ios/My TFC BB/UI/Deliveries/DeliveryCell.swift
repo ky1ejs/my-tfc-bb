@@ -32,6 +32,11 @@ class DeliveryCell: UITableViewCell {
         l.textColor = .gray
         return l
     }()
+    private let courierIcon: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFit
+        return iv
+    }()
 
     var delivery: Delivery? {
         didSet {
@@ -41,6 +46,7 @@ class DeliveryCell: UITableViewCell {
             commentLabel.text = delivery.comment
             dateLabel.text = type(of: self).df.string(for: Date(timeIntervalSince1970: delivery.dateReceived.timeIntervalSince1970))
             bookerLabel.text = "✍️ \(delivery.bookedInByFirstName) \(delivery.bookedInByLastName)"
+            courierIcon.image = image(for: delivery.identifiedCourier)
         }
     }
 
@@ -55,17 +61,24 @@ class DeliveryCell: UITableViewCell {
         lableContainer.addSubview(dateLabel)
         lableContainer.addSubview(bookerLabel)
         contentView.addSubview(lableContainer)
+        contentView.addSubview(courierIcon)
         contentView.disableAutolayoutConstraints()
 
         let horizontalPadding: CGFloat = 22
+        let horizontalSpacing: CGFloat = 16
         let verticalPadding: CGFloat = 8
         let verticalSpacing: CGFloat = 4
         NSLayoutConstraint.activate([
-            lableContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: horizontalPadding),
+            lableContainer.leadingAnchor.constraint(equalTo: courierIcon.trailingAnchor, constant: horizontalSpacing),
             lableContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: verticalPadding),
             lableContainer.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             lableContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -horizontalPadding),
             lableContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -verticalPadding),
+
+            courierIcon.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: horizontalPadding),
+            courierIcon.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            courierIcon.widthAnchor.constraint(equalToConstant: 50),
+            courierIcon.heightAnchor.constraint(equalToConstant: 80),
 
             titleLabel.leadingAnchor.constraint(equalTo: lableContainer.leadingAnchor),
             titleLabel.topAnchor.constraint(equalTo: lableContainer.topAnchor),
@@ -88,5 +101,15 @@ class DeliveryCell: UITableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func image(for courier: Courier) -> UIImage {
+        switch courier {
+        case .amazon: return R.image.amazon()!
+        case .fedex: return R.image.fedEx()!
+        case .ups: return R.image.upS()!
+        case .usps: return R.image.uspS()!
+        default: return R.image.package()!
+        }
     }
 }
