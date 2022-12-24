@@ -25,6 +25,8 @@
 		93EE6A47291098D80012C716 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93EE6A45291098D80012C716 /* LaunchScreen.storyboard */; };
 		93EE6A4F2910AC8E0012C716 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A4E2910AC8E0012C716 /* LogInView.swift */; };
 		93FEA4EB29564DD300F619C3 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FEA4EA29564DD300F619C3 /* DevicesViewController.swift */; };
+		93FEA4ED2956500D00F619C3 /* DeliveryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FEA4EC2956500D00F619C3 /* DeliveryCell.swift */; };
+		93FEA4EF2956716100F619C3 /* UITableView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FEA4EE2956716100F619C3 /* UITableView+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		93EE6A48291098D80012C716 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93EE6A4E2910AC8E0012C716 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		93FEA4EA29564DD300F619C3 /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewController.swift; sourceTree = "<group>"; };
+		93FEA4EC2956500D00F619C3 /* DeliveryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryCell.swift; sourceTree = "<group>"; };
+		93FEA4EE2956716100F619C3 /* UITableView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				9361563529147B05001B0831 /* DeliveriesViewController.swift */,
+				93FEA4EC2956500D00F619C3 /* DeliveryCell.swift */,
 			);
 			path = Deliveries;
 			sourceTree = "<group>";
@@ -114,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				93615633291472E3001B0831 /* UIView+Helpers.swift */,
+				93FEA4EE2956716100F619C3 /* UITableView+Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -289,6 +295,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				93FEA4EB29564DD300F619C3 /* DevicesViewController.swift in Sources */,
+				93FEA4EF2956716100F619C3 /* UITableView+Helpers.swift in Sources */,
+				93FEA4ED2956500D00F619C3 /* DeliveryCell.swift in Sources */,
 				93615634291472E3001B0831 /* UIView+Helpers.swift in Sources */,
 				93EE6A3F291098D70012C716 /* LogInViewController.swift in Sources */,
 				937AFC612938299D004833FF /* TfcApiClient.swift in Sources */,

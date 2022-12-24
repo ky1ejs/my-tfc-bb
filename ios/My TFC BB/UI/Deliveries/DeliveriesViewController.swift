@@ -21,6 +21,7 @@ class DeliveresViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(DeliveryCell.self)
         fetchData()
 
         let refreshControl = UIRefreshControl()
@@ -54,9 +55,8 @@ class DeliveresViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellId = "CELL"
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId) ?? UITableViewCell(style: .default, reuseIdentifier: cellId)
-        cell.textLabel?.text = deliveries[indexPath.row].name
+        let cell = tableView.dequeue(cellOf: DeliveryCell.self)
+        cell.delivery = deliveries[indexPath.row]
         return cell
     }
 
