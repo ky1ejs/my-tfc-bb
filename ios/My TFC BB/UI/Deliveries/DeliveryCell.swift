@@ -105,11 +105,11 @@ class DeliveryCell: UITableViewCell {
 
     private func image(for courier: Courier) -> UIImage {
         switch courier {
-        case .amazon: return R.image.amazon()!
-        case .fedex: return R.image.fedEx()!
-        case .ups: return R.image.upS()!
-        case .usps: return R.image.uspS()!
-        default: return R.image.package()!
+        case .amazon: return UIImage(named: "Amazon")!
+        case .fedex: return UIImage(named: "FedEx")!
+        case .ups: return UIImage(named: "UPS")!
+        case .usps: return UIImage(named: "USPS")!
+        default: return UIImage(named: "Package")!
         }
     }
 }

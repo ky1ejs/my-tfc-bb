@@ -27,7 +27,6 @@
 		93FEA4EB29564DD300F619C3 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FEA4EA29564DD300F619C3 /* DevicesViewController.swift */; };
 		93FEA4ED2956500D00F619C3 /* DeliveryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FEA4EC2956500D00F619C3 /* DeliveryCell.swift */; };
 		93FEA4EF2956716100F619C3 /* UITableView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FEA4EE2956716100F619C3 /* UITableView+Helpers.swift */; };
-		93FEA4F52957725000F619C3 /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 93FEA4F42957725000F619C3 /* RswiftLibrary */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,7 +59,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9361563929147C20001B0831 /* KeychainAccess in Frameworks */,
-				93FEA4F52957725000F619C3 /* RswiftLibrary in Frameworks */,
 				937AFC5A29370DA0004833FF /* SwiftProtobuf in Frameworks */,
 				937AFC5F2938273A004833FF /* GRPC in Frameworks */,
 			);
@@ -238,14 +236,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				93FEA4F92957741A00F619C3 /* PBXTargetDependency */,
 			);
 			name = "My TFC BB";
 			packageProductDependencies = (
 				9361563829147C20001B0831 /* KeychainAccess */,
 				937AFC5929370DA0004833FF /* SwiftProtobuf */,
 				937AFC5E2938273A004833FF /* GRPC */,
-				93FEA4F42957725000F619C3 /* RswiftLibrary */,
 			);
 			productName = "My TFC BB";
 			productReference = 93EE6A37291098D70012C716 /* My TFC BB.app */;
@@ -279,7 +275,6 @@
 				9361563729147C20001B0831 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				937AFC5829370DA0004833FF /* XCRemoteSwiftPackageReference "swift-protobuf" */,
 				937AFC5D2938273A004833FF /* XCRemoteSwiftPackageReference "grpc-swift" */,
-				93FEA4F02957721A00F619C3 /* XCRemoteSwiftPackageReference "R.swift" */,
 			);
 			productRefGroup = 93EE6A38291098D70012C716 /* Products */;
 			projectDirPath = "";
@@ -326,13 +321,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		93FEA4F92957741A00F619C3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = 93FEA4F82957741A00F619C3 /* RswiftGenerateInternalResources */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		93EE6A45291098D80012C716 /* LaunchScreen.storyboard */ = {
@@ -662,14 +650,6 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		93FEA4F02957721A00F619C3 /* XCRemoteSwiftPackageReference "R.swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mac-cain13/R.swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -687,15 +667,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 937AFC5D2938273A004833FF /* XCRemoteSwiftPackageReference "grpc-swift" */;
 			productName = GRPC;
-		};
-		93FEA4F42957725000F619C3 /* RswiftLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 93FEA4F02957721A00F619C3 /* XCRemoteSwiftPackageReference "R.swift" */;
-			productName = RswiftLibrary;
-		};
-		93FEA4F82957741A00F619C3 /* RswiftGenerateInternalResources */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = "plugin:RswiftGenerateInternalResources";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
