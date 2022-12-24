@@ -21,6 +21,7 @@ processes = []
   [[services.tcp_checks]]
     interval = 10000
     timeout = 2000
+    grace_period = "30s" # give more time for service to boot
 
   [services.ports.tls_options]
     alpn = ["h2"]
