@@ -14,3 +14,5 @@ cd ..
 ls -la
 pwd
 buf generate ../backend/proto
+
+defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
