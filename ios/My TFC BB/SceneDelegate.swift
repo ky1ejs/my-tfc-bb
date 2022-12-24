@@ -43,6 +43,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func logedOut() {
         animate(to: LogInViewController())
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
 
     private func animate(to newRootViewController: UIViewController) {

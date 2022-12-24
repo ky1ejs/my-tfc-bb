@@ -52,15 +52,15 @@ struct InteceptorFactory: MyTfcBb_V1_MyTfcClientInterceptorFactoryProtocol {
     }
 
     func makeGetDeliveriesInterceptors() -> [GRPC.ClientInterceptor<MyTfcBb_V1_GetDeliveriesRequest, MyTfcBb_V1_GetDeliveriesResponse>] {
-        return defaultInteceptors()
+        return defaultInteceptors() + [DeliveriesInteceptor()]
     }
 
     func makeUpdatePushTokenInterceptors() -> [GRPC.ClientInterceptor<MyTfcBb_V1_UpdatePushTokenRequest, SwiftProtobuf.Google_Protobuf_Empty>] {
-        return defaultInteceptors()
+        return [AuthInterceptor()]
     }
 
     func makeSendTestPushNoticationInterceptors() -> [GRPC.ClientInterceptor<SwiftProtobuf.Google_Protobuf_Empty, SwiftProtobuf.Google_Protobuf_Empty>] {
-        return [AuthInterceptor()]
+        return defaultInteceptors()
     }
 
     func makeLogOutInterceptors() -> [GRPC.ClientInterceptor<SwiftProtobuf.Google_Protobuf_Empty, SwiftProtobuf.Google_Protobuf_Empty>] {
@@ -119,5 +119,14 @@ class UnauthenticatedInteceptor<Request, Response>: ClientInterceptor<Request, R
             }))
             topViewController.present(alert, animated: true)
         }
+    }
+}
+
+class DeliveriesInteceptor: ClientInterceptor<MyTfcBb_V1_GetDeliveriesRequest, MyTfcBb_V1_GetDeliveriesResponse> {
+    override func receive(_ part: GRPCClientResponsePart<MyTfcBb_V1_GetDeliveriesResponse>, context: ClientInterceptorContext<MyTfcBb_V1_GetDeliveriesRequest, MyTfcBb_V1_GetDeliveriesResponse>) {
+        defer { context.receive(part) }
+
+        guard case let .message(response) = part else { return }
+        UIApplication.shared.applicationIconBadgeNumber = Int(response.uncollectedCount)
     }
 }
