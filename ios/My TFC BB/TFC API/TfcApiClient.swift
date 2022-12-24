@@ -60,7 +60,7 @@ struct InteceptorFactory: MyTfcBb_V1_MyTfcClientInterceptorFactoryProtocol {
     }
 
     func makeSendTestPushNoticationInterceptors() -> [GRPC.ClientInterceptor<SwiftProtobuf.Google_Protobuf_Empty, SwiftProtobuf.Google_Protobuf_Empty>] {
-        return defaultInteceptors()
+        return [AuthInterceptor()]
     }
 
     func makeLogOutInterceptors() -> [GRPC.ClientInterceptor<SwiftProtobuf.Google_Protobuf_Empty, SwiftProtobuf.Google_Protobuf_Empty>] {
