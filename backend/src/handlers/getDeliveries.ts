@@ -34,5 +34,7 @@ function deliveryToProto(d: Delivery): DeliveryProto {
     comment: d.comment,
     dateReceived: d.date_received,
     collectedAt: d.collected_at ?? undefined,
+    bookedInByFirstName: d.booked_in_by_first_name,
+    bookedInByLastName: d.booked_in_by_last_name
   };
 }

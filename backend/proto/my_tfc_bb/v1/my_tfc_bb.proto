@@ -11,6 +11,8 @@ message Delivery {
   string comment = 3;
   google.protobuf.Timestamp date_received = 4;
   google.protobuf.Timestamp collected_at = 5;
+  string booked_in_by_first_name = 6;
+  string booked_in_by_last_name = 7;
 }
 
 message LogInRequest {
