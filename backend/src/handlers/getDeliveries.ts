@@ -53,7 +53,7 @@ function identifyCourier(deliveryName: string): Courier {
   ]);
 
   const identifiedCourier = Array.from(searchTerms.keys()).find((c) =>
-    searchTerms.get(c)!.find((t) => {
+    searchTerms.get(c)?.find((t) => {
       if (text.includes(t)) return c;
     })
   );
