@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GRPC
 
 class LogInViewController: UIViewController {
     private var loginView: LogInView { view as! LogInView }
@@ -40,7 +41,16 @@ class LogInViewController: UIViewController {
                 KeychainManager.setBackendAssignedId(response.deviceID)
                 SceneDelegate.shared.authenticated()
             } catch let error {
-                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+
+                if let status = error as? GRPCStatus, status.code == .unauthenticated {
+                    alert.title = "Invalid credentials"
+                    alert.message = "That username/password combination is incorrect"
+                } else {
+                    alert.title = "Error"
+                    alert.message = error.localizedDescription
+                }
+
                 alert.addAction(UIAlertAction(title: "Damn man...", style: .cancel))
                 self.present(alert, animated: true)
             }
