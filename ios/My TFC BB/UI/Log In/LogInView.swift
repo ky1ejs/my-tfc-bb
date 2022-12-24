@@ -10,6 +10,8 @@ import UIKit
 
 
 class LogInView: UIView {
+    enum State { case normal, loading }
+
     private let usernameTF: UITextField = {
         let tf = UITextField()
         tf.textContentType = .username
@@ -26,12 +28,35 @@ class LogInView: UIView {
         tf.placeholder = "password"
         tf.returnKeyType = .go
         tf.isSecureTextEntry = true
+        tf.textColor = .black
         return tf
     }()
     private let submitButton = UIButton(type: .system)
+    private let loadingIndicator = UIActivityIndicatorView(style: .medium)
 
     var username: String { return usernameTF.text ?? "" }
     var password: String { return passwordTF.text ?? "" }
+    var state: State = .normal {
+        didSet {
+            guard state != oldValue else { return }
+
+            let interactionEnabled = (state == .normal)
+            [usernameTF, passwordTF, submitButton].forEach { $0.isUserInteractionEnabled = interactionEnabled }
+
+            switch state {
+            case .normal:
+                submitButton.setTitle("log in", for: .normal)
+                loadingIndicator.isHidden = true
+                loadingIndicator.stopAnimating()
+            case .loading:
+                submitButton.setTitle("", for: .normal)
+                loadingIndicator.isHidden = false
+                loadingIndicator.startAnimating()
+            }
+
+        }
+    }
+
     func setSubmitAction(_ action: @escaping () -> ()) {
         submitButton.addAction(
             UIAction { _ in action() },
@@ -52,6 +77,7 @@ class LogInView: UIView {
         container.addSubview(usernameTF)
         container.addSubview(passwordTF)
         container.addSubview(submitButton)
+        container.addSubview(loadingIndicator)
         addSubview(container)
 
         styleTextField(usernameTF)
@@ -65,13 +91,13 @@ class LogInView: UIView {
     private func styleTitle(_ label: UILabel) {
         label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
         label.text = "My TFC, But Better"
-        label.textColor = .white
+        label.textColor = .black
         label.textAlignment = .center
     }
 
     private func styleSubtitle(_ label: UILabel) {
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.textColor = .black
         label.text = "Quickly see your packages and get notifications as they're delivered and collected."
         label.numberOfLines = 0
         label.textAlignment = .center
@@ -122,6 +148,9 @@ class LogInView: UIView {
             submitButton.centerXAnchor.constraint(equalTo: container.centerXAnchor),
             submitButton.topAnchor.constraint(equalTo: passwordTF.bottomAnchor, constant: 20),
             submitButton.bottomAnchor.constraint(equalTo: container.bottomAnchor),
+
+            loadingIndicator.centerXAnchor.constraint(equalTo: submitButton.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: submitButton.centerYAnchor)
         ])
     }
 

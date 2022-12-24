@@ -35,6 +35,7 @@ class LogInViewController: UIViewController {
             $0.deviceName = currentDevice.name
         }
 
+        loginView.state = .loading
         Task {
             do {
                 let response = try await client.logIn(request)
@@ -54,6 +55,7 @@ class LogInViewController: UIViewController {
                 alert.addAction(UIAlertAction(title: "Damn man...", style: .cancel))
                 self.present(alert, animated: true)
             }
+            loginView.state = .normal
         }
     }
 }
