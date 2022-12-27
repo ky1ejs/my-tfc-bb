@@ -70,7 +70,7 @@ async function processUpdatesForUser(user: User): Promise<void> {
           })
           .then(() =>
             pushToUsersDevices(user, {
-              title: "Can't update you packages",
+              title: "Can't update your packages",
               body: "It seems your authentications details are no longer valid.",
             })
           );
@@ -105,12 +105,12 @@ async function sendNotificationsForUpdates(update: {
 
   const newDeliveries = update.newDeliveries.length;
   if (newDeliveries > 0) {
-    const title = `${newDeliveries} new ${
-      newDeliveries > 1 ? "packages are" : "package is"
-    } ready for collection`;
+    const title = `${newDeliveries} ${
+      newDeliveries > 1 ? "packages" : "package"
+    } delivered`;
     const body = `${currentPackageCount} ${
-      currentPackageCount > 1 ? "packages are" : "package is"
-    } for collection in total`;
+      currentPackageCount > 1 ? "packages" : "package"
+    } waiting for collection in total`;
     promises.push(
       pushToUsersDevices(update.user, {
         title,
