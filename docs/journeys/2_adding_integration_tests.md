@@ -81,3 +81,9 @@ Here are some useful links I found in the process:
 * [CockroachDB Integration Testing](https://robreid.io/crdb-integration-testing/)
 * [CockroachDB and Docker Compose gist](https://gist.github.com/dbist/ebb1f39f580ad9d07c04c3a3377e2bff)
 * [Prisma - Integration testing](https://www.prisma.io/docs/guides/testing/integration-testing)
+
+
+## Links found for exploring Integration Tests further
+https://www.toptal.com/nodejs/nodejs-guide-integration-tests
+https://dev.to/arifintahu/writing-well-structured-unit-test-in-typescript-2hal
+https://engineering.leanix.net/blog/integration-tests-in-nodejs/
