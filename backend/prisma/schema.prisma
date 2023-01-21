@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider   = "prisma-client-js"
+  engineType = "binary"
 }
 
 datasource db {
@@ -11,14 +12,14 @@ datasource db {
 }
 
 model User {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  username String @unique
+  id                  String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  username            String         @unique
   latest_access_token String
-  refresh_token String
-  hashed_password String
-  devices Device[]
-  deliveries Delivery[]
-  password_status PasswordStatus @default(VALID)
+  refresh_token       String
+  hashed_password     String
+  devices             Device[]
+  deliveries          Delivery[]
+  password_status     PasswordStatus @default(VALID)
 }
 
 enum PasswordStatus {
@@ -27,12 +28,12 @@ enum PasswordStatus {
 }
 
 model Device {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name String
-  device_provided_id String @unique
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id String @db.Uuid
-  push_token PushToken?
+  id                 String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name               String
+  device_provided_id String     @unique
+  user               User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id            String     @db.Uuid
+  push_token         PushToken?
 }
 
 enum TokenEnv {
@@ -47,24 +48,25 @@ enum PushPlatform {
 }
 
 model PushToken {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  token String
-  env TokenEnv
-  platform PushPlatform
-  device Device @relation(fields: [device_id], references: [id], onDelete: Cascade)
-  device_id String @unique @db.Uuid
+  id        String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  token     String
+  env       TokenEnv
+  platform  PushPlatform
+  device    Device       @relation(fields: [device_id], references: [id], onDelete: Cascade)
+  device_id String       @unique @db.Uuid
 }
 
 model Delivery {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  tfc_id Int
-  name String
-  comment String
-  date_received DateTime @db.Timestamptz
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id String @db.Uuid
-  collected_at DateTime? @db.Timestamptz
+  id                      String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tfc_id                  Int
+  name                    String
+  comment                 String
+  date_received           DateTime  @db.Timestamptz
+  user                    User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id                 String    @db.Uuid
+  collected_at            DateTime? @db.Timestamptz
   booked_in_by_first_name String
-  booked_in_by_last_name String
+  booked_in_by_last_name  String
+
   @@unique([tfc_id, user_id])
 }
