@@ -1,4 +1,4 @@
-FROM node:18.13.0-bullseye
+FROM node:18
 WORKDIR /usr/src/
 COPY . .
 RUN ./scripts/install_buf.sh
