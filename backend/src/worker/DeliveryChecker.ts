@@ -5,6 +5,10 @@ import { DateTime } from "luxon";
 import { TfcApiError, TfcApiErrorType } from "../my-tfc/TfcApiError";
 import { Delivery, PasswordStatus, User } from "@prisma/client";
 import { TfcDelivery } from "../my-tfc/TfcDelivery";
+import {
+  formattedCourierName,
+  identifyCourier,
+} from "../helpers/identifyCourier";
 
 const COLLECTION_CLOSE = 22; // 10pm
 const COLLECTION_OPEN = 7; // 7am
@@ -108,9 +112,21 @@ async function sendNotificationsForUpdates(update: {
     const title = `${newDeliveries} ${
       newDeliveries > 1 ? "packages" : "package"
     } delivered`;
-    const body = `${currentPackageCount} ${
-      currentPackageCount > 1 ? "packages" : "package"
-    } waiting for collection in total`;
+
+    let body: string;
+
+    if (newDeliveries > 1) {
+      body = `${currentPackageCount} ${
+        currentPackageCount > 1 ? "packages" : "package"
+      } waiting for collection in total`;
+    } else {
+      const courier = identifyCourier(update.newDeliveries[0].name);
+      const courierName = formattedCourierName(courier);
+      body = `New delivery from ${courierName}. ${currentPackageCount} ${
+        currentPackageCount > 1 ? "packages" : "package"
+      } waiting for collection in total.`;
+    }
+
     promises.push(
       pushToUsersDevices(update.user, {
         title,
