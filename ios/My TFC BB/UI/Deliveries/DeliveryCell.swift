@@ -26,12 +26,6 @@ class DeliveryCell: UITableViewCell {
         l.textColor = .gray
         return l
     }()
-    private let bookerLabel: UILabel = {
-        let l = UILabel()
-        l.font = UIFont.systemFont(ofSize: 12)
-        l.textColor = .gray
-        return l
-    }()
     private let courierIcon: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
@@ -45,7 +39,6 @@ class DeliveryCell: UITableViewCell {
             titleLabel.text = delivery.name
             commentLabel.text = delivery.comment
             dateLabel.text = type(of: self).df.string(for: Date(timeIntervalSince1970: delivery.dateReceived.timeIntervalSince1970))
-            bookerLabel.text = "✍️ \(delivery.bookedInByFirstName) \(delivery.bookedInByLastName)"
             courierIcon.image = image(for: delivery.identifiedCourier)
         }
     }
@@ -59,7 +52,6 @@ class DeliveryCell: UITableViewCell {
         lableContainer.addSubview(titleLabel)
         lableContainer.addSubview(commentLabel)
         lableContainer.addSubview(dateLabel)
-        lableContainer.addSubview(bookerLabel)
         contentView.addSubview(lableContainer)
         contentView.addSubview(courierIcon)
         contentView.disableAutolayoutConstraints()
@@ -91,11 +83,6 @@ class DeliveryCell: UITableViewCell {
             dateLabel.leadingAnchor.constraint(equalTo: lableContainer.leadingAnchor),
             dateLabel.topAnchor.constraint(equalTo: commentLabel.bottomAnchor, constant: verticalSpacing),
             dateLabel.trailingAnchor.constraint(equalTo: lableContainer.trailingAnchor),
-
-            bookerLabel.leadingAnchor.constraint(equalTo: lableContainer.leadingAnchor),
-            bookerLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: verticalSpacing),
-            bookerLabel.trailingAnchor.constraint(equalTo: lableContainer.trailingAnchor),
-            bookerLabel.bottomAnchor.constraint(equalTo: lableContainer.bottomAnchor)
         ])
     }
 

@@ -57,16 +57,14 @@ model PushToken {
 }
 
 model Delivery {
-  id                      String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  tfc_id                  Int
-  name                    String
-  comment                 String
-  date_received           DateTime  @db.Timestamptz
-  user                    User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id                 String    @db.Uuid
-  collected_at            DateTime? @db.Timestamptz
-  booked_in_by_first_name String
-  booked_in_by_last_name  String
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tfc_id        Int
+  name          String
+  comment       String
+  date_received DateTime  @db.Timestamptz
+  user          User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id       String    @db.Uuid
+  collected_at  DateTime? @db.Timestamptz
 
   @@unique([tfc_id, user_id])
 }
