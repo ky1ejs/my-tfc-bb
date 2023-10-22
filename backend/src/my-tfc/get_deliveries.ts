@@ -84,8 +84,6 @@ export async function fetchAndUpdateDeliveries(user: User) {
           date_received: d.date_received,
           tfc_id: d.id,
           user_id: user.id,
-          booked_in_by_first_name: d.booked_in_by_first_name,
-          booked_in_by_last_name: d.booked_in_by_last_name,
         },
         update: {
           collected_at: null,
