@@ -32,7 +32,6 @@ function deliveryToProto(d: Delivery): DeliveryProto {
   return {
     id: d.id,
     name: d.name,
-    comment: d.comment,
     dateReceived: d.date_received,
     collectedAt: d.collected_at ?? undefined,
     identifiedCourier: identifyCourier(d.name),

@@ -80,7 +80,6 @@ export async function fetchAndUpdateDeliveries(user: User) {
         where: { tfc_id_user_id: { user_id: user.id, tfc_id: d.id } },
         create: {
           name: d.name,
-          comment: d.comment,
           date_received: d.date_received,
           tfc_id: d.id,
           user_id: user.id,
@@ -88,7 +87,6 @@ export async function fetchAndUpdateDeliveries(user: User) {
         update: {
           collected_at: null,
           name: d.name,
-          comment: d.comment,
         },
       })
     )

@@ -60,7 +60,6 @@ model Delivery {
   id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   tfc_id        Int
   name          String
-  comment       String
   date_received DateTime  @db.Timestamptz
   user          User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id       String    @db.Uuid
