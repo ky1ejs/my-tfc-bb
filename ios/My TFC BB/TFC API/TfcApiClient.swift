@@ -127,6 +127,9 @@ class DeliveriesInteceptor: ClientInterceptor<MyTfcBb_V1_GetDeliveriesRequest, M
         defer { context.receive(part) }
 
         guard case let .message(response) = part else { return }
-        UIApplication.shared.applicationIconBadgeNumber = Int(response.uncollectedCount)
+
+        DispatchQueue.main.async {
+            UNUserNotificationCenter.current().setBadgeCount(Int(response.uncollectedCount))
+        }
     }
 }
