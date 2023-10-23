@@ -2,159 +2,155 @@
 //  LogInView.swift
 //  My TFC BB
 //
-//  Created by Kyle Satti on 10/31/22.
+//  Created by Kyle Satti on 10/22/23.
 //
 
-import UIKit
+import SwiftUI
+import GRPC
 
+struct LogInView: View {
+    @State private var username = ""
+    @State private var password = ""
+    @State private var lastError: LogInError?
+    @State private var alertPresented = false
+    @State private var isLoading = false
 
+    var body: some View {
+        ZStack {
+            Color(uiColor: .lightOrange)
+                .ignoresSafeArea()
+            VStack {
+                Text("My TFC, but better")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding(.bottom, 4)
+                    .foregroundColor(.black)
+                Text("Quickly see your packages and get notifications as they're delivered and collected.")
+                    .multilineTextAlignment(.center)
+                    .font(.title3)
+                    .foregroundColor(.black)
+                    .padding(.bottom, 32)
+                VStack(spacing: 16) {
+                    TextField(text: $username) {
+                        Text("username")
+                    }
+                    .textFieldStyle(TfStyle())
+                    .keyboardType(.emailAddress)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                    .disabled(isLoading)
 
-class LogInView: UIView {
-    enum State { case normal, loading }
-
-    private let usernameTF: UITextField = {
-        let tf = UITextField()
-        tf.textContentType = .username
-        tf.keyboardType = .emailAddress
-        tf.autocorrectionType = .no
-        tf.autocapitalizationType = .none
-        tf.placeholder = "username"
-        tf.returnKeyType = .next
-        return tf
-    }()
-    private let passwordTF: UITextField = {
-        let tf = UITextField()
-        tf.textContentType = .password
-        tf.placeholder = "password"
-        tf.returnKeyType = .go
-        tf.isSecureTextEntry = true
-        tf.textColor = .black
-        return tf
-    }()
-    private let submitButton = UIButton(type: .system)
-    private let loadingIndicator = UIActivityIndicatorView(style: .medium)
-
-    var username: String { return usernameTF.text ?? "" }
-    var password: String { return passwordTF.text ?? "" }
-    var state: State = .normal {
-        didSet {
-            guard state != oldValue else { return }
-
-            let interactionEnabled = (state == .normal)
-            [usernameTF, passwordTF, submitButton].forEach { $0.isUserInteractionEnabled = interactionEnabled }
-
-            switch state {
-            case .normal:
-                submitButton.setTitle("log in", for: .normal)
-                loadingIndicator.isHidden = true
-                loadingIndicator.stopAnimating()
-            case .loading:
-                submitButton.setTitle("", for: .normal)
-                loadingIndicator.isHidden = false
-                loadingIndicator.startAnimating()
+                    SecureField(text: $password) {
+                        Text("password")
+                    }
+                    .textFieldStyle(TfStyle())
+                    .disabled(isLoading)
+                }
+                Button(action: logIn, label: {
+                    if isLoading {
+                        ProgressView()
+                    } else {
+                        Text("log in")
+                    }
+                })
+                .disabled(isLoading)
+                .padding(.horizontal, 24)
+                .padding(.vertical, 10)
+                .foregroundColor(.white)
+                .background(Color(uiColor: .darkOrange))
+                .clipShape(RoundedRectangle(cornerRadius: 5))
+                .padding(.top, 24)
+                Spacer()
+            }
+            .padding(.horizontal, 18)
+            .padding(.top, 36)
+            .alert(isPresented: $alertPresented, error: lastError) { _ in
+                Button("try again") {}
+            } message: { error in
+                Text(error.body)
             }
 
         }
     }
 
-    func setSubmitAction(_ action: @escaping () -> ()) {
-        submitButton.addAction(
-            UIAction { _ in action() },
-            for: .touchUpInside
-        )
+    private func logIn() {
+        guard isLoading == false else { return }
+
+        isLoading = true
+
+        let request = MyTfcBb_V1_LogInRequest.with {
+            let currentDevice = UIDevice.current
+
+            $0.username = username
+            $0.password = password
+            $0.deviceID = currentDevice.identifierForVendor!.uuidString
+            $0.deviceName = currentDevice.name
+        }
+
+        Task {
+            do {
+                let response = try await TfcApi.client.logIn(request)
+                KeychainManager.setBackendAssignedId(response.deviceID)
+                await SceneDelegate.shared.authenticated()
+            } catch let error {
+                if let status = error as? GRPCStatus, status.code == .unauthenticated {
+                    lastError = .invalidCredentials
+                } else {
+                    lastError = .unknownError(error)
+                }
+                alertPresented = true
+            }
+            isLoading = false
+        }
     }
 
-    init() {
-        super.init(frame: .zero)
-        backgroundColor = #colorLiteral(red: 1, green: 0.8509630561, blue: 0.5459031463, alpha: 1)
+    private func createTextField(field: Binding<String>, placeholder: String) -> some View {
+        TextField(text: field) {
+            Text(placeholder)
+        }
 
-        let titleLabel = UILabel()
-        let subtitleLabel = UILabel()
-        addSubview(titleLabel)
-        addSubview(subtitleLabel)
+    }
+}
 
-        let container = UIView()
-        container.addSubview(usernameTF)
-        container.addSubview(passwordTF)
-        container.addSubview(submitButton)
-        container.addSubview(loadingIndicator)
-        addSubview(container)
+struct TfStyle: TextFieldStyle {
+    func _body(configuration: TextField<Self._Label>) -> some View {
+            configuration
+            .padding(.vertical, 10)
+            .padding(.horizontal, 6)
+            .background(.white)
+            .clipShape(RoundedRectangle(cornerRadius: 5))
+            .foregroundColor(.black)
+        }
+}
 
-        styleTextField(usernameTF)
-        styleTextField(passwordTF)
-        styleTitle(titleLabel)
-        styleSubtitle(subtitleLabel)
-        styleSubmitButton(submitButton)
-        layout(titleLabel, subtitleLabel, container)
+enum LogInError: LocalizedError, Identifiable {
+    case invalidCredentials
+    case unknownError(Error)
+
+    var id: String { localizedDescription }
+
+    var errorDescription: String? {
+        switch self {
+        case .invalidCredentials: return "Invalid credentials"
+        case .unknownError: return "Unknown Error"
+        }
     }
 
-    private func styleTitle(_ label: UILabel) {
-        label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
-        label.text = "My TFC, But Better"
-        label.textColor = .black
-        label.textAlignment = .center
+    var body: String {
+        switch self {
+        case .invalidCredentials: return "That username/password combination is incorrect"
+        case .unknownError(let error): return error.localizedDescription
+        }
     }
+}
 
-    private func styleSubtitle(_ label: UILabel) {
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.textColor = .black
-        label.text = "Quickly see your packages and get notifications as they're delivered and collected."
-        label.numberOfLines = 0
-        label.textAlignment = .center
+private extension TextField {
+    func styledTextField() -> some View  {
+        padding(.horizontal, 6)
+
     }
+}
 
-    private func styleTextField(_ tf: UITextField) {
-        tf.layer.cornerRadius = 5
-        tf.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        tf.backgroundColor = .white
-        tf.leftView = UIView(frame: CGRectMake(0, 0, 15, 50))
-        tf.leftViewMode = .always
-    }
-
-    private func styleSubmitButton(_ submitButton: UIButton) {
-        submitButton.setTitle("log in", for: .normal)
-        submitButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        submitButton.setTitleColor(.white, for: .normal)
-        submitButton.backgroundColor = #colorLiteral(red: 0.995413363, green: 0.7451600432, blue: 0.2731953263, alpha: 1)
-        submitButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        submitButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        submitButton.layer.cornerRadius = 8
-    }
-
-    private func layout(_ titleLabel: UILabel, _ subtitleLabel: UILabel, _ container: UIView) {
-        disableAutolayoutConstraints()
-
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 18),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-
-            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-            subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            subtitleLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-
-            container.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 30),
-            container.centerXAnchor.constraint(equalTo: centerXAnchor),
-            container.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-
-            usernameTF.topAnchor.constraint(equalTo: container.safeAreaLayoutGuide.topAnchor),
-            usernameTF.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-            usernameTF.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-
-            passwordTF.topAnchor.constraint(equalTo: usernameTF.bottomAnchor, constant: 20),
-            passwordTF.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-            passwordTF.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-
-            submitButton.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            submitButton.topAnchor.constraint(equalTo: passwordTF.bottomAnchor, constant: 20),
-            submitButton.bottomAnchor.constraint(equalTo: container.bottomAnchor),
-
-            loadingIndicator.centerXAnchor.constraint(equalTo: submitButton.centerXAnchor),
-            loadingIndicator.centerYAnchor.constraint(equalTo: submitButton.centerYAnchor)
-        ])
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+#Preview {
+    LogInView()
 }

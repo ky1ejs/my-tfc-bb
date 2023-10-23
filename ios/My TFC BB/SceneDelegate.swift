@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -25,29 +26,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let rootViewController: UIViewController = {
             if KeychainManager.getBackendAssignedId() == nil {
-                return LogInViewController()
+                return UIHostingController(rootView: LogInView())
             } else {
-                return DeliveresViewController()
+                return UIHostingController(rootView: DeliveriesView(provider: DeliveriesFetcher()))
             }
         }()
 
         let window = UIWindow(windowScene: scene)
-        window.rootViewController = UINavigationController(rootViewController: rootViewController)
+        window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         self.window = window
     }
 
     func authenticated() {
-        animate(to: DeliveresViewController())
+        animate(to: UIHostingController(rootView: DeliveriesView(provider: DeliveriesFetcher())))
     }
 
     func logedOut() {
-        animate(to: LogInViewController())
-        UIApplication.shared.applicationIconBadgeNumber = 0
+        animate(to: UIHostingController(rootView: LogInView()))
+        UNUserNotificationCenter.current().setBadgeCount(0)
     }
 
     private func animate(to newRootViewController: UIViewController) {
-        window!.rootViewController = UINavigationController(rootViewController: newRootViewController)
+        window!.rootViewController = newRootViewController
         UIView.transition(with: window!, duration: 0.3, options: .transitionCrossDissolve, animations: {})
     }
 }
