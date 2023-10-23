@@ -55,11 +55,18 @@ struct SettingsView: View {
                 })
             }
         }
+        .alert(isPresented: $alertPresented, error: lastError) { error in
+            Text(error.localizedDescription)
+        } message: { error in
+            Text(error.body)
+        }
+
     }
 
     private func sendTestPush() {
+        guard isTestPushLoading == false else { return }
+        isTestPushLoading = true
         Task {
-            isTestPushLoading = true
             do {
                 let _ = try await TfcApi.client.sendTestPushNotication(Empty())
             } catch let error {
