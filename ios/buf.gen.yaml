@@ -3,6 +3,8 @@ plugins:
   - name: grpc-swift
     out: ./tfc-bb-core/generated/proto/
     strategy: all
+    opt:
+      - Visibility=Public
   - name: swift
     out: ./tfc-bb-core/generated/proto/
     strategy: all
