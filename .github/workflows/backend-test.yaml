@@ -2,6 +2,9 @@ name: Backend Test
 
 on:
   workflow_call:
+    paths: 
+      - 'backend/**'
+      - '.github/workflows/**'
 
 jobs:
   eslint:
