@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import tfc_bb_core
 
 struct DeliveryCellContent: View {
     private let delivery: Delivery
@@ -42,21 +43,13 @@ struct DeliveryCellContent: View {
     }
 
     private func image(for courier: Courier) -> UIImage {
-        let image: UIImage? = {
-            switch courier {
-            case .amazon: return UIImage(named: "Amazon")!
-            case .fedex: return UIImage(named: "FedEx")!
-            case .ups: return UIImage(named: "UPS")!
-            case .usps: return UIImage(named: "USPS")!
-            default: return nil
-            }
-        }()
-
-        if var identifiedImage = image  {
-
-            return identifiedImage
+        switch courier {
+        case .amazon: return UIImage(named: "Amazon")!
+        case .fedex: return UIImage(named: "FedEx")!
+        case .ups: return UIImage(named: "UPS")!
+        case .usps: return UIImage(named: "USPS")!
+        default: return UIImage(named: "Package")!
         }
-        return UIImage(named: "Package")!
     }
 }
 

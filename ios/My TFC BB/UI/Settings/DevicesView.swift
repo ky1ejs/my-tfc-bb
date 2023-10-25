@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import tfc_bb_core
 
 protocol DevicesLoader {
     func loadDevices() async throws -> [Device]
@@ -13,7 +14,7 @@ protocol DevicesLoader {
 
 struct DeviceFetcher: DevicesLoader {
     func loadDevices() async throws -> [Device] {
-        let response = try await TfcApi.client.getDevices(Empty())
+        let response = try await TfcApi.shared.client.getDevices(Empty())
         return response.devices
     }
 }
@@ -63,7 +64,7 @@ struct DevicesView: View {
 
     private func fetchData() async {
         do {
-            let response = try await TfcApi.client.getDevices(Empty())
+            let response = try await TfcApi.shared.client.getDevices(Empty())
             state = .loaded(response.devices)
         } catch let error {
             state = .error(error)

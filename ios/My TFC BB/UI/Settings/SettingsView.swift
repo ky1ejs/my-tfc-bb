@@ -6,12 +6,7 @@
 //
 
 import SwiftUI
-
-//struct SendTestPushRow: View {
-//    var body: some View {
-//
-//    }
-//}
+import tfc_bb_core
 
 struct TestPushError: LocalizedError {
     let error: Error
@@ -68,7 +63,7 @@ struct SettingsView: View {
         isTestPushLoading = true
         Task {
             do {
-                let _ = try await TfcApi.client.sendTestPushNotication(Empty())
+                let _ = try await TfcApi.shared.client.sendTestPushNotication(Empty())
             } catch let error {
                 lastError = TestPushError(error: error)
                 alertPresented = true
@@ -79,9 +74,9 @@ struct SettingsView: View {
 
     private func logOut() {
         Task {
-            let _ = try! await TfcApi.client.logOut(Empty())
+            let _ = try! await TfcApi.shared.client.logOut(Empty())
             KeychainManager.clearKeyain()
-            await SceneDelegate.shared.logedOut()
+            await SceneDelegate.shared?.logedOut()
         }
     }
 }

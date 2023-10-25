@@ -7,14 +7,15 @@
 
 import UIKit
 import SwiftUI
+import tfc_bb_core
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    static var shared: SceneDelegate {
+    static var shared: SceneDelegate? {
         let windowScene = UIApplication.shared.connectedScenes.first as! UIWindowScene
-        return windowScene.delegate as! SceneDelegate
+        return windowScene.delegate as? SceneDelegate
     }
 
 

@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
     static var lightOrange: UIColor {
         UIColor(hue:0.109, saturation:0.431, brightness:1, alpha:1)
     }

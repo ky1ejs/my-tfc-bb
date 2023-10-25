@@ -6,14 +6,53 @@
 //
 
 import UIKit
+import tfc_bb_core
+import Combine
+import WidgetKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    private var bag: Set<AnyCancellable>?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UNUserNotificationCenter.current().delegate = self
+
+        let authenticationSub = TfcApi.shared.$authenticationState.sink { status in
+            guard status == .notAuthenticated else { return }
+            DispatchQueue.main.async {
+                guard let sceneDelegate = SceneDelegate.shared else { return }
+                guard let rootController = sceneDelegate.window?.rootViewController else { return }
+
+                let topViewController: UIViewController = {
+                    var topViewController = rootController
+
+                    while let presentedVC = topViewController.presentedViewController {
+                        topViewController = presentedVC
+                    }
+
+                    return topViewController
+                }()
+
+
+                let alert = UIAlertController(title: "Authentication problem 😕", message: "There's a problem with your log in details (perhaps you changed your password?).\n\nPlease log in again.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: { _ in
+                    sceneDelegate.logedOut()
+                }))
+                topViewController.present(alert, animated: true)
+            }
+        }
+
+        let notificationSub = TfcApi.shared.$latestDeliveryCount.sink { deliveryCount in
+            DispatchQueue.main.async {
+                UNUserNotificationCenter.current().setBadgeCount(Int(deliveryCount))
+            }
+        }
+
+        bag?.insert(authenticationSub)
+        bag?.insert(notificationSub)
+
         return true
     }
 
@@ -60,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 #endif
                 $0.platform = .ios
             }
-            let _ = try? await TfcApi.client.updatePushToken(update)
+            let _ = try? await TfcApi.shared.client.updatePushToken(update)
         }
     }
 

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import tfc_bb_core
+import WidgetKit
 
 protocol DeliveriesProvider {
     func provideDeliveries() async throws -> [Delivery]
@@ -76,6 +78,7 @@ struct DeliveriesView: View {
     func refreshData() async {
         do {
             let deliveries = try await provider.provideDeliveries()
+            WidgetCenter.shared.reloadAllTimelines()
             withAnimation {
                 state = .loaded(deliveries)
             }
@@ -86,7 +89,7 @@ struct DeliveriesView: View {
 }
 
 extension Delivery: Identifiable {
-    typealias ID = String
+    public typealias ID = String
 }
 
 struct FakeProvider: DeliveriesProvider {
