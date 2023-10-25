@@ -104,8 +104,8 @@ struct SmallWidget : View {
             switch entry.state {
             case .notLoggedIn: Text("log in")
             case .error(let error):
-                Text("❗️").font(.title2)
-                Text(error.localizedDescription)
+                Text("❗️").font(.title2).foregroundStyle(.black)
+                Text(error.localizedDescription).foregroundStyle(.black)
             case .latestData(let deliveryCount):
                 HStack {
                     VStack(alignment: .leading) {
@@ -113,11 +113,13 @@ struct SmallWidget : View {
                         if deliveryCount == 0 {
                             Text("✅")
                                 .font(.title)
+                                .foregroundStyle(.black)
                             Text("all pacakages collected")
                                 .font(.footnote)
                                 .foregroundStyle(Color(uiColor: .darkGray))
                         } else {
                             Text("\(deliveryCount)").font(.title)
+                                .foregroundStyle(.black)
                             Text("ready for you to collect")
                                 .font(.footnote)
                                 .foregroundStyle(Color(uiColor: .darkGray))
