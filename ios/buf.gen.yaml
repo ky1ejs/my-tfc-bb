@@ -1,9 +1,11 @@
 version: v1
 plugins:
   - name: grpc-swift
-    out: ./My TFC BB/generated/proto/
+    out: ./tfc-bb-core/generated/proto/
     strategy: all
   - name: swift
-    out: ./My TFC BB/generated/proto/
+    out: ./tfc-bb-core/generated/proto/
     strategy: all
+    opt:
+      - Visibility=Public
 

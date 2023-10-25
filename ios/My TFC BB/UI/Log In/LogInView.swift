@@ -7,6 +7,7 @@
 
 import SwiftUI
 import GRPC
+import tfc_bb_core
 
 struct LogInView: View {
     @State private var username = ""
@@ -89,9 +90,9 @@ struct LogInView: View {
 
         Task {
             do {
-                let response = try await TfcApi.client.logIn(request)
+                let response = try await TfcApi.shared.client.logIn(request)
                 KeychainManager.setBackendAssignedId(response.deviceID)
-                await SceneDelegate.shared.authenticated()
+                await SceneDelegate.shared?.authenticated()
             } catch let error {
                 if let status = error as? GRPCStatus, status.code == .unauthenticated {
                     lastError = .invalidCredentials

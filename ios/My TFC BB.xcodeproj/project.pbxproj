@@ -7,29 +7,98 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93281E9B2AE73C72005CBD17 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93281E9A2AE73C72005CBD17 /* WidgetKit.framework */; };
+		93281E9D2AE73C72005CBD17 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93281E9C2AE73C72005CBD17 /* SwiftUI.framework */; };
+		93281EA02AE73C72005CBD17 /* My_TFC_BB_WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93281E9F2AE73C72005CBD17 /* My_TFC_BB_WidgetBundle.swift */; };
+		93281EA22AE73C72005CBD17 /* My_TFC_BB_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93281EA12AE73C72005CBD17 /* My_TFC_BB_Widget.swift */; };
+		93281EA42AE73C73005CBD17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93281EA32AE73C73005CBD17 /* Assets.xcassets */; };
+		93281EA82AE73C73005CBD17 /* My TFC BB WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 93281E992AE73C72005CBD17 /* My TFC BB WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		93281EB62AE74579005CBD17 /* tfc_bb_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 93281EB52AE74579005CBD17 /* tfc_bb_core.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		93281EB92AE74579005CBD17 /* tfc_bb_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93281EB32AE74578005CBD17 /* tfc_bb_core.framework */; };
+		93281EBA2AE74579005CBD17 /* tfc_bb_core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 93281EB32AE74578005CBD17 /* tfc_bb_core.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		93281EC12AE74800005CBD17 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 93281EC02AE74800005CBD17 /* KeychainAccess */; };
+		93281EC32AE74800005CBD17 /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 93281EC22AE74800005CBD17 /* SwiftProtobuf */; };
+		93281EC62AE7484A005CBD17 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937AFC622938664F004833FF /* Types.swift */; };
+		93281EC72AE7484A005CBD17 /* TfcApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937AFC602938299D004833FF /* TfcApiClient.swift */; };
+		93281EC82AE748E6005CBD17 /* my_tfc_bb.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB54182940EF2A0014ECAF /* my_tfc_bb.grpc.swift */; };
+		93281EC92AE748E6005CBD17 /* my_tfc_bb.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB54172940EF2A0014ECAF /* my_tfc_bb.pb.swift */; };
+		93281ECA2AE75C67005CBD17 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361563A29147C30001B0831 /* KeychainManager.swift */; };
+		93281ECC2AE76698005CBD17 /* tfc_bb_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93281EB32AE74578005CBD17 /* tfc_bb_core.framework */; };
+		93281ED82AE76BED005CBD17 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 93281ED72AE76BED005CBD17 /* GRPC */; };
 		932B86262AE5ED9C00C8445A /* DeliveryCellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B86252AE5ED9C00C8445A /* DeliveryCellContent.swift */; };
 		932B86282AE5EF2E00C8445A /* DeliveriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B86272AE5EF2E00C8445A /* DeliveriesView.swift */; };
 		932B862A2AE5F1A000C8445A /* DeliveriesFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B86292AE5F1A000C8445A /* DeliveriesFetcher.swift */; };
 		932B862C2AE6010600C8445A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B862B2AE6010600C8445A /* SettingsView.swift */; };
 		932B862E2AE603BD00C8445A /* DevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B862D2AE603BD00C8445A /* DevicesView.swift */; };
 		932B86302AE606BA00C8445A /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B862F2AE606BA00C8445A /* LogInView.swift */; };
-		932B86322AE625D700C8445A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B86312AE625D700C8445A /* Color.swift */; };
-		9361563929147C20001B0831 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 9361563829147C20001B0831 /* KeychainAccess */; };
-		9361563B29147C30001B0831 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361563A29147C30001B0831 /* KeychainManager.swift */; };
-		937AFC5A29370DA0004833FF /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 937AFC5929370DA0004833FF /* SwiftProtobuf */; };
-		937AFC5F2938273A004833FF /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 937AFC5E2938273A004833FF /* GRPC */; };
-		937AFC612938299D004833FF /* TfcApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937AFC602938299D004833FF /* TfcApiClient.swift */; };
-		937AFC632938664F004833FF /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937AFC622938664F004833FF /* Types.swift */; };
-		93DB54192940EF2A0014ECAF /* my_tfc_bb.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB54172940EF2A0014ECAF /* my_tfc_bb.pb.swift */; };
-		93DB541A2940EF2A0014ECAF /* my_tfc_bb.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB54182940EF2A0014ECAF /* my_tfc_bb.grpc.swift */; };
+		9330C5632AE8BD9E0097B924 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B86312AE625D700C8445A /* Color.swift */; };
 		93EE6A3B291098D70012C716 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A3A291098D70012C716 /* AppDelegate.swift */; };
 		93EE6A3D291098D70012C716 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A3C291098D70012C716 /* SceneDelegate.swift */; };
 		93EE6A44291098D80012C716 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93EE6A43291098D80012C716 /* Assets.xcassets */; };
 		93EE6A47291098D80012C716 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93EE6A45291098D80012C716 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		93281EA62AE73C73005CBD17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93EE6A2F291098D70012C716 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 93281E982AE73C72005CBD17;
+			remoteInfo = "My TFC BB WidgetExtension";
+		};
+		93281EB72AE74579005CBD17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93EE6A2F291098D70012C716 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 93281EB22AE74578005CBD17;
+			remoteInfo = "tfc-bb-core";
+		};
+		93281ECE2AE76698005CBD17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93EE6A2F291098D70012C716 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 93281EB22AE74578005CBD17;
+			remoteInfo = "tfc-bb-core";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		93281EA92AE73C73005CBD17 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				93281EA82AE73C73005CBD17 /* My TFC BB WidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93281EBF2AE74579005CBD17 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				93281EBA2AE74579005CBD17 /* tfc_bb_core.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		93074046291A859C0027B6B1 /* My TFC BB.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "My TFC BB.entitlements"; sourceTree = "<group>"; };
+		93281E992AE73C72005CBD17 /* My TFC BB WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "My TFC BB WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93281E9A2AE73C72005CBD17 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		93281E9C2AE73C72005CBD17 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		93281E9F2AE73C72005CBD17 /* My_TFC_BB_WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = My_TFC_BB_WidgetBundle.swift; sourceTree = "<group>"; };
+		93281EA12AE73C72005CBD17 /* My_TFC_BB_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = My_TFC_BB_Widget.swift; sourceTree = "<group>"; };
+		93281EA32AE73C73005CBD17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		93281EA52AE73C73005CBD17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93281EB32AE74578005CBD17 /* tfc_bb_core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = tfc_bb_core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		93281EB52AE74579005CBD17 /* tfc_bb_core.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tfc_bb_core.h; sourceTree = "<group>"; };
+		93281ECB2AE75F1F005CBD17 /* My TFC BB WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "My TFC BB WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		932B86252AE5ED9C00C8445A /* DeliveryCellContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryCellContent.swift; sourceTree = "<group>"; };
 		932B86272AE5EF2E00C8445A /* DeliveriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveriesView.swift; sourceTree = "<group>"; };
 		932B86292AE5F1A000C8445A /* DeliveriesFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveriesFetcher.swift; sourceTree = "<group>"; };
@@ -52,19 +121,62 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		93281E962AE73C72005CBD17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93281E9D2AE73C72005CBD17 /* SwiftUI.framework in Frameworks */,
+				93281E9B2AE73C72005CBD17 /* WidgetKit.framework in Frameworks */,
+				93281ECC2AE76698005CBD17 /* tfc_bb_core.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93281EB02AE74578005CBD17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93281EC12AE74800005CBD17 /* KeychainAccess in Frameworks */,
+				93281EC32AE74800005CBD17 /* SwiftProtobuf in Frameworks */,
+				93281ED82AE76BED005CBD17 /* GRPC in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93EE6A34291098D70012C716 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9361563929147C20001B0831 /* KeychainAccess in Frameworks */,
-				937AFC5A29370DA0004833FF /* SwiftProtobuf in Frameworks */,
-				937AFC5F2938273A004833FF /* GRPC in Frameworks */,
+				93281EB92AE74579005CBD17 /* tfc_bb_core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		93281E9E2AE73C72005CBD17 /* My TFC BB Widget */ = {
+			isa = PBXGroup;
+			children = (
+				93281E9F2AE73C72005CBD17 /* My_TFC_BB_WidgetBundle.swift */,
+				93281EA12AE73C72005CBD17 /* My_TFC_BB_Widget.swift */,
+				93281EA32AE73C73005CBD17 /* Assets.xcassets */,
+				93281EA52AE73C73005CBD17 /* Info.plist */,
+				93281ECB2AE75F1F005CBD17 /* My TFC BB WidgetExtension.entitlements */,
+			);
+			path = "My TFC BB Widget";
+			sourceTree = "<group>";
+		};
+		93281EB42AE74578005CBD17 /* tfc-bb-core */ = {
+			isa = PBXGroup;
+			children = (
+				932B86312AE625D700C8445A /* Color.swift */,
+				9361563A29147C30001B0831 /* KeychainManager.swift */,
+				937AFC602938299D004833FF /* TfcApiClient.swift */,
+				937AFC622938664F004833FF /* Types.swift */,
+				93DB54132940EF2A0014ECAF /* generated */,
+				93281EB52AE74579005CBD17 /* tfc_bb_core.h */,
+			);
+			path = "tfc-bb-core";
+			sourceTree = "<group>";
+		};
 		935DC5DD291B2FCC00DB3F39 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,7 +218,6 @@
 		9361564B2914807F001B0831 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				932B86312AE625D700C8445A /* Color.swift */,
 				935DC5E0291B300800DB3F39 /* Settings */,
 				935DC5DF291B300100DB3F39 /* Deliveries */,
 				935DC5DE291B2FF800DB3F39 /* Log In */,
@@ -160,6 +271,8 @@
 			children = (
 				937AFC64293D973D004833FF /* ci_scripts */,
 				93EE6A39291098D70012C716 /* My TFC BB */,
+				93281E9E2AE73C72005CBD17 /* My TFC BB Widget */,
+				93281EB42AE74578005CBD17 /* tfc-bb-core */,
 				93EE6A38291098D70012C716 /* Products */,
 				93FEA4F32957725000F619C3 /* Frameworks */,
 			);
@@ -169,6 +282,8 @@
 			isa = PBXGroup;
 			children = (
 				93EE6A37291098D70012C716 /* My TFC BB.app */,
+				93281E992AE73C72005CBD17 /* My TFC BB WidgetExtension.appex */,
+				93281EB32AE74578005CBD17 /* tfc_bb_core.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -177,35 +292,77 @@
 			isa = PBXGroup;
 			children = (
 				93EE6A3A291098D70012C716 /* AppDelegate.swift */,
-				9361563A29147C30001B0831 /* KeychainManager.swift */,
 				93EE6A3C291098D70012C716 /* SceneDelegate.swift */,
-				93DB54132940EF2A0014ECAF /* generated */,
 				935DC5DD291B2FCC00DB3F39 /* Resources */,
-				93EE6A522910B0170012C716 /* TFC API */,
 				9361564B2914807F001B0831 /* UI */,
 			);
 			path = "My TFC BB";
 			sourceTree = "<group>";
 		};
-		93EE6A522910B0170012C716 /* TFC API */ = {
-			isa = PBXGroup;
-			children = (
-				937AFC602938299D004833FF /* TfcApiClient.swift */,
-				937AFC622938664F004833FF /* Types.swift */,
-			);
-			path = "TFC API";
-			sourceTree = "<group>";
-		};
 		93FEA4F32957725000F619C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93281E9A2AE73C72005CBD17 /* WidgetKit.framework */,
+				93281E9C2AE73C72005CBD17 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		93281EAE2AE74578005CBD17 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93281EB62AE74579005CBD17 /* tfc_bb_core.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		93281E982AE73C72005CBD17 /* My TFC BB WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93281EAD2AE73C73005CBD17 /* Build configuration list for PBXNativeTarget "My TFC BB WidgetExtension" */;
+			buildPhases = (
+				93281E952AE73C72005CBD17 /* Sources */,
+				93281E962AE73C72005CBD17 /* Frameworks */,
+				93281E972AE73C72005CBD17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				93281ECF2AE76698005CBD17 /* PBXTargetDependency */,
+			);
+			name = "My TFC BB WidgetExtension";
+			productName = "My TFC BB WidgetExtension";
+			productReference = 93281E992AE73C72005CBD17 /* My TFC BB WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		93281EB22AE74578005CBD17 /* tfc-bb-core */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93281EBB2AE74579005CBD17 /* Build configuration list for PBXNativeTarget "tfc-bb-core" */;
+			buildPhases = (
+				93281EAE2AE74578005CBD17 /* Headers */,
+				93281EAF2AE74578005CBD17 /* Sources */,
+				93281EB02AE74578005CBD17 /* Frameworks */,
+				93281EB12AE74578005CBD17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "tfc-bb-core";
+			packageProductDependencies = (
+				93281EC02AE74800005CBD17 /* KeychainAccess */,
+				93281EC22AE74800005CBD17 /* SwiftProtobuf */,
+				93281ED72AE76BED005CBD17 /* GRPC */,
+			);
+			productName = "tfc-bb-core";
+			productReference = 93281EB32AE74578005CBD17 /* tfc_bb_core.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		93EE6A36291098D70012C716 /* My TFC BB */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 93EE6A4B291098D80012C716 /* Build configuration list for PBXNativeTarget "My TFC BB" */;
@@ -213,16 +370,17 @@
 				93EE6A33291098D70012C716 /* Sources */,
 				93EE6A34291098D70012C716 /* Frameworks */,
 				93EE6A35291098D70012C716 /* Resources */,
+				93281EA92AE73C73005CBD17 /* Embed Foundation Extensions */,
+				93281EBF2AE74579005CBD17 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				93281EA72AE73C73005CBD17 /* PBXTargetDependency */,
+				93281EB82AE74579005CBD17 /* PBXTargetDependency */,
 			);
 			name = "My TFC BB";
 			packageProductDependencies = (
-				9361563829147C20001B0831 /* KeychainAccess */,
-				937AFC5929370DA0004833FF /* SwiftProtobuf */,
-				937AFC5E2938273A004833FF /* GRPC */,
 			);
 			productName = "My TFC BB";
 			productReference = 93EE6A37291098D70012C716 /* My TFC BB.app */;
@@ -235,9 +393,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					93281E982AE73C72005CBD17 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					93281EB22AE74578005CBD17 = {
+						CreatedOnToolsVersion = 15.0;
+					};
 					93EE6A36291098D70012C716 = {
 						CreatedOnToolsVersion = 14.0.1;
 					};
@@ -262,11 +426,28 @@
 			projectRoot = "";
 			targets = (
 				93EE6A36291098D70012C716 /* My TFC BB */,
+				93281E982AE73C72005CBD17 /* My TFC BB WidgetExtension */,
+				93281EB22AE74578005CBD17 /* tfc-bb-core */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		93281E972AE73C72005CBD17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93281EA42AE73C73005CBD17 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93281EB12AE74578005CBD17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93EE6A35291098D70012C716 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -279,6 +460,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		93281E952AE73C72005CBD17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93281EA02AE73C72005CBD17 /* My_TFC_BB_WidgetBundle.swift in Sources */,
+				93281EA22AE73C72005CBD17 /* My_TFC_BB_Widget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93281EAF2AE74578005CBD17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93281EC62AE7484A005CBD17 /* Types.swift in Sources */,
+				93281EC72AE7484A005CBD17 /* TfcApiClient.swift in Sources */,
+				93281EC92AE748E6005CBD17 /* my_tfc_bb.pb.swift in Sources */,
+				93281EC82AE748E6005CBD17 /* my_tfc_bb.grpc.swift in Sources */,
+				93281ECA2AE75C67005CBD17 /* KeychainManager.swift in Sources */,
+				9330C5632AE8BD9E0097B924 /* Color.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93EE6A33291098D70012C716 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -287,20 +490,32 @@
 				932B86262AE5ED9C00C8445A /* DeliveryCellContent.swift in Sources */,
 				932B862C2AE6010600C8445A /* SettingsView.swift in Sources */,
 				932B862E2AE603BD00C8445A /* DevicesView.swift in Sources */,
-				937AFC612938299D004833FF /* TfcApiClient.swift in Sources */,
 				932B86282AE5EF2E00C8445A /* DeliveriesView.swift in Sources */,
-				9361563B29147C30001B0831 /* KeychainManager.swift in Sources */,
 				932B86302AE606BA00C8445A /* LogInView.swift in Sources */,
-				937AFC632938664F004833FF /* Types.swift in Sources */,
-				932B86322AE625D700C8445A /* Color.swift in Sources */,
 				93EE6A3B291098D70012C716 /* AppDelegate.swift in Sources */,
-				93DB541A2940EF2A0014ECAF /* my_tfc_bb.grpc.swift in Sources */,
-				93DB54192940EF2A0014ECAF /* my_tfc_bb.pb.swift in Sources */,
 				93EE6A3D291098D70012C716 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		93281EA72AE73C73005CBD17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 93281E982AE73C72005CBD17 /* My TFC BB WidgetExtension */;
+			targetProxy = 93281EA62AE73C73005CBD17 /* PBXContainerItemProxy */;
+		};
+		93281EB82AE74579005CBD17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 93281EB22AE74578005CBD17 /* tfc-bb-core */;
+			targetProxy = 93281EB72AE74579005CBD17 /* PBXContainerItemProxy */;
+		};
+		93281ECF2AE76698005CBD17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 93281EB22AE74578005CBD17 /* tfc-bb-core */;
+			targetProxy = 93281ECE2AE76698005CBD17 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		93EE6A45291098D80012C716 /* LaunchScreen.storyboard */ = {
@@ -314,6 +529,425 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		93281EAA2AE73C73005CBD17 /* Debug - localhost */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "My TFC BB WidgetExtension.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = X2TBSUCASC;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "My TFC BB Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "My TFC BB Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.kylejs.My-TFC-BB.My-TFC-BB-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug - localhost";
+		};
+		93281EAB2AE73C73005CBD17 /* Debug - production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "My TFC BB WidgetExtension.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = X2TBSUCASC;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "My TFC BB Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "My TFC BB Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.kylejs.My-TFC-BB.My-TFC-BB-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug - production";
+		};
+		93281EAC2AE73C73005CBD17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "My TFC BB WidgetExtension.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X2TBSUCASC;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "My TFC BB Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "My TFC BB Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.kylejs.My-TFC-BB.My-TFC-BB-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		93281EBC2AE74579005CBD17 /* Debug - localhost */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = X2TBSUCASC;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.kylejs.tfc-bb-core";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = "Debug - localhost";
+		};
+		93281EBD2AE74579005CBD17 /* Debug - production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = X2TBSUCASC;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.kylejs.tfc-bb-core";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = "Debug - production";
+		};
+		93281EBE2AE74579005CBD17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = X2TBSUCASC;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.kylejs.tfc-bb-core";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		937AFC66293D9942004833FF /* Debug - production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -379,6 +1013,7 @@
 		937AFC67293D9942004833FF /* Debug - production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "My TFC BB/Resources/My TFC BB.entitlements";
@@ -529,6 +1164,7 @@
 		93EE6A4C291098D80012C716 /* Debug - localhost */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "My TFC BB/Resources/My TFC BB.entitlements";
@@ -559,6 +1195,7 @@
 		93EE6A4D291098D80012C716 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "My TFC BB/Resources/My TFC BB.entitlements";
@@ -589,6 +1226,26 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		93281EAD2AE73C73005CBD17 /* Build configuration list for PBXNativeTarget "My TFC BB WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93281EAA2AE73C73005CBD17 /* Debug - localhost */,
+				93281EAB2AE73C73005CBD17 /* Debug - production */,
+				93281EAC2AE73C73005CBD17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		93281EBB2AE74579005CBD17 /* Build configuration list for PBXNativeTarget "tfc-bb-core" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93281EBC2AE74579005CBD17 /* Debug - localhost */,
+				93281EBD2AE74579005CBD17 /* Debug - production */,
+				93281EBE2AE74579005CBD17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		93EE6A32291098D70012C716 /* Build configuration list for PBXProject "My TFC BB" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -639,17 +1296,17 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9361563829147C20001B0831 /* KeychainAccess */ = {
+		93281EC02AE74800005CBD17 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9361563729147C20001B0831 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
 		};
-		937AFC5929370DA0004833FF /* SwiftProtobuf */ = {
+		93281EC22AE74800005CBD17 /* SwiftProtobuf */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 937AFC5829370DA0004833FF /* XCRemoteSwiftPackageReference "swift-protobuf" */;
 			productName = SwiftProtobuf;
 		};
-		937AFC5E2938273A004833FF /* GRPC */ = {
+		93281ED72AE76BED005CBD17 /* GRPC */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 937AFC5D2938273A004833FF /* XCRemoteSwiftPackageReference "grpc-swift" */;
 			productName = GRPC;

@@ -11,9 +11,19 @@ import NIO
 import SwiftProtobuf
 import UIKit
 
-class TfcApi {
+public enum AuthenticationState {
+    case authenticated, notAuthenticated
+}
+
+public class TfcApi {
+    @Published public fileprivate(set) var authenticationState: AuthenticationState
+    @Published public fileprivate(set) var latestDeliveryCount = 0
 
     static private var clientAndChannel: (TfcApiClient, ChannelProvider)?
+
+    init() {
+        authenticationState = KeychainManager.getBackendAssignedId() != nil ? .authenticated : .notAuthenticated
+    }
 
     private class ChannelProvider {
         private let group: EventLoopGroup
@@ -37,13 +47,15 @@ class TfcApi {
         }
     }
 
-    static var client: TfcApiClient {
-        if let c = clientAndChannel { return c.0 }
+    public var client: TfcApiClient {
+        if let c = type(of: self).clientAndChannel { return c.0 }
         let channelProvider = try! ChannelProvider()
         let client = TfcApiClient(channel: channelProvider.connection, interceptors: InteceptorFactory())
-        clientAndChannel = (client, channelProvider)
+        type(of: self).clientAndChannel = (client, channelProvider)
         return client
     }
+
+    public static var shared = TfcApi()
 }
 
 struct InteceptorFactory: MyTfcBb_V1_MyTfcClientInterceptorFactoryProtocol {
@@ -93,6 +105,7 @@ class AuthInterceptor<Request, Response>: ClientInterceptor<Request, Response> {
 }
 
 class UnauthenticatedInteceptor<Request, Response>: ClientInterceptor<Request, Response> {
+
     override func receive(_ part: GRPCClientResponsePart<Response>, context: ClientInterceptorContext<Request, Response>) {
         defer { context.receive(part) }
 
@@ -100,25 +113,7 @@ class UnauthenticatedInteceptor<Request, Response>: ClientInterceptor<Request, R
             return
         }
 
-        DispatchQueue.main.async {
-            let topViewController: UIViewController = {
-                let root = SceneDelegate.shared.window!.rootViewController!
-                var topViewController = root
-
-                while let presentedVC = topViewController.presentedViewController {
-                    topViewController = presentedVC
-                }
-
-                return topViewController
-            }()
-
-
-            let alert = UIAlertController(title: "Authentication problem 😕", message: "There's a problem with your log in details (perhaps you changed your password?).\n\nPlease log in again.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: { _ in
-                SceneDelegate.shared.logedOut()
-            }))
-            topViewController.present(alert, animated: true)
-        }
+        TfcApi.shared.authenticationState = .notAuthenticated
     }
 }
 
@@ -128,8 +123,6 @@ class DeliveriesInteceptor: ClientInterceptor<MyTfcBb_V1_GetDeliveriesRequest, M
 
         guard case let .message(response) = part else { return }
 
-        DispatchQueue.main.async {
-            UNUserNotificationCenter.current().setBadgeCount(Int(response.uncollectedCount))
-        }
+        TfcApi.shared.latestDeliveryCount = Int(response.uncollectedCount)
     }
 }
