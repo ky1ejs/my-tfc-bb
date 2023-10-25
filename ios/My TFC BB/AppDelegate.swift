@@ -12,14 +12,14 @@ import WidgetKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    private var bag: Set<AnyCancellable>?
+    private var bag = Set<AnyCancellable>()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UNUserNotificationCenter.current().delegate = self
 
-        let authenticationSub = TfcApi.shared.$authenticationState.sink { status in
+        TfcApi.shared.$authenticationState.sink { status in
             guard status == .notAuthenticated else { return }
             DispatchQueue.main.async {
                 guard let sceneDelegate = SceneDelegate.shared else { return }
@@ -42,16 +42,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }))
                 topViewController.present(alert, animated: true)
             }
-        }
+        }.store(in: &bag)
 
-        let notificationSub = TfcApi.shared.$latestDeliveryCount.sink { deliveryCount in
-            DispatchQueue.main.async {
+        TfcApi.shared.$latestDeliveryCount
+            .receive(on: DispatchQueue.main)
+            .sink { deliveryCount in
                 UNUserNotificationCenter.current().setBadgeCount(Int(deliveryCount))
-            }
-        }
-
-        bag?.insert(authenticationSub)
-        bag?.insert(notificationSub)
+        }.store(in: &bag)
 
         return true
     }
