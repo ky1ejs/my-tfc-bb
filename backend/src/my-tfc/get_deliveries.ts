@@ -56,15 +56,15 @@ export async function fetchAndUpdateDeliveries(user: User) {
     getDeliveries(user),
   ]);
 
-  const [uncollectedDeliveries, latestTfcDeliveries] = data;
+  const [uncollectedInDatabase, uncollectedInTFC] = data;
 
-  const latestDeliveryIds = latestTfcDeliveries.map((d) => d.id);
-  const collectedDeliveries = uncollectedDeliveries.filter(
+  const latestDeliveryIds = uncollectedInTFC.map((d) => d.id);
+  const collectedDeliveries = uncollectedInDatabase.filter(
     (d) => !latestDeliveryIds.includes(d.tfc_id)
   );
 
-  const uncollectedDeliveryIds = uncollectedDeliveries.map((d) => d.tfc_id);
-  const newDeliveries = latestTfcDeliveries.filter(
+  const uncollectedDeliveryIds = uncollectedInDatabase.map((d) => d.tfc_id);
+  const newDeliveries = uncollectedInTFC.filter(
     (d) => !uncollectedDeliveryIds.includes(d.id)
   );
 
@@ -74,8 +74,8 @@ export async function fetchAndUpdateDeliveries(user: User) {
       collected_at: new Date(),
     },
   });
-  const createDeliveries = prisma.$transaction(
-    latestTfcDeliveries.map((d) =>
+  const upsertUncollectedDeliveries = prisma.$transaction(
+    uncollectedInTFC.map((d) =>
       prisma.delivery.upsert({
         where: { tfc_id_user_id: { user_id: user.id, tfc_id: d.id } },
         create: {
@@ -91,13 +91,13 @@ export async function fetchAndUpdateDeliveries(user: User) {
       })
     )
   );
-  const [latestDeliveries] = await Promise.all([
-    createDeliveries,
+  const [uncollectedDeliveries] = await Promise.all([
+    upsertUncollectedDeliveries,
     setCollected,
   ]);
   return {
     collectedDeliveries,
-    latestDeliveries,
+    uncollectedDeliveries,
     newDeliveries,
     user,
   };

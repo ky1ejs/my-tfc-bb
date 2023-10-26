@@ -85,19 +85,31 @@ async function processUpdatesForUser(user: User): Promise<void> {
 
 async function sendNotificationsForUpdates(update: {
   collectedDeliveries: Delivery[];
-  latestDeliveries: Delivery[];
+  uncollectedDeliveries: Delivery[];
   newDeliveries: TfcDelivery[];
   user: User;
 }): Promise<void> {
   const promises: Promise<void>[] = [];
 
   const collectedPackages = update.collectedDeliveries.length;
-  const currentPackageCount = update.latestDeliveries.length;
+  const currentPackageCount = update.uncollectedDeliveries.length;
   if (collectedPackages > 0) {
-    const title = `${collectedPackages} package${
-      collectedPackages > 1 ? "s" : ""
-    } collected`;
-    const body = `${currentPackageCount} remain to be collected`;
+    let title: string;
+    let body: string;
+
+    if (currentPackageCount <= 0) {
+      title = "All packages collected";
+      body =
+        collectedPackages > 1
+          ? `✅ ${collectedPackages} packages have been collected`
+          : "✅ 1 package has been collected";
+    } else {
+      title = `${collectedPackages} package${
+        collectedPackages > 1 ? "s" : ""
+      } collected`;
+      body = `${currentPackageCount} remain to be collected`;
+    }
+
     promises.push(
       pushToUsersDevices(update.user, {
         title,

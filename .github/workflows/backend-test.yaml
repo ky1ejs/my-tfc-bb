@@ -7,7 +7,7 @@ jobs:
   check-paths: 
     runs-on: ubuntu-latest
     steps:
-      - uses: ky1ejs/check-diff-paths-action@8ed0573
+      - uses: ky1ejs/check-diff-paths-action@v0.1.0
         with:
           paths: |-
             backend/*
