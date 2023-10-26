@@ -2,13 +2,22 @@ name: Backend Test
 
 on:
   workflow_call:
-    paths: 
-      - 'backend/**'
-      - '.github/workflows/**'
 
 jobs:
+  check-paths: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ky1ejs/check-diff-paths-action@v0.1
+        with:
+          paths: -|
+            backend/**
+            .github/workflows/**
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
   eslint:
     runs-on: ubuntu-latest
+    depends-on: check-paths
+    if: ${{ steps.check-paths.outputs.has-changes }}
     defaults:
       run:
         working-directory: ./backend
@@ -27,6 +36,8 @@ jobs:
 
   buf-lint:
     runs-on: ubuntu-latest
+    depends-on: check-paths
+    if: ${{ steps.check-paths.outputs.has-changes }}
     defaults:
       run:
         working-directory: ./backend
@@ -41,6 +52,8 @@ jobs:
 
   run-tests:
     runs-on: ubuntu-latest
+    depends-on: check-paths
+    if: ${{ steps.check-paths.outputs.has-changes }}
     defaults:
       run:
         working-directory: ./backend
