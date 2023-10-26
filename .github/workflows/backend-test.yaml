@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: ky1ejs/check-diff-paths-action@v0.1.0
         with:
-          paths: -|
+          paths: |-
             backend/**
             .github/workflows/**
           github-token: ${{ secrets.GITHUB_TOKEN }}
