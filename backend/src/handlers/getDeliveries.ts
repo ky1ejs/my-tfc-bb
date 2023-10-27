@@ -18,11 +18,11 @@ export const getDeliveriesHandler: handleUnaryCall<
   return logRequest(call)
     .then(authenticate)
     .then(({ user }) => fetchAndUpdateDeliveries(user))
-    .then(({ latestDeliveries }) => {
+    .then(({ uncollectedDeliveries }) => {
       callback(null, {
-        deliveries: latestDeliveries.map(deliveryToProto),
+        deliveries: uncollectedDeliveries.map(deliveryToProto),
         collectedCount: 0,
-        uncollectedCount: latestDeliveries.length,
+        uncollectedCount: uncollectedDeliveries.length,
       });
     })
     .catch((e) => handleError(e, callback));
