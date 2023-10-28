@@ -11,6 +11,9 @@ jobs:
       run:
         working-directory: ./ios
    steps:
+     - name: "Displays Xcode current version"
+       run: sudo xcode-select -p
+
      - uses: actions/checkout@v2
 
      - name: Write Appfile
