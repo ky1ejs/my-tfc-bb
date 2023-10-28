@@ -1,0 +1,26 @@
+name: iOS PR
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+ test:
+   runs-on: macos-latest
+   defaults:
+      run:
+        working-directory: ./ios
+   steps:
+     - uses: actions/checkout@v2
+
+     - name: Write Appfile
+       run: echo $FASTLANE_APPFILE > ./ios/.fastlane/Appfile
+ 
+     - name: Set up ruby env
+       uses: ruby/setup-ruby@v1.138.0
+       with:
+         ruby-version: 3.2.1
+         bundler-cache: true
+    
+     - name: Build & upload iOS binary
+       run: bundle exec fastlane build
