@@ -25,11 +25,15 @@ jobs:
      - name: Install fastlane
        run: bundle install
 
+     - name: Install buf
+       uses: bufbuild/buf-setup-action@v1.10.0
+       with:
+         github_token: ${{ github.token }}
+
      - name: Code gen
        run: |
          brew install swift-protobuf
          brew install grpc-swift
-         brew install bufbuild/buf/buf
          buf generate ../backend/proto
     
      - name: Build & upload iOS binary
