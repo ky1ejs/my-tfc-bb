@@ -13,8 +13,10 @@ jobs:
    steps:
      - uses: actions/checkout@v2
 
-     - name: "Displays Xcode current version"
-       run: sudo xcode-select -p
+     - name: "Set Xcode Version"
+       run: |
+         sudo xcode-select -s /Applications/Xcode_15.0.1.app
+         sudo xcode-select -p
 
      - name: Write Appfile
        run: echo $FASTLANE_APPFILE >> ./fastlane/Appfile
