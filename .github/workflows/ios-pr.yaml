@@ -27,7 +27,6 @@ jobs:
 
      - name: Code gen
        run: |
-         brew install protoc
          brew install swift-protobuf
          brew install grpc-swift
          brew install bufbuild/buf/buf
