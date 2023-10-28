@@ -11,10 +11,10 @@ jobs:
       run:
         working-directory: ./ios
    steps:
+     - uses: actions/checkout@v2
+
      - name: "Displays Xcode current version"
        run: sudo xcode-select -p
-
-     - uses: actions/checkout@v2
 
      - name: Write Appfile
        run: echo $FASTLANE_APPFILE >> ./fastlane/Appfile
