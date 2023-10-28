@@ -15,15 +15,6 @@ jobs:
 
      - name: Write Appfile
        run: echo $FASTLANE_APPFILE >> ./fastlane/Appfile
- 
-     - name: Set up ruby env
-       uses: ruby/setup-ruby@v1.138.0
-       with:
-         ruby-version: 3.2.1
-         bundler-cache: true
-
-     - name: Install fastlane
-       run: bundle install
 
      - name: Install buf
        uses: bufbuild/buf-setup-action@v1.10.0
@@ -37,4 +28,4 @@ jobs:
          buf generate ../backend/proto
     
      - name: Build & upload iOS binary
-       run: bundle exec fastlane build
+       run: fastlane build
