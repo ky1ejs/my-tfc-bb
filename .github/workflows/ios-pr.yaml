@@ -24,6 +24,9 @@ jobs:
 
      - name: Install fastlane
        run: bundle install
+
+     - name: Code gen
+       run: ./ci_scripts/ci_post_clone.sh
     
      - name: Build & upload iOS binary
        run: bundle exec fastlane build
