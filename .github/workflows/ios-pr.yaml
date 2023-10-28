@@ -26,7 +26,12 @@ jobs:
        run: bundle install
 
      - name: Code gen
-       run: ./ci_scripts/ci_post_clone.sh
+       run: |
+         brew install protoc
+         brew install swift-protobuf
+         brew install grpc-swift
+         brew install bufbuild/buf/buf
+         buf generate ../backend/proto
     
      - name: Build & upload iOS binary
        run: bundle exec fastlane build
