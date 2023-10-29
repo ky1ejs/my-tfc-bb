@@ -6,7 +6,7 @@ on:
 
 jobs:
   check-changed-platforms:
-    uses: ./github/workflows/check-changed-platforms.yaml
+    uses: ./.github/workflows/check-changed-platforms.yaml
   
   backend-test:
     needs: [check-changed-platforms]
