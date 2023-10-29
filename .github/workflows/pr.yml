@@ -5,63 +5,17 @@ on:
     branches: [ main ]
 
 jobs:
-  check-ios-changes: 
-    runs-on: ubuntu-latest
-    outputs:
-      has-changes: ${{ steps.check-paths-step.outputs.has-changes }}
-    steps:
-      - id: check-paths-step
-        uses: ky1ejs/check-diff-paths-action@v0.1.0
-        with:
-          paths: |- 
-            backend/proto/*
-            ios/*
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-  check-workflow-changes: 
-    runs-on: ubuntu-latest
-    outputs:
-      has-changes: ${{ steps.check-paths-step.outputs.has-changes }}
-    steps:
-      - id: check-paths-step
-        uses: ky1ejs/check-diff-paths-action@v0.1.0
-        with:
-          paths: .github/workflows/*
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-  check-backend-changes: 
-    runs-on: ubuntu-latest
-    outputs:
-      has-changes: ${{ steps.check-paths-step.outputs.has-changes }}
-    steps:
-      - id: check-paths-step
-        uses: ky1ejs/check-diff-paths-action@v0.1.0
-        with:
-          paths: backend/*
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-  
-  output-check-results:
-    runs-on: ubuntu-latest
-    needs: [check-ios-changes, check-backend-changes, check-workflow-changes]
-    steps:
-      - name: Check results
-        run: |
-          echo "iOS changes: ${{ needs.check-ios-changes.outputs.has-changes }}"
-          echo "Backend changes: ${{ needs.check-backend-changes.outputs.has-changes }}"
-          echo "Workflow changes: ${{ needs.check-workflow-changes.outputs.has-changes }}"
-      - name: Print skips
-        run: |
-          echo "Skip iOS tests: ${{ needs.check-ios-changes.outputs.has-changes == 'false' && !needs.check-workflow-changes.outputs.has-changes == 'false' }}"
-          echo "Skip backend tests: ${{ needs.check-backend-changes.outputs.has-changes == 'false' && needs.check-workflow-changes.outputs.has-changes == 'false' }}"
+  check-changed-platforms:
+    uses: ./github/workflows/check-changed-platforms.yaml
   
   backend-test:
-    needs: [check-backend-changes, check-workflow-changes]
-    uses: ./.github/workflows/backend-test.yaml
+    needs: [check-changed-platforms]
+    uses: ./.github/workflows/backend/backend-test.yaml
     with:
-      skip: ${{ needs.check-backend-changes.outputs.has-changes == 'false' && needs.check-workflow-changes.outputs.has-changes == 'false' }}
+      skip: ${{ needs.check-changed-platforms.outputs.skip-backend == 'true' }}
 
   ios-test:
-    needs: [check-ios-changes, check-workflow-changes]
-    uses: ./.github/workflows/ios-test.yaml
+    needs: [check-changed-platforms]
+    uses: ./.github/workflows/ios/ios-test.yaml
     with:
-      skip: ${{ needs.check-ios-changes.outputs.has-changes == 'false' && !needs.check-workflow-changes.outputs.has-changes == 'false' }}
+      skip: ${{ needs.check-changed-platforms.outputs.skip-ios == 'true' }}

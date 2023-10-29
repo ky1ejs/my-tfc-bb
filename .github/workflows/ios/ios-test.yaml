@@ -6,6 +6,15 @@ on:
       skip: 
         type: boolean
         required: true
+      # ugly way of reusing env prep for iOS. In the long term may make a composite action for this
+      # See here for a great breakdown of reusing steps:
+      #   https://stackoverflow.com/questions/59757355/reuse-portion-of-github-action-across-jobs/71570847#71570847
+      # The downside doing it like this is that deploy shows up as a test action in GitHub statuses and it probably
+      # hinders reusability.
+      deploy: 
+        type: boolean
+        required: true
+        default: false
 
 jobs:
  test:
@@ -38,5 +47,9 @@ jobs:
          brew install grpc-swift
          buf generate ../backend/proto
     
-     - name: Build & upload iOS binary
+     - name: Build
        run: fastlane build
+
+     - name: Build and upload
+       if: ${{ inputs.deploy }}
+       run: fastlane internal_testers

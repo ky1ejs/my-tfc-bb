@@ -1,0 +1,66 @@
+
+on:
+  workflow_call:
+    inputs:
+      skip: 
+        type: boolean
+        required: true
+    outputs:
+      skip-ios: 
+        value: ${{ jobs.set-outputs.outputs.skip-ios }}
+      skip-backend: 
+        value: ${{ jobs.set-outputs.outputs.skip-backend }}
+
+jobs:
+  check-ios-changes: 
+    runs-on: ubuntu-latest
+    outputs:
+      has-changes: ${{ steps.check-paths-step.outputs.has-changes }}
+    steps:
+      - id: check-paths-step
+        uses: ky1ejs/check-diff-paths-action@v0.1.0
+        with:
+          paths: |- 
+            backend/proto/*
+            ios/*
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  check-workflow-changes: 
+    runs-on: ubuntu-latest
+    outputs:
+      has-changes: ${{ steps.check-paths-step.outputs.has-changes }}
+    steps:
+      - id: check-paths-step
+        uses: ky1ejs/check-diff-paths-action@v0.1.0
+        with:
+          paths: .github/workflows/*
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  check-backend-changes: 
+    runs-on: ubuntu-latest
+    outputs:
+      has-changes: ${{ steps.check-paths-step.outputs.has-changes }}
+    steps:
+      - id: check-paths-step
+        uses: ky1ejs/check-diff-paths-action@v0.1.0
+        with:
+          paths: backend/*
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+  
+  set-outputs:
+    runs-on: ubuntu-latest
+    needs: [check-ios-changes, check-backend-changes, check-workflow-changes]
+    outputs:
+      skip-ios: ${{ needs.check-ios-changes.outputs.has-changes == 'false' && !needs.check-workflow-changes.outputs.has-changes == 'false' }}
+      skip-backend: ${{ needs.check-backend-changes.outputs.has-changes == 'false' && needs.check-workflow-changes.outputs.has-changes == 'false' }}
+    steps:
+      - name: Check results
+        run: |
+          echo "iOS changes: ${{ needs.check-ios-changes.outputs.has-changes }}"
+          echo "Backend changes: ${{ needs.check-backend-changes.outputs.has-changes }}"
+          echo "Workflow changes: ${{ needs.check-workflow-changes.outputs.has-changes }}"
+      - name: Print skips
+        run: |
+          echo "Skip iOS tests: ${{ needs.check-ios-changes.outputs.has-changes == 'false' && !needs.check-workflow-changes.outputs.has-changes == 'false' }}"
+          echo "Skip backend tests: ${{ needs.check-backend-changes.outputs.has-changes == 'false' && needs.check-workflow-changes.outputs.has-changes == 'false' }}"
+
