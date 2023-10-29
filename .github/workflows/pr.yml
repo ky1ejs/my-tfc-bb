@@ -19,7 +19,7 @@ jobs:
   check-workflow-changes: 
     runs-on: ubuntu-latest
     outputs:
-      has-ios-changes: ${{ steps.check-paths-step.outputs.has-changes }}
+      has-workflow-changes: ${{ steps.check-paths-step.outputs.has-changes }}
     steps:
       - id: check-paths-step
         uses: ky1ejs/check-diff-paths-action@v0.1.0
@@ -30,7 +30,7 @@ jobs:
   check-backend-changes: 
     runs-on: ubuntu-latest
     outputs:
-      has-ios-changes: ${{ steps.check-paths-step.outputs.has-changes }}
+      has-backend-changes: ${{ steps.check-paths-step.outputs.has-changes }}
     steps:
       - id: check-paths-step
         uses: ky1ejs/check-diff-paths-action@v0.1.0
@@ -41,7 +41,7 @@ jobs:
   check-proto-changes: 
     runs-on: ubuntu-latest
     outputs:
-      has-ios-changes: ${{ steps.check-paths-step.outputs.has-changes }}
+      has-proto-changes: ${{ steps.check-paths-step.outputs.has-changes }}
     steps:
       - id: check-paths-step
         uses: ky1ejs/check-diff-paths-action@v0.1.0
