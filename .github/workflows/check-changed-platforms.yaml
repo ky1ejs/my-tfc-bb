@@ -1,10 +1,6 @@
 
 on:
   workflow_call:
-    inputs:
-      skip: 
-        type: boolean
-        required: true
     outputs:
       skip-ios: 
         value: ${{ jobs.set-outputs.outputs.skip-ios }}
