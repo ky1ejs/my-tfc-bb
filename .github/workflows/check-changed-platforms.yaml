@@ -18,8 +18,8 @@ jobs:
         uses: ky1ejs/check-diff-paths-action@v0.1.0
         with:
           paths: |- 
-            backend/proto/*
-            ios/*
+            backend\/proto\/.*
+            ^ios\/.*
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
   check-workflow-changes: 
@@ -30,7 +30,7 @@ jobs:
       - id: check-paths-step
         uses: ky1ejs/check-diff-paths-action@v0.1.0
         with:
-          paths: .github/workflows/*
+          paths: ^\.github\/workflows\/.*
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
   check-backend-changes: 
@@ -41,7 +41,7 @@ jobs:
       - id: check-paths-step
         uses: ky1ejs/check-diff-paths-action@v0.1.0
         with:
-          paths: backend/*
+          paths: ^backend\/.*
           github-token: ${{ secrets.GITHUB_TOKEN }}
   
   set-outputs:
@@ -60,4 +60,3 @@ jobs:
         run: |
           echo "Skip iOS tests: ${{ needs.check-ios-changes.outputs.has-changes == 'false' && !needs.check-workflow-changes.outputs.has-changes == 'false' }}"
           echo "Skip backend tests: ${{ needs.check-backend-changes.outputs.has-changes == 'false' && needs.check-workflow-changes.outputs.has-changes == 'false' }}"
-
