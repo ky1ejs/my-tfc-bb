@@ -51,17 +51,17 @@ jobs:
           echo "Workflow changes: ${{ needs.check-workflow-changes.outputs.has-changes }}"
       - name: Print skips
         run: |
-          echo "Skip iOS tests: ${{ !needs.check-ios-changes.outputs.has-changes && !needs.check-workflow-changes.outputs.has-changes }}"
+          echo "Skip iOS tests: ${{ needs.check-ios-changes.outputs.has-changes == 'false' && !needs.check-workflow-changes.outputs.has-changes == 'false' }}"
           echo "Skip backend tests: ${{ needs.check-backend-changes.outputs.has-changes == 'false' && needs.check-workflow-changes.outputs.has-changes == 'false' }}"
   
   backend-test:
     needs: [check-backend-changes, check-workflow-changes]
     uses: ./.github/workflows/backend-test.yaml
     with:
-      skip: ${{ !needs.check-backend-changes.outputs.has-changes && !needs.check-workflow-changes.outputs.has-changes }}
+      skip: ${{ needs.check-backend-changes.outputs.has-changes == 'false' && needs.check-workflow-changes.outputs.has-changes == 'false' }}
 
   ios-test:
     needs: [check-ios-changes, check-workflow-changes]
     uses: ./.github/workflows/ios-test.yaml
     with:
-      skip: ${{ !needs.check-ios-changes.outputs.has-changes && !needs.check-workflow-changes.outputs.has-changes }}
+      skip: ${{ needs.check-ios-changes.outputs.has-changes == 'false' && !needs.check-workflow-changes.outputs.has-changes == 'false' }}
