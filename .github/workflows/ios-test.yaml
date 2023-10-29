@@ -10,7 +10,7 @@ on:
 jobs:
  test:
    runs-on: macos-13
-   if: inputs.skip == false
+   if: ${{ inputs.skip == false }}
    defaults:
       run:
         working-directory: ./ios
