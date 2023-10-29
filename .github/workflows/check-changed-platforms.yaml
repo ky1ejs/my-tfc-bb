@@ -1,3 +1,4 @@
+name: Check Changed Platform 
 
 on:
   workflow_call:

@@ -8,7 +8,7 @@ env:
 
 jobs: 
   test:
-    uses: ./.github/workflows/backend/backend-test.yaml
+    uses: ./.github/workflows/backend-test.yaml
     with:
       skip: false
 

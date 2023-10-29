@@ -9,14 +9,14 @@ jobs:
     uses: ./github/workflows/check-changed-platforms.yaml
   
   deploy-backend:
-    uses: ./github/workflows/backend/backend-deploy.yaml
+    uses: ./github/workflows/backend-deploy.yaml
     needs: check-changed-platforms
     if: needs.check-changed-platforms.outputs.skip-backend == 'false'
 
   deploy-ios:
     needs: check-changed-platforms
     if: needs.check-changed-platforms.outputs.skip-ios == 'false'
-    uses: ./github/workflows/ios/ios-test.yaml
+    uses: ./github/workflows/ios-test.yaml
     with:
       skip: false
       deploy: true

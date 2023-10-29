@@ -10,12 +10,12 @@ jobs:
   
   backend-test:
     needs: [check-changed-platforms]
-    uses: ./.github/workflows/backend/backend-test.yaml
+    uses: ./.github/workflows/backend-test.yaml
     with:
       skip: ${{ needs.check-changed-platforms.outputs.skip-backend == 'true' }}
 
   ios-test:
     needs: [check-changed-platforms]
-    uses: ./.github/workflows/ios/ios-test.yaml
+    uses: ./.github/workflows/ios-test.yaml
     with:
       skip: ${{ needs.check-changed-platforms.outputs.skip-ios == 'true' }}
