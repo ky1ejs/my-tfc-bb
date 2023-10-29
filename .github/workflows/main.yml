@@ -9,9 +9,10 @@ jobs:
     uses: ./.github/workflows/check-changed-platforms.yaml
   
   deploy-backend:
-    uses: ./.github/workflows/backend-deploy.yaml
     needs: check-changed-platforms
     if: needs.check-changed-platforms.outputs.skip-backend == 'false'
+    uses: ./.github/workflows/backend-deploy.yaml
+    secrets: inherit
 
   deploy-ios:
     needs: check-changed-platforms
