@@ -39,4 +39,4 @@ jobs:
          buf generate ../backend/proto
     
      - name: Build & upload iOS binary
-       run: fastlane test
+       run: fastlane build
