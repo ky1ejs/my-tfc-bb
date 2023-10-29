@@ -52,7 +52,7 @@ jobs:
       - name: Print skips
         run: |
           echo "Skip iOS tests: ${{ !needs.check-ios-changes.outputs.has-changes && !needs.check-workflow-changes.outputs.has-changes }}"
-          echo "Skip backend tests: ${{ needs.check-backend-changes.outputs.has-changes == false && needs.check-workflow-changes.outputs.has-changes == false }}"
+          echo "Skip backend tests: ${{ needs.check-backend-changes.outputs.has-changes == 'false' && needs.check-workflow-changes.outputs.has-changes == 'false' }}"
   
   backend-test:
     needs: [check-backend-changes, check-workflow-changes]
