@@ -6,5 +6,9 @@ Heplful articles in debugging keychain sharing:
 * https://swiftsenpai.com/development/create-lock-screen-widget/
 * https://swiftsenpai.com/development/configurable-widgets-static-options
 * https://emregurses.medium.com/sharing-data-between-app-and-extension-on-ios-2ff518b2ebe7
+* https://evgenii.com/blog/sharing-keychain-in-ios/
 
 For me, it wasn't working until I defined a 'service'. However, I'm only 90% sure this was the fix because since achieveing this, upon device restart I found the same buggy behaviour I was having where the widget would get `nil` back from the keychain.
+
+Docs on widgets: 
+* https://developer.apple.com/documentation/widgetkit/creating-a-widget-extension/
