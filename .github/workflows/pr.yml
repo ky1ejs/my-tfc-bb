@@ -1,0 +1,53 @@
+name: PR
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check-ios-changes: 
+    runs-on: ubuntu-latest
+    outputs:
+      has-changes: ${{ steps.check-paths-step.outputs.has-changes }}
+    steps:
+      - id: check-paths-step
+        uses: ky1ejs/check-diff-paths-action@v0.1.0
+        with:
+          paths: |- 
+            backend/proto/*
+            ios/*
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  check-workflow-changes: 
+    runs-on: ubuntu-latest
+    outputs:
+      has-changes: ${{ steps.check-paths-step.outputs.has-changes }}
+    steps:
+      - id: check-paths-step
+        uses: ky1ejs/check-diff-paths-action@v0.1.0
+        with:
+          paths: .github/workflows/*
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  check-backend-changes: 
+    runs-on: ubuntu-latest
+    outputs:
+      has-changes: ${{ steps.check-paths-step.outputs.has-changes }}
+    steps:
+      - id: check-paths-step
+        uses: ky1ejs/check-diff-paths-action@v0.1.0
+        with:
+          paths: backend/*
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+  
+  backend-test:
+    needs: [check-backend-changes, check-workflow-changes]
+    uses: ./.github/workflows/backend-test.yaml
+    with:
+      skip: ${{ !(needs.check-backend-changes.outputs.has-changes) && !(needs.check-workflow-changes.outputs.has-changes) }}
+
+  ios-test:
+    needs: [check-ios-changes, check-workflow-changes]
+    uses: ./.github/workflows/ios-test.yaml
+    with:
+      skip: ${{ !(needs.check-ios-changes.outputs.has-changes) && !(needs.check-workflow-changes.outputs.has-changes) }}

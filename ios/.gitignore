@@ -1,2 +1,6 @@
 xcuserdata/
 tfc-bb-core/generated/
+
+# fastlane
+fastlane/Appfile
+fastlane/report.xml

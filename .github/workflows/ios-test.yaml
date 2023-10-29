@@ -1,0 +1,42 @@
+name: iOS Test
+
+on:
+  workflow_call:
+    inputs:
+      skip: 
+        type: boolean
+        required: true
+
+jobs:
+ test:
+   runs-on: macos-13
+   if: ${{ inputs.skip == false }}
+   defaults:
+      run:
+        working-directory: ./ios
+   steps:
+     - uses: actions/checkout@v2
+       with:
+        lfs: true
+
+     - name: "Set Xcode Version"
+       run: |
+         sudo xcode-select -s /Applications/Xcode_15.0.app/Contents/Developer/
+         sudo xcode-select -p
+
+     - name: Write Appfile
+       run: echo $FASTLANE_APPFILE >> ./fastlane/Appfile
+
+     - name: Install buf
+       uses: bufbuild/buf-setup-action@v1.10.0
+       with:
+         github_token: ${{ github.token }}
+
+     - name: Code gen
+       run: |
+         brew install swift-protobuf
+         brew install grpc-swift
+         buf generate ../backend/proto
+    
+     - name: Build & upload iOS binary
+       run: fastlane build
