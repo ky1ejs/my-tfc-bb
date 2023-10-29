@@ -40,14 +40,28 @@ jobs:
           paths: backend/*
           github-token: ${{ secrets.GITHUB_TOKEN }}
   
+  output-check-results:
+    runs-on: ubuntu-latest
+    needs: [check-ios-changes, check-backend-changes, check-workflow-changes]
+    steps:
+      - name: Check results
+        run: |
+          echo "iOS changes: ${{ needs.check-ios-changes.outputs.has-changes }}"
+          echo "Backend changes: ${{ needs.check-backend-changes.outputs.has-changes }}"
+          echo "Workflow changes: ${{ needs.check-workflow-changes.outputs.has-changes }}"
+      - name: Print skips
+        run: |
+          echo "Skip iOS tests: ${{ !needs.check-ios-changes.outputs.has-changes && !needs.check-workflow-changes.outputs.has-changes }}"
+          echo "Skip backend tests: ${{ !needs.check-backend-changes.outputs.has-changes && !needs.check-workflow-changes.outputs.has-changes }}"
+  
   backend-test:
     needs: [check-backend-changes, check-workflow-changes]
     uses: ./.github/workflows/backend-test.yaml
     with:
-      skip: ${{ needs.check-backend-changes.outputs.has-changes == false && needs.check-workflow-changes.outputs.has-changes == false }}
+      skip: ${{ !needs.check-backend-changes.outputs.has-changes && !needs.check-workflow-changes.outputs.has-changes }}
 
   ios-test:
     needs: [check-ios-changes, check-workflow-changes]
     uses: ./.github/workflows/ios-test.yaml
     with:
-      skip: ${{ !(needs.check-ios-changes.outputs.has-changes) && !(needs.check-workflow-changes.outputs.has-changes) }}
+      skip: ${{ !needs.check-ios-changes.outputs.has-changes && !needs.check-workflow-changes.outputs.has-changes }}
