@@ -1,12 +1,16 @@
-name: iOS PR
+name: iOS Test
 
 on:
-  pull_request:
-    branches: [ main ]
+  workflow_call:
+    inputs:
+      skip: 
+        type: boolean
+        required: true
 
 jobs:
  test:
    runs-on: macos-13
+   if: inputs.skip == false
    defaults:
       run:
         working-directory: ./ios
@@ -35,4 +39,4 @@ jobs:
          buf generate ../backend/proto
     
      - name: Build & upload iOS binary
-       run: fastlane build
+       run: fastlane test
