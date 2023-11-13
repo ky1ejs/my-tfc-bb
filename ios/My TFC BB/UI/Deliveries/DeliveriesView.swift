@@ -31,7 +31,7 @@ struct DeliveriesView: View {
         NavigationStack{
             HStack {
                 switch state {
-                case .loading: 
+                case .loading:
                     ProgressView("...loading")
                         .tint(Color(uiColor: .lightOrange))
                         .task {
@@ -39,17 +39,22 @@ struct DeliveriesView: View {
                         }
                 case .error: Text("There was an error")
                 case .loaded(let deliveries):
-                    if deliveries.isEmpty {
-                        Text("No deliveries")
-                    } else {
+
+                    ZStack {
                         List(deliveries) { delivery in
                             DeliveryCellContent(delivery: delivery)
                         }
-                        .refreshable {
-                            await refreshData()
+                        if deliveries.isEmpty {
+                            VStack {
+                                Text("all deliveries collected").font(.title).foregroundStyle(Color(uiColor: .darkGray))
+                                Text("swipe down to refresh").font(.footnote).foregroundStyle(Color(uiColor: .lightGray))
+                            }
                         }
-                        .listStyle(.plain)
                     }
+                    .refreshable {
+                        await refreshData()
+                    }
+                    .listStyle(.plain)
                 }
             }
             .navigationTitle("Deliveries")
@@ -108,6 +113,16 @@ struct FakeProvider: DeliveriesProvider {
     }
 }
 
+struct EmptyFakeProvider: DeliveriesProvider {
+    func provideDeliveries() async throws -> [Delivery] {
+        return []
+    }
+}
+
 #Preview {
     DeliveriesView(provider: FakeProvider())
+}
+
+#Preview {
+    DeliveriesView(provider: EmptyFakeProvider())
 }
