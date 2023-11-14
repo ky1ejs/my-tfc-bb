@@ -18,6 +18,7 @@ jobs:
     needs: check-changed-platforms
     if: needs.check-changed-platforms.outputs.skip-ios == 'false'
     uses: ./.github/workflows/ios-build.yaml
+    secrets: inherit
     with:
       skip: false
       deploy: true
