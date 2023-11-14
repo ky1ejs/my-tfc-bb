@@ -17,7 +17,7 @@ jobs:
   deploy-ios:
     needs: check-changed-platforms
     if: needs.check-changed-platforms.outputs.skip-ios == 'false'
-    uses: ./.github/workflows/ios-test.yaml
+    uses: ./.github/workflows/ios-build.yaml
     with:
       skip: false
       deploy: true

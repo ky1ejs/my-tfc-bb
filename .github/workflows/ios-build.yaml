@@ -1,4 +1,4 @@
-name: iOS Test
+name: iOS Build
 
 on:
   workflow_call:
@@ -47,7 +47,8 @@ jobs:
          brew install grpc-swift
          buf generate ../backend/proto
     
-     - name: Build
+     - name: Test
+       if: ${{ !inputs.deploy }}
        run: fastlane build
 
      - name: Build and upload
