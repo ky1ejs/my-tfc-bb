@@ -18,9 +18,10 @@ on:
 
 env:
   MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+  MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
 jobs:
- test:
+ build:
    runs-on: macos-13
    if: ${{ inputs.skip == false }}
    defaults:
