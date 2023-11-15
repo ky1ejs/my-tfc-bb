@@ -36,11 +36,31 @@ platform :ios do
   end
 
   lane :certs do
-    match(
-      type: "appstore",
-      app_identifier: certificate_ids,
-      readonly: true
-    )
+    if ENV['CI']
+      keychain_name = "signing"
+      keychain_password = "temp"
+      create_keychain(
+        name: keychain_name,
+        password: keychain_password,
+        default_keychain: true,
+        unlock: true,
+        timeout: 3600,
+        lock_when_sleeps: false
+      )
+      match(
+        keychain_name: keychain_name,
+        keychain_password: keychain_password,
+        type: "appstore",
+        app_identifier: certificate_ids,
+        readonly: true
+      )
+    else 
+      match(
+        type: "appstore",
+        app_identifier: certificate_ids,
+        readonly: true
+      )
+    end
   end
 
   lane :build_for_testflight do
