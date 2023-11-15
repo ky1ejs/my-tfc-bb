@@ -15,6 +15,10 @@ on:
         type: boolean
         required: true
         default: false
+      audience:
+        type: string
+        required: false
+        default: "alpha"
 
 env:
   MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
@@ -58,8 +62,12 @@ jobs:
        if: ${{ !inputs.deploy }}
        run: fastlane build
 
-     - name: Build and upload
-       if: ${{ inputs.deploy }}
+     - name: Build for alpha testers
+       if: ${{ inputs.deploy && inputs.audience == 'alpha' }}
+       run: fastlane build_for_alpha_testers
+
+     - name: Build for beta testers
+       if: ${{ inputs.deploy && inputs.audience == 'beta' }}
        run: fastlane build_for_alpha_testers
 
      - name: Upload .ipa
