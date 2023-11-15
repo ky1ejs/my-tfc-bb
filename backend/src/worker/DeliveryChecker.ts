@@ -75,7 +75,7 @@ async function processUpdatesForUser(user: User): Promise<void> {
           .then(() =>
             pushToUsersDevices(user, {
               title: "Can't update your packages",
-              body: "It seems your authentications details are no longer valid.",
+              body: "It seems your authentication details are no longer valid.",
             })
           );
       }
