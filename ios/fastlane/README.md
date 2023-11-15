@@ -47,6 +47,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
+### ios asc_key
+
+```sh
+[bundle exec] fastlane ios asc_key
+```
+
+
+
 ### ios internal_testers
 
 ```sh

@@ -62,7 +62,7 @@ platform :ios do
 
   lane :internal_testers do
     build_for_testflight
-    upload_to_testflight(groups: "Testers")
+    # upload_to_testflight(groups: "Testers")
   end
 
   lane :external_testers do
