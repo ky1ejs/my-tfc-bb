@@ -74,12 +74,12 @@ jobs:
        if: ${{ inputs.deploy }}
        uses: actions/upload-artifact@v2
        with:
-         name: ios
+         name: .ipa
          path: ./ios/My TFC BB.ipa
 
      - name: Upload dSYM
        if: ${{ inputs.deploy }}
        uses: actions/upload-artifact@v2
        with:
-         name: ios
+         name: dSYM
          path: .ios/My TFC BB.app.dSYM.zip
