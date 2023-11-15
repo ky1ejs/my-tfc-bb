@@ -47,7 +47,7 @@ platform :ios do
     asc_key
     certs
     increment_build_number(xcodeproj: "My TFC BB.xcodeproj")
-    build_app(scheme: "My TFC BB - production")
+    build_app(scheme: "My TFC BB - production", xcodebuild_formatter: "")
   end
 
   lane :asc_key do
