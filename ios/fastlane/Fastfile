@@ -101,19 +101,11 @@ platform :ios do
 
   lane :build_for_alpha_testers do
     build_for_testflight
-    upload_to_testflight(
-      groups: "Alpha", 
-      skip_submission: true,
-      submit_beta_review: false
-    )
+    upload_to_testflight(groups: "Alpha", submit_beta_review: false)
   end
 
   lane :build_for_beta_testers do
     build_for_testflight
-    upload_to_testflight(
-      groups: "Beta",
-      skip_submission: true,
-      submit_beta_review: false
-    )
+    upload_to_testflight(groups: "Beta", submit_beta_review: false)
   end
 end
