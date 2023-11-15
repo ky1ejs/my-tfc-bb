@@ -99,13 +99,13 @@ platform :ios do
     build_app(scheme: "My TFC BB - production", xcodebuild_formatter: "")
   end
 
-  lane :internal_testers do
+  lane :build_for_alpha_testers do
     build_for_testflight
-    upload_to_testflight(groups: "Testers")
+    upload_to_testflight(groups: "Alpha")
   end
 
-  lane :external_testers do
+  lane :build_for_beta_testers do
     build_for_testflight
-    upload_to_testflight(groups: "External Testers")
+    upload_to_testflight(groups: "Beta")
   end
 end
