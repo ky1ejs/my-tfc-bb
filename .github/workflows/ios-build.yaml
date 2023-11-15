@@ -60,7 +60,7 @@ jobs:
 
      - name: Build and upload
        if: ${{ inputs.deploy }}
-       run: fastlane internal_testers
+       run: fastlane build_for_alpha_testers
 
      - name: Upload .ipa
        if: ${{ inputs.deploy }}
