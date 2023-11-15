@@ -15,6 +15,11 @@
 
 default_platform(:ios)
 
+certificate_ids = [
+  "dev.kylejs.My-TFC-BB", 
+  "dev.kylejs.My-TFC-BB.My-TFC-BB-Widget"
+]
+
 platform :ios do
   lane :build do
     build_app(
@@ -25,9 +30,23 @@ platform :ios do
     )
   end
 
+  lane :renew_certs do
+    match(type: "development", app_identifier: certificate_ids)
+    match(type: "appstore", app_identifier: certificate_ids)
+  end
+
+  lane :certs do
+    match(
+      type: "appstore",
+      app_identifier: certificate_ids,
+      readonly: true
+    )
+  end
+
+
   lane :build_for_testflight do
+    certs
     increment_build_number(xcodeproj: "My TFC BB.xcodeproj")
-    match(type: "appstore", readonly: true)
     build_app(scheme: "My TFC BB - production")
   end
 

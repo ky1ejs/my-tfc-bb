@@ -23,6 +23,22 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
+### ios renew_certs
+
+```sh
+[bundle exec] fastlane ios renew_certs
+```
+
+
+
+### ios certs
+
+```sh
+[bundle exec] fastlane ios certs
+```
+
+
+
 ### ios build_for_testflight
 
 ```sh
