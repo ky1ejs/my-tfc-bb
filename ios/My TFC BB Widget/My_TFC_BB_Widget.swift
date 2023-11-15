@@ -114,7 +114,7 @@ struct SmallWidget : View {
                             Text("✅")
                                 .font(.title)
                                 .foregroundStyle(.black)
-                            Text("all pacakages collected")
+                            Text("all packages collected")
                                 .font(.footnote)
                                 .foregroundStyle(Color(uiColor: .darkGray))
                         } else {
