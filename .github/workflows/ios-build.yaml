@@ -61,3 +61,17 @@ jobs:
      - name: Build and upload
        if: ${{ inputs.deploy }}
        run: fastlane internal_testers
+
+     - name: Upload .ipa
+       if: ${{ inputs.deploy }}
+       uses: actions/upload-artifact@v2
+       with:
+         name: ios
+         path: ./ios/My TFC BB.ipa
+
+     - name: Upload dSYM
+       if: ${{ inputs.deploy }}
+       uses: actions/upload-artifact@v2
+       with:
+         name: ios
+         path: .ios/My TFC BB.app.dSYM.zip
