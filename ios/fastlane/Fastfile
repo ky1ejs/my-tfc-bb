@@ -73,10 +73,29 @@ platform :ios do
    )
   end
 
+  desc "Bump build number based on most recent TestFlight build number"
+  lane :fetch_and_increment_build_number do
+    app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+    api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
+
+    current_version = get_version_number(
+      target: "My TFC BB"
+    )
+    latest_build_number = latest_testflight_build_number(
+      api_key: api_key,
+      version: current_version,
+      app_identifier: app_identifier
+    )
+    increment_build_number(
+      build_number: latest_build_number + 1,
+      xcodeproj: "My TFC BB.xcodeproj",
+    )
+  end
+
   lane :build_for_testflight do
     asc_key
     certs
-    increment_build_number(xcodeproj: "My TFC BB.xcodeproj")
+    fetch_and_increment_build_number
     build_app(scheme: "My TFC BB - production", xcodebuild_formatter: "")
   end
 
