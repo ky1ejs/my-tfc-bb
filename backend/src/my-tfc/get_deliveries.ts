@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { User, Delivery } from "@prisma/client";
 import axios from "axios";
 import prisma from "../db";
 import Auth from "../services/auth";
@@ -6,6 +6,7 @@ import { decrypt } from "../services/cipher";
 import myTfcEndpoints from "./endpoints";
 import { TfcApiError } from "./TfcApiError";
 import { parseTfcDeliveries, TfcDelivery } from "./TfcDelivery";
+import { sendNotificationsForUpdates } from "../sendNotificationsForUpdates";
 
 export function getDeliveries(user: User): Promise<TfcDelivery[]> {
   const a = axios.create();
@@ -49,6 +50,19 @@ export function getDeliveries(user: User): Promise<TfcDelivery[]> {
 }
 
 export async function fetchAndUpdateDeliveries(user: User) {
+  const updates = await updateDeliveries(user);
+  await sendNotificationsForUpdates(updates, user);
+  return updates;
+}
+
+export type DeliveryUpdates = {
+  collectedDeliveries: Delivery[];
+  uncollectedDeliveries: Delivery[];
+  newDeliveries: TfcDelivery[];
+  user: User;
+};
+
+export async function updateDeliveries(user: User): Promise<DeliveryUpdates> {
   const data = await Promise.all([
     prisma.delivery.findMany({
       where: { user_id: user.id, collected_at: null },
