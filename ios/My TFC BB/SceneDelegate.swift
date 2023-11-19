@@ -14,7 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     static var shared: SceneDelegate? {
-        let windowScene = UIApplication.shared.connectedScenes.first as! UIWindowScene
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+            return nil
+        }
         return windowScene.delegate as? SceneDelegate
     }
 
