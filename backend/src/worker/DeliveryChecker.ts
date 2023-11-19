@@ -6,8 +6,8 @@ import { TfcApiError, TfcApiErrorType } from "../my-tfc/TfcApiError";
 import { PasswordStatus, User } from "@prisma/client";
 
 const COLLECTION_CLOSE = 22; // 10pm
-const COLLECTION_OPEN = 7; // 7am
-const WHILE_CLOSED_CHECK_INTERVAL = 15; // minutes
+const COLLECTION_OPEN = 8; // 8am
+const WHILE_CLOSED_CHECK_INTERVAL = 60; // minutes
 const WHILE_OPEN_CHECK_INTERVAL = 2; // minutes
 
 let intervalMinutes = WHILE_OPEN_CHECK_INTERVAL;
