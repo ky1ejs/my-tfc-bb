@@ -36,6 +36,7 @@
 		93EE6A3D291098D70012C716 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE6A3C291098D70012C716 /* SceneDelegate.swift */; };
 		93EE6A44291098D80012C716 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93EE6A43291098D80012C716 /* Assets.xcassets */; };
 		93EE6A47291098D80012C716 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93EE6A45291098D80012C716 /* LaunchScreen.storyboard */; };
+		93F019AF2B0A41BB00DFE8CE /* RelativeDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F019AE2B0A41BB00DFE8CE /* RelativeDateFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 		93EE6A43291098D80012C716 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93EE6A46291098D80012C716 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		93EE6A48291098D80012C716 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93F019AE2B0A41BB00DFE8CE /* RelativeDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeDateFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,7 @@
 				935DC5E0291B300800DB3F39 /* Settings */,
 				935DC5DF291B300100DB3F39 /* Deliveries */,
 				935DC5DE291B2FF800DB3F39 /* Log In */,
+				93F019AE2B0A41BB00DFE8CE /* RelativeDateFormatter.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				932B862C2AE6010600C8445A /* SettingsView.swift in Sources */,
 				932B862E2AE603BD00C8445A /* DevicesView.swift in Sources */,
 				932B86282AE5EF2E00C8445A /* DeliveriesView.swift in Sources */,
+				93F019AF2B0A41BB00DFE8CE /* RelativeDateFormatter.swift in Sources */,
 				932B86302AE606BA00C8445A /* LogInView.swift in Sources */,
 				93EE6A3B291098D70012C716 /* AppDelegate.swift in Sources */,
 				93EE6A3D291098D70012C716 /* SceneDelegate.swift in Sources */,
