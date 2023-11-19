@@ -16,11 +16,10 @@ protocol DeliveriesProvider {
 struct DeliveriesView: View {
     enum ViewState {
         case loading
-        case error
+        case error(Error)
         case loaded([Delivery])
     }
     private let provider: DeliveriesProvider
-
     @State private var state: ViewState = .loading
 
     init(provider: DeliveriesProvider) {
@@ -37,24 +36,26 @@ struct DeliveriesView: View {
                         .task {
                             await refreshData()
                         }
-                case .error: Text("There was an error")
+                case .error(let error):
+                    messageView(
+                        "whoops, there's been an error",
+                        error.localizedDescription
+                    )
                 case .loaded(let deliveries):
-
-                    ZStack {
-                        List(deliveries) { delivery in
-                            DeliveryCellContent(delivery: delivery)
+                        if (deliveries.count > 0) {
+                            List(deliveries) { delivery in
+                                DeliveryCellContent(delivery: delivery)
+                            }.refreshable {
+                                await refreshData()
+                            }
+                            .listStyle(.plain)
                         }
                         if deliveries.isEmpty {
-                            VStack {
-                                Text("all deliveries collected").font(.title).foregroundStyle(Color(uiColor: .darkGray))
-                                Text("swipe down to refresh").font(.footnote).foregroundStyle(Color(uiColor: .lightGray))
-                            }
+                            messageView(
+                                "all deliveries collected",
+                                nil
+                            )
                         }
-                    }
-                    .refreshable {
-                        await refreshData()
-                    }
-                    .listStyle(.plain)
                 }
             }
             .navigationTitle("Deliveries")
@@ -88,7 +89,37 @@ struct DeliveriesView: View {
                 state = .loaded(deliveries)
             }
         } catch {
-            state = .error
+            state = .error(error)
+        }
+    }
+
+    func messageView(_ title: String, _ body: String?) -> some View {
+        VStack {
+            Text(title)
+                .font(.title)
+                .foregroundStyle(Color(uiColor: .darkGray))
+            if let body = body {
+                Text(body)
+                    .font(.footnote)
+                    .foregroundStyle(Color(uiColor: .lightGray))
+                    .padding(.bottom, 24)
+            }
+            Button {
+                withAnimation {
+                    state = .loading
+                }
+                Task {
+                    await refreshData()
+                }
+            } label: {
+                Text("refresh")
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 8)
+                    .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color(uiColor: .lightOrange), lineWidth: 2)
+                )
+            }
         }
     }
 }
@@ -115,6 +146,7 @@ struct FakeProvider: DeliveriesProvider {
 
 struct EmptyFakeProvider: DeliveriesProvider {
     func provideDeliveries() async throws -> [Delivery] {
+        try await Task.sleep(nanoseconds: 1_000_000_000)
         return []
     }
 }
