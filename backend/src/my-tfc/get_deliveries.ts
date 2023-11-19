@@ -8,7 +8,7 @@ import { TfcApiError } from "./TfcApiError";
 import { parseTfcDeliveries, TfcDelivery } from "./TfcDelivery";
 import { sendNotificationsForUpdates } from "../sendNotificationsForUpdates";
 
-export function getDeliveries(user: User): Promise<TfcDelivery[]> {
+function getDeliveries(user: User): Promise<TfcDelivery[]> {
   const a = axios.create();
   a.defaults.headers.common = {
     Authorization: `Token ${user.latest_access_token}`,
@@ -62,7 +62,7 @@ export type DeliveryUpdates = {
   user: User;
 };
 
-export async function updateDeliveries(user: User): Promise<DeliveryUpdates> {
+async function updateDeliveries(user: User): Promise<DeliveryUpdates> {
   const data = await Promise.all([
     prisma.delivery.findMany({
       where: { user_id: user.id, collected_at: null },

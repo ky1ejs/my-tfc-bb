@@ -1,14 +1,9 @@
 import prisma from "../db";
 import { fetchAndUpdateDeliveries } from "../my-tfc/get_deliveries";
-import { pushToUsersDevices } from "./NotificationSender";
+import { pushToUsersDevices } from "../services/NotificationSender";
 import { DateTime } from "luxon";
 import { TfcApiError, TfcApiErrorType } from "../my-tfc/TfcApiError";
-import { Delivery, PasswordStatus, User } from "@prisma/client";
-import { TfcDelivery } from "../my-tfc/TfcDelivery";
-import {
-  formattedCourierName,
-  identifyCourier,
-} from "../helpers/identifyCourier";
+import { PasswordStatus, User } from "@prisma/client";
 
 const COLLECTION_CLOSE = 22; // 10pm
 const COLLECTION_OPEN = 7; // 7am
@@ -62,8 +57,7 @@ function process(): Promise<void> {
 
 async function processUpdatesForUser(user: User): Promise<void> {
   try {
-    const updates = await fetchAndUpdateDeliveries(user);
-    await sendNotificationsForUpdates(updates);
+    await fetchAndUpdateDeliveries(user);
   } catch (error) {
     if (error instanceof TfcApiError) {
       if (error.type === TfcApiErrorType.INVALID_PASSWORD) {
@@ -81,74 +75,6 @@ async function processUpdatesForUser(user: User): Promise<void> {
       }
     }
   }
-}
-
-async function sendNotificationsForUpdates(update: {
-  collectedDeliveries: Delivery[];
-  uncollectedDeliveries: Delivery[];
-  newDeliveries: TfcDelivery[];
-  user: User;
-}): Promise<void> {
-  const promises: Promise<void>[] = [];
-
-  const collectedPackages = update.collectedDeliveries.length;
-  const currentPackageCount = update.uncollectedDeliveries.length;
-  if (collectedPackages > 0) {
-    let title: string;
-    let body: string;
-
-    if (currentPackageCount <= 0) {
-      title = "All packages collected";
-      body =
-        collectedPackages > 1
-          ? `✅ ${collectedPackages} packages have been collected`
-          : "✅ 1 package has been collected";
-    } else {
-      title = `${collectedPackages} package${
-        collectedPackages > 1 ? "s" : ""
-      } collected`;
-      body = `${currentPackageCount} remain to be collected`;
-    }
-
-    promises.push(
-      pushToUsersDevices(update.user, {
-        title,
-        body,
-        badge: currentPackageCount,
-      })
-    );
-  }
-
-  const newDeliveries = update.newDeliveries.length;
-  if (newDeliveries > 0) {
-    const title = `${newDeliveries} ${
-      newDeliveries > 1 ? "packages" : "package"
-    } delivered`;
-
-    let body: string;
-
-    if (newDeliveries > 1) {
-      body = `${currentPackageCount} ${
-        currentPackageCount > 1 ? "packages" : "package"
-      } waiting for collection in total`;
-    } else {
-      const courier = identifyCourier(update.newDeliveries[0].name);
-      const courierName = formattedCourierName(courier);
-      body = `New delivery from ${courierName}. ${currentPackageCount} ${
-        currentPackageCount > 1 ? "packages" : "package"
-      } waiting for collection in total.`;
-    }
-
-    promises.push(
-      pushToUsersDevices(update.user, {
-        title,
-        body,
-        badge: currentPackageCount,
-      })
-    );
-  }
-
-  await Promise.all(promises);
 }
 
 start();

@@ -4,7 +4,7 @@ import {
   identifyCourier,
 } from "./helpers/identifyCourier";
 import { DeliveryUpdates } from "./my-tfc/get_deliveries";
-import { pushToUsersDevices } from "./worker/NotificationSender";
+import { pushToUsersDevices } from "./services/NotificationSender";
 
 export async function sendNotificationsForUpdates(
   updates: DeliveryUpdates,

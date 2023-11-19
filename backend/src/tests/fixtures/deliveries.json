@@ -1,0 +1,11 @@
+{
+  "results": [
+    {
+      "id": 1234,
+      "date_opened": "2023-11-18T16:41:10.858708-05:00",
+      "package_type": {
+        "name": "FedEx Delivery"
+      }
+    }
+  ]
+}

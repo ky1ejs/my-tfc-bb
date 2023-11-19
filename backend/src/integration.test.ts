@@ -12,6 +12,7 @@ import { rest } from "msw";
 import myTfcEndpoints from "./my-tfc/endpoints";
 import { setupServer, SetupServerApi } from "msw/node";
 import fs from "fs";
+import { TEST_USER } from "./tests/test_data";
 
 export const handlers = [
   rest.get(myTfcEndpoints.authConfig, (_, res, ctx) => {
@@ -55,13 +56,7 @@ describe("MyTfc gRPC Service", () => {
   beforeEach(async () => {
     console.log("⛑️ creating data");
     user = await prisma.user.create({
-      data: {
-        username: "test@test.com",
-        latest_access_token: "123",
-        refresh_token: "123",
-        hashed_password:
-          "9b1977d2f3c9bb0f00aab556135f75b1:ff7b5a298f2680ae83d97e19b7569453",
-      },
+      data: TEST_USER,
     });
     device = await prisma.device.create({
       data: {

@@ -1,5 +1,5 @@
 import { PushPlatform, PushToken, User } from "@prisma/client";
-import { PushMessage, sendPush } from "../services/apns";
+import { PushMessage, sendPush } from "./apns";
 import prisma from "../db";
 
 export async function pushToUsersDevices(

@@ -4,7 +4,7 @@ import prisma from "../db";
 import { handleError } from "../errors/HandleGrpcError";
 import { Empty } from "../generated/proto/google/protobuf/empty";
 import { authenticate } from "../helpers/authenticate";
-import { pushToDevice } from "../worker/NotificationSender";
+import { pushToDevice } from "../services/NotificationSender";
 
 export const sendTestPushNoticationHandler: handleUnaryCall<Empty, Empty> = (
   call,
