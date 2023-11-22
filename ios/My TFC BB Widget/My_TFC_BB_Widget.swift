@@ -109,7 +109,10 @@ struct SmallWidget : View {
             case .latestData(let deliveryCount):
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("📦 TFC").font(.headline).padding(.bottom, 12)
+                        Text("📦 TFC")
+                            .font(.headline)
+                            .padding(.bottom, 12)
+                            .foregroundStyle(Color(uiColor: .darkGray))
                         if deliveryCount == 0 {
                             Text("✅")
                                 .font(.title)
