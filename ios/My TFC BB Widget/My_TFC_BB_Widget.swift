@@ -37,9 +37,9 @@ struct Provider: TimelineProvider {
                 return 
             }
             do {
-                let response = try await api.client.getDeliveries(MyTfcBb_V1_GetDeliveriesRequest())
+                let response = try await api.getUncollectedDeliveryCount()
                 completion(DeliveryCount(
-                    state: .latestData(response.deliveries.count),
+                    state: .latestData(response.deliveriesCount),
                     date: .now
                 ))
             } catch {

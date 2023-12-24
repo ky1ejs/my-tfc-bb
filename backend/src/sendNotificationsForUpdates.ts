@@ -13,12 +13,12 @@ export async function sendNotificationsForUpdates(
   const promises: Promise<void>[] = [];
 
   const collectedPackages = updates.collectedDeliveries.length;
-  const currentPackageCount = updates.uncollectedDeliveries.length;
+  const uncolectedPackageCount = updates.uncollectedDeliveries.length;
   if (collectedPackages > 0) {
     let title: string;
     let body: string;
 
-    if (currentPackageCount <= 0) {
+    if (uncolectedPackageCount <= 0) {
       title = "All packages collected";
       body =
         collectedPackages > 1
@@ -28,14 +28,20 @@ export async function sendNotificationsForUpdates(
       title = `${collectedPackages} package${
         collectedPackages > 1 ? "s" : ""
       } collected`;
-      body = `${currentPackageCount} remain to be collected`;
+      body = `${uncolectedPackageCount} remain to be collected`;
     }
 
     promises.push(
       pushToUsersDevices(user, {
         title,
         body,
-        badge: currentPackageCount,
+        badge: uncolectedPackageCount,
+        payload: {
+          packagesCollected: {
+            collectedDeliveriesCount: collectedPackages,
+            uncollectedDeliveriesCount: uncolectedPackageCount,
+          },
+        },
       })
     );
   }
@@ -49,14 +55,14 @@ export async function sendNotificationsForUpdates(
     let body: string;
 
     if (newDeliveries > 1) {
-      body = `${currentPackageCount} ${
-        currentPackageCount > 1 ? "packages" : "package"
+      body = `${uncolectedPackageCount} ${
+        uncolectedPackageCount > 1 ? "packages" : "package"
       } waiting for collection in total`;
     } else {
       const courier = identifyCourier(updates.newDeliveries[0].name);
       const courierName = formattedCourierName(courier);
-      body = `New delivery from ${courierName}. ${currentPackageCount} ${
-        currentPackageCount > 1 ? "packages" : "package"
+      body = `New delivery from ${courierName}. ${uncolectedPackageCount} ${
+        uncolectedPackageCount > 1 ? "packages" : "package"
       } waiting for collection in total.`;
     }
 
@@ -64,7 +70,7 @@ export async function sendNotificationsForUpdates(
       pushToUsersDevices(updates.user, {
         title,
         body,
-        badge: currentPackageCount,
+        badge: uncolectedPackageCount,
       })
     );
   }

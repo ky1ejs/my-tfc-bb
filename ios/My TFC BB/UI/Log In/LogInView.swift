@@ -91,7 +91,7 @@ struct LogInView: View {
         Task {
             do {
                 let response = try await TfcApi.shared.client.logIn(request)
-                KeychainManager.setBackendAssignedId(response.deviceID)
+                try! KeychainManager.setBackendAssignedId(response.deviceID)
                 await SceneDelegate.shared?.authenticated()
             } catch let error {
                 if let status = error as? GRPCStatus, status.code == .unauthenticated {

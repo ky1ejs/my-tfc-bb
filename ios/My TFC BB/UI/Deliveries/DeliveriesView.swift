@@ -84,7 +84,6 @@ struct DeliveriesView: View {
     func refreshData() async {
         do {
             let deliveries = try await provider.provideDeliveries()
-            WidgetCenter.shared.reloadAllTimelines()
             withAnimation {
                 state = .loaded(deliveries)
             }

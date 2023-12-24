@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package my_tfc_bb.v1;
+
+message PushPayload {
+    oneof data {
+      DeliveriesCollectedPush packages_collected = 1;
+    }
+}
+
+message DeliveriesCollectedPush {
+  int32 uncollected_deliveries_count = 1;
+  int32 collected_deliveries_count = 2;
+}

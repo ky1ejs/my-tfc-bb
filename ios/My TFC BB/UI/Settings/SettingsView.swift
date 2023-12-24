@@ -75,7 +75,8 @@ struct SettingsView: View {
     private func logOut() {
         Task {
             let _ = try! await TfcApi.shared.client.logOut(Empty())
-            KeychainManager.clearKeyain()
+            try! KeychainManager.clearKeyain()
+            DataStorage.clearData()
             await SceneDelegate.shared?.logedOut()
         }
     }

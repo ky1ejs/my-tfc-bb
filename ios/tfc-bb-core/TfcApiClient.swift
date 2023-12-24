@@ -21,8 +21,8 @@ public class TfcApi {
 
     static private var clientAndChannel: (TfcApiClient, ChannelProvider)?
 
-    init() {
-        authenticationState = KeychainManager.getBackendAssignedId() != nil ? .authenticated : .notAuthenticated
+    init() throws {
+        authenticationState = try KeychainManager.getBackendAssignedId() != nil ? .authenticated : .notAuthenticated
     }
 
     private class ChannelProvider {
@@ -55,7 +55,16 @@ public class TfcApi {
         return client
     }
 
-    public static var shared = TfcApi()
+    public static var shared = try! TfcApi()
+
+    public func getUncollectedDeliveryCount() async throws -> PersistedData {
+        if let cacheHit = DataStorage.readData(), cacheHit.lastUpdate.timeIntervalSince(.now) > 60 * 5 {
+            return cacheHit
+        }
+
+        let response = try await client.getDeliveries(MyTfcBb_V1_GetDeliveriesRequest())
+        return CacheWriter.writeCacheUpdate(uncollectedCount: Int(response.uncollectedCount))
+    }
 }
 
 struct InteceptorFactory: MyTfcBb_V1_MyTfcClientInterceptorFactoryProtocol {
@@ -94,18 +103,20 @@ struct InteceptorFactory: MyTfcBb_V1_MyTfcClientInterceptorFactoryProtocol {
 
 class AuthInterceptor<Request, Response>: ClientInterceptor<Request, Response> {
     override func send(_ part: GRPCClientRequestPart<Request>, promise: EventLoopPromise<Void>?, context: ClientInterceptorContext<Request, Response>) {
-        guard case .metadata(var hPACKHeaders) = part, let token = KeychainManager.getBackendAssignedId() else {
-            context.send(part, promise: promise)
-            return
+        do {
+            guard case .metadata(var hPACKHeaders) = part, let token = try KeychainManager.getBackendAssignedId() else {
+                context.send(part, promise: promise)
+                return
+            }
+            hPACKHeaders.add(name: "device_id", value: token)
+            context.send(.metadata(hPACKHeaders), promise: promise)
+        } catch {
+            context.errorCaught(error)
         }
-
-        hPACKHeaders.add(name: "device_id", value: token)
-        context.send(.metadata(hPACKHeaders), promise: promise)
     }
 }
 
 class UnauthenticatedInteceptor<Request, Response>: ClientInterceptor<Request, Response> {
-
     override func receive(_ part: GRPCClientResponsePart<Response>, context: ClientInterceptorContext<Request, Response>) {
         defer { context.receive(part) }
 
@@ -123,6 +134,18 @@ class DeliveriesInteceptor: ClientInterceptor<MyTfcBb_V1_GetDeliveriesRequest, M
 
         guard case let .message(response) = part else { return }
 
-        TfcApi.shared.latestDeliveryCount = Int(response.uncollectedCount)
+        let uncollectedCount = Int(response.uncollectedCount)
+        TfcApi.shared.latestDeliveryCount = uncollectedCount
+        CacheWriter.writeCacheUpdate(uncollectedCount: uncollectedCount)
+
+    }
+}
+
+private struct CacheWriter {
+    @discardableResult
+    static func writeCacheUpdate(uncollectedCount: Int) -> PersistedData {
+        let persistedData = PersistedData(lastUpdate: .now, deliveriesCount: Int(uncollectedCount))
+        DataStorage.write(persistedData)
+        return persistedData
     }
 }

@@ -1,6 +1,4 @@
 import { handleUnaryCall } from "@grpc/grpc-js";
-import { Delivery } from "@prisma/client";
-import { Delivery as DeliveryProto } from "../generated/proto/my_tfc_bb/v1/my_tfc_bb";
 import { handleError } from "../errors/HandleGrpcError";
 import {
   GetDeliveriesRequest,
@@ -9,7 +7,7 @@ import {
 import { authenticate } from "../helpers/authenticate";
 import { fetchAndUpdateDeliveries } from "../my-tfc/get_deliveries";
 import { logRequest } from "../helpers/logRequest";
-import { identifyCourier } from "../helpers/identifyCourier";
+import { deliveryToProto } from "helpers/deliveryToProto";
 
 export const getDeliveriesHandler: handleUnaryCall<
   GetDeliveriesRequest,
@@ -27,13 +25,3 @@ export const getDeliveriesHandler: handleUnaryCall<
     })
     .catch((e) => handleError(e, callback));
 };
-
-function deliveryToProto(d: Delivery): DeliveryProto {
-  return {
-    id: d.id,
-    name: d.name,
-    dateReceived: d.date_received,
-    collectedAt: d.collected_at ?? undefined,
-    identifiedCourier: identifyCourier(d.name),
-  };
-}

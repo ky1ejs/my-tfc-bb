@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9300C1762B35202200D26310 /* model.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300C1742B35202200D26310 /* model.pb.swift */; };
+		9300C1772B35202200D26310 /* ios_push.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300C1752B35202200D26310 /* ios_push.pb.swift */; };
+		9300C17C2B354B6E00D26310 /* PersistedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300C17A2B354B6800D26310 /* PersistedData.swift */; };
+		9300C17D2B354B7700D26310 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300C1782B3547D000D26310 /* Constants.swift */; };
 		93281E9B2AE73C72005CBD17 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93281E9A2AE73C72005CBD17 /* WidgetKit.framework */; };
 		93281E9D2AE73C72005CBD17 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93281E9C2AE73C72005CBD17 /* SwiftUI.framework */; };
 		93281EA02AE73C72005CBD17 /* My_TFC_BB_WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93281E9F2AE73C72005CBD17 /* My_TFC_BB_WidgetBundle.swift */; };
@@ -89,6 +93,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9300C1742B35202200D26310 /* model.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = model.pb.swift; sourceTree = "<group>"; };
+		9300C1752B35202200D26310 /* ios_push.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ios_push.pb.swift; sourceTree = "<group>"; };
+		9300C1782B3547D000D26310 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9300C17A2B354B6800D26310 /* PersistedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistedData.swift; sourceTree = "<group>"; };
 		93074046291A859C0027B6B1 /* My TFC BB.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "My TFC BB.entitlements"; sourceTree = "<group>"; };
 		93281E992AE73C72005CBD17 /* My TFC BB WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "My TFC BB WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93281E9A2AE73C72005CBD17 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -169,6 +177,8 @@
 		93281EB42AE74578005CBD17 /* tfc-bb-core */ = {
 			isa = PBXGroup;
 			children = (
+				9300C1782B3547D000D26310 /* Constants.swift */,
+				9300C17A2B354B6800D26310 /* PersistedData.swift */,
 				932B86312AE625D700C8445A /* Color.swift */,
 				9361563A29147C30001B0831 /* KeychainManager.swift */,
 				937AFC602938299D004833FF /* TfcApiClient.swift */,
@@ -263,6 +273,8 @@
 		93DB54162940EF2A0014ECAF /* v1 */ = {
 			isa = PBXGroup;
 			children = (
+				9300C1752B35202200D26310 /* ios_push.pb.swift */,
+				9300C1742B35202200D26310 /* model.pb.swift */,
 				93DB54172940EF2A0014ECAF /* my_tfc_bb.pb.swift */,
 				93DB54182940EF2A0014ECAF /* my_tfc_bb.grpc.swift */,
 			);
@@ -478,10 +490,14 @@
 			files = (
 				93281EC62AE7484A005CBD17 /* Types.swift in Sources */,
 				93281EC72AE7484A005CBD17 /* TfcApiClient.swift in Sources */,
+				9300C1762B35202200D26310 /* model.pb.swift in Sources */,
 				93281EC92AE748E6005CBD17 /* my_tfc_bb.pb.swift in Sources */,
 				93281EC82AE748E6005CBD17 /* my_tfc_bb.grpc.swift in Sources */,
+				9300C17D2B354B7700D26310 /* Constants.swift in Sources */,
 				93281ECA2AE75C67005CBD17 /* KeychainManager.swift in Sources */,
+				9300C1772B35202200D26310 /* ios_push.pb.swift in Sources */,
 				9330C5632AE8BD9E0097B924 /* Color.swift in Sources */,
+				9300C17C2B354B6E00D26310 /* PersistedData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

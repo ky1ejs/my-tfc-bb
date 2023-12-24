@@ -28,10 +28,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
 
         let rootViewController: UIViewController = {
-            if KeychainManager.getBackendAssignedId() == nil {
-                return UIHostingController(rootView: LogInView())
-            } else {
+            if let _ = try? KeychainManager.getBackendAssignedId() {
                 return UIHostingController(rootView: DeliveriesView(provider: DeliveriesFetcher()))
+            } else {
+                return UIHostingController(rootView: LogInView())
             }
         }()
 

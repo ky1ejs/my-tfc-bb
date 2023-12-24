@@ -1,25 +1,10 @@
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-import "google/protobuf/empty.proto";
-
 package my_tfc_bb.v1;
 
-message Delivery {
-  string id = 1;
-  string name = 2;
-  google.protobuf.Timestamp date_received = 4;
-  google.protobuf.Timestamp collected_at = 5;
-  Courier identified_courier = 8;
-}
-
-enum Courier {
-  UNIDENTIFIED = 0;
-  AMAZON = 1;
-  FEDEX = 2;
-  UPS = 3;
-  USPS = 4;
-}
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "my_tfc_bb/v1/model.proto";
 
 message LogInRequest {
   string username = 1;

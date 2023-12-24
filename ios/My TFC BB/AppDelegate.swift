@@ -77,8 +77,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
-        print(userInfo)
-        return .noData
+        guard let payloadString = userInfo["payload"] as? String, let payload = try? MyTfcBb_V1_PushPayload(jsonString: payloadString) else {
+            return .noData
+        }
+        switch payload.data {
+        case .packagesCollected(let data):
+            let newPersistedData = PersistedData(lastUpdate: .now, deliveriesCount: Int(data.uncollectedDeliveriesCount))
+            DataStorage.write(newPersistedData)
+            WidgetCenter.shared.reloadAllTimelines()
+            return .newData
+        default:
+            return .noData
+        }
     }
 
     func application(

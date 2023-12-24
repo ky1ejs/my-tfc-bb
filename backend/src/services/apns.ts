@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import http2 from "http2";
 import { PushToken, TokenEnv } from "@prisma/client";
+import { PushPayload } from "generated/proto/my_tfc_bb/v1/ios_push";
 
 /*
 Read p8 file. Assumes p8 file to be in same directory
@@ -11,15 +12,16 @@ export type PushMessage = {
   title: string;
   body: string;
   badge?: number;
+  payload?: PushPayload;
 };
 
 export function sendPush(
   deviceToken: PushToken,
-  { title, body, badge }: PushMessage
+  { title, body, badge, payload }: PushMessage
 ): Promise<void> {
   const path = `/3/device/${deviceToken.token}`;
   const bearerToken = createBearerToken();
-  const payload = {
+  const pushPayload = {
     aps: {
       alert: {
         title: title,
@@ -27,6 +29,7 @@ export function sendPush(
       },
       badge: badge,
     },
+    payload: payload ? PushPayload.toJSON(payload) : undefined,
   };
   const headers = {
     ":method": "POST",
@@ -56,7 +59,7 @@ export function sendPush(
     request.on("data", (chunk) => {
       data += chunk;
     });
-    request.write(JSON.stringify(payload));
+    request.write(JSON.stringify(pushPayload));
     request.on("end", () => {
       console.log(`\n${data}`);
       resolve();

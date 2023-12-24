@@ -1,4 +1,4 @@
-import { Courier } from "../generated/proto/my_tfc_bb/v1/my_tfc_bb";
+import { Courier } from "../generated/proto/my_tfc_bb/v1/model";
 
 export function identifyCourier(deliveryName: string): Courier {
   const text = deliveryName.toLowerCase();
