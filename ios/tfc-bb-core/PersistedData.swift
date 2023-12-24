@@ -18,7 +18,9 @@ public struct PersistedData: Codable {
 }
 
 public struct DataStorage {
-    static private var path = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: GROUP)!.appending(path: "data.json")
+    static private var path = FileManager.default
+        .containerURL(forSecurityApplicationGroupIdentifier: APP_GROUP)!
+        .appending(path: "data.json")
 
     public static func write(_ data: PersistedData) {
         let encoded = try! JSONEncoder().encode(data)

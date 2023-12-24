@@ -13,7 +13,7 @@ public struct KeychainManager {
     private static let BACKEND_DEVICE_ID_KEY = "backend_assigned_device_id_v0"
     private static let keychain = Keychain(
         service: "dev.kylejs.My-TFC-BB",
-        accessGroup: "\(GROUP).dev.kylejs.My-TFC-BB.shared"
+        accessGroup: "\(TEAM_ID).dev.kylejs.My-TFC-BB.shared"
     ).accessibility(.afterFirstUnlock)
 
 public static func getBackendAssignedId() throws -> String? {

@@ -7,4 +7,5 @@
 
 import Foundation
 
-let GROUP = "X2TBSUCASC"
+let TEAM_ID = "X2TBSUCASC"
+let APP_GROUP = "group.dev.kylejs.My-TFC-BB"
