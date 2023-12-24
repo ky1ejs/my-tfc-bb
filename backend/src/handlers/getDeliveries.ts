@@ -7,7 +7,7 @@ import {
 import { authenticate } from "../helpers/authenticate";
 import { fetchAndUpdateDeliveries } from "../my-tfc/get_deliveries";
 import { logRequest } from "../helpers/logRequest";
-import { deliveryToProto } from "helpers/deliveryToProto";
+import { deliveryToProto } from "../helpers/deliveryToProto";
 
 export const getDeliveriesHandler: handleUnaryCall<
   GetDeliveriesRequest,

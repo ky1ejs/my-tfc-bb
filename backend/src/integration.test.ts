@@ -46,6 +46,26 @@ export const handlers = [
   ),
 ];
 
+async function clearDatabase() {
+  console.log("⛑️ deleting data");
+  const tablenames = await prisma.$queryRaw<
+    Array<{ tablename: string }>
+  >`SELECT tablename FROM pg_tables WHERE schemaname='public'`;
+
+  const tables = tablenames
+    .map(({ tablename }) => tablename)
+    .filter((name) => name !== "_prisma_migrations")
+    .map((name) => `"public"."${name}"`)
+    .join(", ");
+
+  try {
+    await prisma.$executeRawUnsafe(`TRUNCATE TABLE ${tables} CASCADE;`);
+  } catch (error) {
+    console.log({ error });
+  }
+  console.log("🗑️ deleted data");
+}
+
 describe("MyTfc gRPC Service", () => {
   let server: Server;
   let client: MyTfcClient;
@@ -53,7 +73,7 @@ describe("MyTfc gRPC Service", () => {
   let device: Device;
   let mockTfcApi: SetupServerApi;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     console.log("⛑️ creating data");
     user = await prisma.user.create({
       data: TEST_USER,
@@ -66,7 +86,9 @@ describe("MyTfc gRPC Service", () => {
       },
     });
     console.log("✨ created data");
+  });
 
+  beforeEach(async () => {
     server = bootService();
     client = new MyTfcClient(`0.0.0.0:3000`, credentials.createInsecure());
 
@@ -75,15 +97,16 @@ describe("MyTfc gRPC Service", () => {
   });
 
   afterEach(async () => {
-    if (device) await prisma.device.deleteMany({ where: { id: device.id } });
-    if (user) await prisma.user.deleteMany({ where: { id: user.id } });
-    await prisma.$disconnect();
     client.close();
     mockTfcApi.close();
-
     return new Promise((resolve) => {
       server.tryShutdown(() => resolve(undefined));
     });
+  });
+
+  afterAll(async () => {
+    await clearDatabase();
+    await prisma.$disconnect();
   });
 
   describe("getDeliveries handler", () => {
