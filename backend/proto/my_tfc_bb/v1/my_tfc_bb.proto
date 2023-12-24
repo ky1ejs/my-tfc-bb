@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package my_tfc_bb.v1;
 
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 import "my_tfc_bb/v1/model.proto";
 
