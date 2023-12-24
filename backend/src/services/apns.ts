@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import http2 from "http2";
 import { PushToken, TokenEnv } from "@prisma/client";
-import { PushPayload } from "generated/proto/my_tfc_bb/v1/ios_push";
+import { PushPayload } from "./../generated/proto/my_tfc_bb/v1/ios_push";
 
 /*
 Read p8 file. Assumes p8 file to be in same directory
