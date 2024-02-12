@@ -17,6 +17,6 @@ The last link there had a nice comparison of the new `Protobuf-ES` generator/run
 
 At this point, it dawned upon me that this is too much work and I need to get back to `cut`. 
 
-To be honest, I'm pretty fed up with fighting the gRPC toolchain for JS... I think I'll stick to GraphQL.
+To be honest, I'm pretty fed up with fighting the gRPC toolchain for JS (also looking at you Buf, a massive pain in the ass to figure out how to get it running in the Dockerbuild process or in other CI processes)... I think I'll stick to GraphQL.
 
 For now I'll just leave the service in a state where it has to be forced to shutdown, which I think is how it already was anyway iirc... I recall seing logs in Fly.io saying that it was being force shutdown or something like that...
