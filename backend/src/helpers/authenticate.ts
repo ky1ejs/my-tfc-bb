@@ -5,10 +5,10 @@ import { MyTfcBbError, MyTfcBbErrorType } from "../errors/MyTfcBbError";
 
 export function authenticate<T, V>(
   call: ServerUnaryCall<T, V>
-): Promise<Device & { user: User }> {
+): Promise<Device & { User: User }> {
   return prisma.device
     .findUniqueOrThrow({
-      include: { user: true },
+      include: { User: true },
       where: { id: getDeviceIdFromRequest(call) },
     })
     .catch(() => {

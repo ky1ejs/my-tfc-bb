@@ -8,42 +8,40 @@ import {
   MyTfcClient,
 } from "./generated/proto/my_tfc_bb/v1/my_tfc_bb";
 import { Status } from "@grpc/grpc-js/build/src/constants";
-import { rest } from "msw";
+import { HttpResponse, http } from "msw";
 import myTfcEndpoints from "./my-tfc/endpoints";
-import { setupServer, SetupServerApi } from "msw/node";
+import { SetupServer, setupServer } from "msw/node";
 import fs from "fs";
 import { TEST_USER } from "./tests/test_data";
 
 export const handlers = [
-  rest.get(myTfcEndpoints.authConfig, (_, res, ctx) => {
+  http.get(myTfcEndpoints.authConfig, () => {
     const page = fs.readFileSync(
       __dirname + "/tests/fixtures/start-login-page.html",
       "utf8"
     );
-    return res(ctx.text(page));
+    return new Response(page, { status: 200 });
   }),
 
-  rest.post(
+  http.post(
     "https://auth.tfc.io/auth/realms/my-tfc/login-actions/authenticate",
-    (_, res, ctx) => {
+    () => {
       const page = fs.readFileSync(
         __dirname + "/tests/fixtures/invalid-password.html",
         "utf8"
       );
-      return res(
-        ctx.text(page),
-        ctx.status(400),
-        ctx.cookie("marylands", "are-the-best")
-      );
+      return new HttpResponse(page, {
+        status: 400,
+        headers: {
+          "Set-Cookie": "marylands=are-the-best",
+        },
+      });
     }
   ),
 
-  rest.get(
-    "https://connect.tfc.com/api/v1/packages/my-packages/",
-    (_, res, ctx) => {
-      return res(ctx.status(403));
-    }
-  ),
+  http.get("https://connect.tfc.com/api/v1/packages/my-packages/", () => {
+    return new HttpResponse(null, { status: 403 });
+  }),
 ];
 
 async function clearDatabase() {
@@ -71,7 +69,7 @@ describe("MyTfc gRPC Service", () => {
   let client: MyTfcClient;
   let user: User;
   let device: Device;
-  let mockTfcApi: SetupServerApi;
+  let mockTfcApi: SetupServer;
 
   beforeAll(async () => {
     console.log("⛑️ creating data");

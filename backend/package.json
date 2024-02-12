@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "ts-node -r dotenv src/index.ts",
     "dev:no-delivery-check": "RUN_DELIVERY_CHECK=false ts-node -r dotenv src/index.ts",
-    "start": "prisma migrate deploy && ts-node -r dotenv src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "migrate": "prisma migrate deploy",
+    "prisma:gen": "prisma generate",
+    "migrate:start": "npm run migrate && npm run start",
     "jest": "dotenv -e .env.test -- prisma migrate deploy && dotenv -e .env.test -- jest",
     "lint": "eslint --fix src/",
     "lint:ci": "eslint --max-warnings=0 src/",
@@ -28,19 +32,19 @@
   },
   "homepage": "https://github.com/ky1ejs/my-tfc-bb#readme",
   "dependencies": {
-    "@grpc/grpc-js": "^1.7.3",
-    "@prisma/client": "^4.5.0",
+    "@grpc/grpc-js": "^1.10.0",
+    "@prisma/client": "^5.9.1",
     "axios": "^1.6.0",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "jsdom": "^20.0.2",
     "jsonwebtoken": "^9.0.0",
     "luxon": "^3.1.0",
-    "prisma": "^4.5.0",
+    "prisma": "^5.9.1",
     "querystring": "^0.2.1"
   },
   "devDependencies": {
-    "@tsconfig/node18": "^1.0.1",
+    "@tsconfig/node20": "^20.1.2",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.14",
     "@types/jest": "^29.2.4",
@@ -54,10 +58,11 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "jest": "^29.3.1",
-    "msw": "^0.49.2",
+    "msw": "^2.1.7",
     "prettier": "^2.7.1",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
-    "ts-proto": "^1.153.0"
+    "ts-proto": "^1.167.3",
+    "typescript": "^5.3.3"
   }
 }

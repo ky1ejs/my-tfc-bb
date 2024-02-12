@@ -1,14 +1,41 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider   = "prisma-client-js"
   engineType = "binary"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "cockroachdb"
   url      = env("DATABASE_URL")
+}
+
+model Delivery {
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tfc_id        Int
+  name          String
+  date_received DateTime  @db.Timestamptz(6)
+  user_id       String    @db.Uuid
+  collected_at  DateTime? @db.Timestamptz(6)
+  User          User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([tfc_id, user_id])
+}
+
+model Device {
+  id                 String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name               String
+  device_provided_id String     @unique
+  user_id            String     @db.Uuid
+  User               User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  PushToken          PushToken?
+}
+
+model PushToken {
+  id        String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  token     String
+  env       TokenEnv
+  platform  PushPlatform
+  device_id String       @unique @db.Uuid
+  Device    Device       @relation(fields: [device_id], references: [id], onDelete: Cascade)
 }
 
 model User {
@@ -17,28 +44,14 @@ model User {
   latest_access_token String
   refresh_token       String
   hashed_password     String
-  devices             Device[]
-  deliveries          Delivery[]
   password_status     PasswordStatus @default(VALID)
+  Delivery            Delivery[]
+  Device              Device[]
 }
 
 enum PasswordStatus {
   VALID
   INVALID
-}
-
-model Device {
-  id                 String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name               String
-  device_provided_id String     @unique
-  user               User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id            String     @db.Uuid
-  push_token         PushToken?
-}
-
-enum TokenEnv {
-  STAGING
-  PRODUCTION
 }
 
 enum PushPlatform {
@@ -47,23 +60,7 @@ enum PushPlatform {
   WEB
 }
 
-model PushToken {
-  id        String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  token     String
-  env       TokenEnv
-  platform  PushPlatform
-  device    Device       @relation(fields: [device_id], references: [id], onDelete: Cascade)
-  device_id String       @unique @db.Uuid
-}
-
-model Delivery {
-  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  tfc_id        Int
-  name          String
-  date_received DateTime  @db.Timestamptz
-  user          User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id       String    @db.Uuid
-  collected_at  DateTime? @db.Timestamptz
-
-  @@unique([tfc_id, user_id])
+enum TokenEnv {
+  STAGING
+  PRODUCTION
 }

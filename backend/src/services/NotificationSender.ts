@@ -7,8 +7,8 @@ export async function pushToUsersDevices(
   message: PushMessage
 ): Promise<void> {
   return prisma.device
-    .findMany({ where: { user_id: user.id }, include: { push_token: true } })
-    .then((devices) => devices.map((d) => d.push_token))
+    .findMany({ where: { user_id: user.id }, include: { PushToken: true } })
+    .then((devices) => devices.map((d) => d.PushToken))
     .then((tokens) => tokens.filter((t): t is PushToken => t !== null))
     .then((tokens) => tokens.map((t) => pushToDevice(t, message)))
     .then((promises) => Promise.all(promises))

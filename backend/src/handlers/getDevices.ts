@@ -15,7 +15,7 @@ export const getDevicesHandler: handleUnaryCall<Empty, GetDevicesResponse> = (
 ) => {
   return logRequest(call)
     .then(authenticate)
-    .then(({ user: { id: uid } }) =>
+    .then(({ User: { id: uid } }) =>
       prisma.device.findMany({ where: { user_id: uid } })
     )
     .then((devices) => devices.map(deliveryToProto))

@@ -27,7 +27,7 @@ export function bootService(): Server {
     "grpc.max_receive_message_length": -1,
     "grpc.max_send_message_length": -1,
   });
-  const port = 3000;
+  const port = process.env.PORT ?? "3000";
 
   server.addService(MyTfcService, new MyTfcServiceImpl());
   server.bindAsync(
@@ -41,6 +41,5 @@ export function bootService(): Server {
       server.start();
     }
   );
-  console.log("booted");
   return server;
 }

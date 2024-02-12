@@ -2,8 +2,8 @@ import { TEST_USER } from "../tests/test_data";
 import { fetchAndUpdateDeliveries } from "./get_deliveries";
 import prisma from "../db";
 import { User } from "@prisma/client";
-import { setupServer, SetupServerApi } from "msw/node";
-import { rest } from "msw";
+import { SetupServer, setupServer } from "msw/node";
+import { http } from "msw";
 import fs from "fs";
 import myTfcEndpoints from "./endpoints";
 import { pushToUsersDevices } from "../services/NotificationSender";
@@ -19,18 +19,18 @@ jest.mock("../services/NotificationSender", () => {
 });
 
 const handlers = [
-  rest.get(myTfcEndpoints.delivereies, (_, res, ctx) => {
+  http.get(myTfcEndpoints.delivereies, () => {
     const body = fs.readFileSync(
       __dirname + "/../tests/fixtures/deliveries.json",
       "utf8"
     );
-    return res(ctx.status(200), ctx.text(body));
+    return new Response(body, { status: 200 });
   }),
 ];
 
 describe("fetchAndUpdateDeliveries", () => {
   let user: User;
-  let mockTfcApi: SetupServerApi;
+  let mockTfcApi: SetupServer;
 
   beforeEach(async () => {
     user = await prisma.user.create({

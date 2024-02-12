@@ -28,7 +28,7 @@ export const updatePushTokenHandler: handleUnaryCall<
           token: call.request.token,
           platform: platform,
           env: env,
-          device: {
+          Device: {
             connect: {
               id: device.id,
             },

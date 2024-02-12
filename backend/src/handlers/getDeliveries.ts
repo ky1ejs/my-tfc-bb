@@ -15,7 +15,7 @@ export const getDeliveriesHandler: handleUnaryCall<
 > = (call, callback) => {
   return logRequest(call)
     .then(authenticate)
-    .then(({ user }) => fetchAndUpdateDeliveries(user))
+    .then(({ User: user }) => fetchAndUpdateDeliveries(user))
     .then(({ uncollectedDeliveries }) => {
       callback(null, {
         deliveries: uncollectedDeliveries.map(deliveryToProto),

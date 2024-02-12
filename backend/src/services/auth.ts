@@ -49,7 +49,7 @@ export default class Auth {
         device_provided_id: deviceId,
       },
       update: {
-        user: {
+        User: {
           connect: {
             id: user.id,
           },
@@ -58,7 +58,7 @@ export default class Auth {
       create: {
         device_provided_id: deviceId,
         name: deviceName,
-        user: {
+        User: {
           connect: {
             id: user.id,
           },
