@@ -39,7 +39,7 @@ export const handlers = [
     }
   ),
 
-  http.get("https://connect.tfc.com/api/v1/packages/my-packages/", () => {
+  http.get("https://connect.tfc.com/api/v1/packages/my-packages", () => {
     return new HttpResponse(null, { status: 403 });
   }),
 ];
