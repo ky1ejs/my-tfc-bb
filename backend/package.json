@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/ky1ejs/my-tfc-bb#readme",
   "dependencies": {
-    "@grpc/grpc-js": "^1.10.0",
+    "@grpc/grpc-js": "^1.10.9",
     "@prisma/client": "^5.9.1",
     "axios": "^1.6.0",
     "cors": "^2.8.5",
